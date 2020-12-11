@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="account_report_standard_ledger_view_form_inherit" model="ir.ui.view">
+            <field name="name">Standard Ledger Inherit</field>
+                <field name="model">account.report.standard.ledger</field>
+                <field name="inherit_id" ref="account_standard_report.account_report_standard_view"/>
+                <field name="arch" type="xml">
+
+                <field name="account_in_ex_clude_ids" position="before">
+                    
+                    <field name="parent_account_ids" string="Cuentas a Imprimir" widget="many2many_tags"/>
+                </field>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

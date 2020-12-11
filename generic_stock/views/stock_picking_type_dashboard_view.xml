@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record model="ir.ui.view" id="stock_picking_type_kanban_view">
+		<field name="name">stock.picking.type.kanban</field>
+		<field name="model">stock.picking.type</field>
+		<field name="inherit_id" ref="stock.stock_picking_type_kanban" />
+		<field name="arch" type="xml">
+			<xpath expr="//div[hasclass('o_kanban_card_manage_settings')]"
+				position="attributes">
+				<attribute name="groups">generic_stock.group_stock_config</attribute>
+			</xpath>
+		</field>
+	</record>
+</odoo>

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_report_certification_ica,report.certification_ica,model_report_certification_ica,,1,1,1,1
+access_report_certification_iva,report.certification_iva,model_report_certification_iva,,1,1,1,1
+access_report_certification_base,report.certification_base,model_report_certification_base,,1,1,1,1
+access_report_certification_partner,report.certification_partner,model_report_certification_partner,,1,1,1,1

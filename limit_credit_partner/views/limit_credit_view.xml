@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	
+	<record id="limit_credit_form" model="ir.ui.view">
+		<field name="name">limit.credit.form</field>
+		<field name="model">limit.credit</field>
+		<field name="arch" type="xml">
+			<form>
+				
+				<div class="oe_title">
+					<label for="name" class="oe_edit_only"/>
+					<h1><field name="name" class="oe_inline"/></h1>
+				</div>
+
+				<div class="oe_title">
+					<label for="partner_id" class="oe_edit_only"/>
+					<h1><field name="partner_id" class="oe_inline"/></h1>
+				</div>
+
+				<group col='4'>
+					<field name="registration_day" string="Fecha Registro"/>
+					<field name="credit" />
+				</group>
+
+				<group col="2">
+
+				</group>
+
+				<group>
+					<notebook>
+
+						<page string="Registro Crédito Cliente" name="record_credit_partner">
+							<field name="limit_credit_partner_ids"/>
+						</page>
+
+					</notebook>
+				</group>
+
+			</form>
+		</field>
+	</record>
+
+
+	<record id="limit_credit_tree" model="ir.ui.view">
+		<field name="name">limit.credit.tree</field>
+		<field name="model">limit.credit</field>
+		<field name="arch" type="xml">
+			<tree default_order="registration_day">
+				<field name="name"/>
+				<field name="partner_id"/>
+				<field name="credit" sum="Total Crédito"/>
+				<field name="registration_day" string="Fecha Registro"/>
+			</tree>
+		</field>
+	</record>
+
+
+
+</odoo>

@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+		<template id="report_pos_details_cash">
+		<t t-call="web.html_container">
+			<t t-foreach="docs" t-as="doc">
+				<t t-call="web.external_layout">
+					<div class="page">
+						<div class="oe_structure"/>
+
+						<h2>
+							<span>COMPROBANTE DE INFORME DIARIO</span>
+						</h2>
+
+						<h2>
+							<span>Punto de Venta: </span><span t-field="doc.config_id.name"/>
+						</h2>
+
+						<div class="row mt32 mb32">
+							<div class="col-auto mw-100 mb-2">
+								<strong>Sesión:</strong>
+								<p t-field="doc.name"/>
+							</div>
+							<div class="col-auto mw-100 mb-2">
+								<strong>Cajero:</strong>
+								<t t-if="doc.user_id.partner_id.xidentification">
+									<span><strong>CC. Cajero:</strong> <t t-esc="doc.user_id.partner_id.xidentification" /> </span>
+								</t>
+								<br/>
+								<p t-field="doc.user_id"/>
+							</div>
+							<div class="col-auto mw-100 mb-2">
+								<strong>Fecha de Apertura:</strong>
+								<p t-field="doc.start_at"/>
+							</div>
+							<div class="col-auto mw-100 mb-2">
+								<strong>Fecha de Cierre:</strong>
+								<p t-field="doc.stop_at"/>
+							</div>
+						</div>
+
+
+<!--
+						<h2>
+							<span>Ordenes</span><span t-field="doc.config_id.name"/>
+						</h2>
+
+						<t t-set="subtotal_amount_discount" t-value="0"/>
+						<t t-set="subtotal_amount_tax" t-value="0"/>
+						<t t-set="subtotal_amount" t-value="0"/>
+						<t t-set="subtotal_cash_in" t-value="0"/>
+						<t t-set="subtotal_cash_out" t-value="0"/>
+
+						<table class="table table-sm o_main_table">
+							<thead>
+								<tr>
+									<th class="text-left">Fecha</th>
+									<th class="text-left">Orden</th>
+									<th class="text-left">Referencia Recibo</th>
+									<th class="text-right">Descuentos</th>
+									<th class="text-right">Impuestos</th>
+									<th class="text-right">Total</th>
+								</tr>
+							</thead>
+							<tbody>
+								<t t-foreach="request.env['pos.order'].search([('session_id', '=', doc.id)])" t-as="record">
+
+									<t t-set="amount_discount" t-value="0"/>
+									<t t-foreach="record.lines" t-as="line">
+										<t t-if="line.discount">
+											<t t-set="amount_discount" t-value="amount_discount + (line.price_unit - line.price_subtotal)"/>
+											<t t-set="subtotal_amount_discount" t-value="subtotal_amount_discount + amount_discount"/>
+										</t>
+									</t>
+									
+									<tr>
+										<td class="text-left">
+											<span t-field="record.date_order"/>
+										</td>
+										<td class="text-left">
+											<span t-field="record.name"/>
+										</td>
+										<td class="text-left">
+											<span t-field="record.pos_reference"/>
+										</td>
+										<td class="text-right">
+											<span t-esc="amount_discount"/>
+										</td>
+										<td class="text-right">
+											<t t-set="subtotal_amount_tax" t-value="subtotal_amount_tax + record.amount_tax"/>
+											<span t-field="record.amount_tax"/>
+										</td>
+										<td class="text-right">
+											<t t-set="subtotal_amount" t-value="subtotal_amount + record.amount_total"/>
+											<span t-field="record.amount_total"/>
+										</td>
+									</tr>
+								</t>
+
+
+								<t t-foreach="request.env['cash.box.in'].search([('pos_session_id', '=', doc.id)])" t-as="record">
+									<tr>
+										<td class="text-left">
+											<span t-field="record.create_date"/>
+										</td>
+										<td class="text-left">
+											Ingreso - <span t-field="record.name"/>
+										</td>
+										<td class="text-left">
+											<span t-field="record.code"/>
+										</td>
+										<td class="text-left">
+											
+										</td>
+										<td class="text-left">
+
+										</td>
+										<td class="text-right">
+											<t t-set="subtotal_cash_in" t-value="subtotal_cash_in + record.amount"/>
+											<span t-field="record.amount"/>
+										</td>
+									</tr>
+								</t>
+
+								<t t-foreach="request.env['cash.box.out'].search([('pos_session_id', '=', doc.id)])" t-as="record">
+									<tr>
+										<td class="text-left">
+											<span t-field="record.create_date"/>
+										</td>
+										<td class="text-left">
+											Egreso - <span t-field="record.name"/>
+										</td>
+										<td class="text-left">
+											<span t-field="record.code"/>
+										</td>
+										<td class="text-left">
+											
+										</td>
+										<td class="text-left">
+
+										</td>
+										<td class="text-right">
+											<t t-set="subtotal_cash_out" t-value="subtotal_cash_out + record.amount"/>
+											<span t-field="record.amount"/>
+										</td>
+									</tr>
+								</t>
+
+
+							</tbody>
+						</table>
+
+						<div class="clearfix">
+							<div id="total" class="row">
+								<div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto">
+									<table class="table table-sm">
+										<tr class="border-black o_total">
+											<td><strong>Importe Ordenes</strong></td>
+										</tr>
+										<tr style="">
+											<td><strong>Descuentos</strong></td>
+											<td class="text-right">
+												<span t-esc="subtotal_amount_discount" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+											</td>
+										</tr>
+										<tr style="">
+											<td><strong>Impuestos</strong></td>
+											<td class="text-right">
+												<span t-esc="subtotal_amount_tax" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+											</td>
+										</tr>
+										<tr style="">
+											<td><strong>Ingresos</strong></td>
+											<td class="text-right">
+												<span t-esc="subtotal_cash_in" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+											</td>
+										</tr>
+										<tr style="">
+											<td><strong>Egresos</strong></td>
+											<td class="text-right">
+												<span t-esc="subtotal_cash_out" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+											</td>
+										</tr>							
+										<tr class="border-black o_total">
+											<td><strong>Total</strong></td>
+											<td class="text-right">
+												<t t-set="total" t-value="(subtotal_amount + subtotal_cash_in) - subtotal_cash_out"/>
+												<span t-esc="total" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+											</td>
+										</tr>
+									</table>
+								</div>
+							</div>
+						</div>
+
+						<br/>
+						<br/>
+-->
+<!--
+						<h2>
+							<span>Resumen Medios de Pago</span>
+						</h2>
+
+						<table class="table table-sm o_main_table">
+							<thead>
+								<tr>
+									<th class="text-left">Diario</th>
+									<th class="text-right">Saldo Inicial</th>
+									<th class="text-right">Saldo Final</th>
+									<th class="text-right">Subtotal Transacciones</th>
+									<th class="text-right">Diferencia</th>
+								</tr>
+							</thead>
+							<tbody>
+								<t t-foreach="doc.statement_ids" t-as="record">
+									<tr>
+										<td class="text-left">
+											<span t-field="record.journal_id"/>
+										</td>
+										<td class="text-right">
+											<span t-field="record.balance_start"/>
+										</td>
+										<td class="text-right">
+											<span t-field="record.balance_end_real"/>
+										</td>
+										<td class="text-right">
+											<span t-field="record.total_entry_encoding"/>
+										</td>
+										<td class="text-right">
+											<span t-field="record.difference"/>
+										</td>
+									</tr>
+								</t>
+							</tbody>
+						</table>
+
+-->
+
+<!--
+						<h2>Ingresos</h2>
+				
+						<t t-set="amount" t-value="doc.return_payment_orders(doc.id)"/>
+
+						<table class="table table-sm o_main_table">
+							<thead>
+								<tr>
+									<th class="text-left">
+										<strong>Movimientos</strong>
+									</th>
+									<th class="text-left">
+										<strong>Importe</strong>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<t>Valor Bruto</t>
+									</td>
+									<td class="text-right">
+										<t t-esc="amount['amount_base']" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<t>Impuestos </t>
+									</td>
+									<td class="text-right">
+										<t t-esc="amount['amount_tax']" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<t>Descuentos</t>
+									</td>
+									<td class="pos-right-align">
+										<t t-esc="amount['amount_discount']" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<t>Ingresos por Venta </t>
+									</td>
+									<td class="pos-right-align">
+										<t t-esc="amount['amount_total']" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+									</td>
+								</tr>
+								<tr>
+									<td class="text-right">
+										<t><strong>TOTAL NETO</strong></t>
+									</td>
+									<td class="pos-right-align">
+										<span t-esc="amount['amount_total']" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+									</td>                               
+								</tr>
+							</tbody>
+						</table>
+
+-->
+
+						<h2>Medios de Pago</h2>
+						<t t-if="doc.statement_ids">
+							<t t-foreach="doc.statement_ids" t-as="method_payment">
+							
+								<table style="border:0px;" width="70%"> 
+									<thead style="border:0px;">
+										<tr style="border:0px;">
+											<th class="text-left"><strong><span>Método de Pago</span></strong></th>
+											<th class="text-left"><strong><span>Balance</span></strong></th>
+											<th class="text-left"><strong><span>Cantidad Pagos</span></strong></th>
+										</tr>											
+									</thead>
+									<tbody style="border:0px;">
+										<tr style="border:0px; height:2px;">
+											<td class="text-left" style="border:0px; height:2px; height=2px;" >
+												<span t-esc="method_payment.journal_id.name"/>
+											</td>
+											<td class="text-left" style="border:0px; height:2px; height=2px;">
+												<span t-field="method_payment.total_entry_encoding" style="text-align:right" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+											</td>
+											<td class="text-left" style="border:0px; height:2px; height=2px;">
+												<span t-esc="len(method_payment.line_ids)"/>
+											</td>												
+										</tr>
+									</tbody>
+								</table>
+
+								<br/>
+
+
+								<t t-if="method_payment.line_ids">
+									<t t-set="total_balance" t-value="0"/>
+									<table style="border:0px;" width="100%"> 
+										<thead style="border:1px;">
+											<tr style="border:1px;">
+												<th class="text-left"><strong><span>Fecha</span></strong></th>
+												<th class="text-left"><strong><span>Orden</span></strong></th>
+												<th class="text-left"><strong><span>Cliente</span></strong></th>
+												<th class="text-right"><strong><span>Importe</span></strong></th>
+											</tr>											
+										</thead>
+										<tbody style="border:0px;">
+											<tr t-foreach="method_payment.line_ids" t-as="transaction" style="border:0px; height:2px;">
+												<td class="text-left" style="border:0px; height:2px; height=2px;" >
+													<span t-esc="transaction.date"/>
+												</td>
+												<td class="text-left" style="border:0px; height:2px; height=2px;">
+													<span t-esc="transaction.name"/>
+												</td>
+												<td class="text-left" style="border:0px; height:2px; height=2px;">
+													<span t-esc="transaction.partner_id.name"/>
+												</td>												
+												<td class="text-right" style="border:0px; height=2px;">
+													<span t-esc="transaction.amount" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.currency_id}"/>
+												</td>
+												<t t-set="total_balance" t-value="total_balance + transaction.amount"/>
+											</tr>
+											<tr style="border:0px;">
+												<td style="text-align:right; border:0px; height=2px;">
+													
+												</td>
+												<td style="text-align:right; border:0px; height=2px;">
+													
+												</td>
+												<td class="text-right" style="border:0px; height=2px;">
+													<span><strong>Total: <span t-esc="method_payment.journal_id.name"/></strong></span>
+												</td>
+												<td class="text-right" style="border:0px; height=2px;">
+													<strong><span t-esc="total_balance" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.currency_id}"/></strong>
+												</td>								
+											</tr>
+										</tbody>
+									</table>
+									<br/>				
+								</t>
+					
+							</t>
+						</t>					
+
+
+
+						<h2>Ingresos</h2>
+				
+						<t t-set="amount" t-value="doc.return_payment_orders(doc.id)"/>
+
+						<t t-set="subtotal_cash_in" t-value="0"/>
+						<t t-set="subtotal_cash_out" t-value="0"/>
+						<table  width="60%">
+							<thead>
+								<tr>
+									<th class="text-left">
+										<strong>Movimientos</strong>
+									</th>
+									<th class="text-left">
+										<strong>Importe</strong>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<t>Valor Bruto</t>
+									</td>
+									<td class="text-right">
+										<t t-esc="amount['amount_base']" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<t>Impuestos </t>
+									</td>
+									<td class="text-right">
+										<t t-esc="amount['amount_tax']" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<t>Descuentos</t>
+									</td>
+									<td class="text-right">
+										<t t-esc="amount['amount_discount']" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<t>Ingresos</t>
+									</td>
+									<t t-foreach="request.env['cash.box.in'].search([('pos_session_id', '=', doc.id)])" t-as="record">
+										<t t-set="subtotal_cash_in" t-value="subtotal_cash_in + record.amount"/>
+									</t>
+									<td class="text-right">
+										<t t-esc="subtotal_cash_in" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<t>Egresos</t>
+									</td>
+									<t t-foreach="request.env['cash.box.in'].search([('pos_session_id', '=', doc.id)])" t-as="record">
+										<t t-set="subtotal_cash_out" t-value="subtotal_cash_out + record.amount"/>
+									</t>									
+									<td class="text-right">
+										<t t-esc="subtotal_cash_out" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<t>Devoluciones</t>
+									</td>
+									<td class="text-right">
+										<t t-esc="amount['amount_refund']" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<t>Ingresos por Venta </t>
+									</td>
+									<td class="text-right">
+										<t t-esc="amount['amount_total']" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<t>Total Efectivo</t>
+									</td>
+									<td class="text-right">
+										<t t-esc="amount['amount_cash']" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<t>Total Tarjetas</t>
+									</td>
+									<td class="text-right">
+										<t t-esc="amount['amount_bank']" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+									</td>
+								</tr>
+								<tr>
+									<td class="text-right">
+										<t><strong>TOTAL NETO</strong></t>
+									</td>
+									<td class="text-right">
+										
+										<span t-esc="amount['amount_total']" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+									</td>                               
+								</tr>
+							</tbody>
+						</table>
+
+						<br/>
+
+						<div  name="header_report" style="border: 3px solid gray; text-align:left;">
+							<t t-set="total_received" t-value="amount['amount_total'] + subtotal_cash_in - subtotal_cash_out - amount['amount_bank'] - amount['amount_refund']"/>
+							<strong><span style="font-size: 20px;">Saldo de Apertura:</span></strong>
+							<span style="font-size: 18px;"><span t-esc="doc.cash_register_balance_start" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/></span><br/>
+
+							<strong><span style="font-size: 20px;">Total Recibido:</span></strong>
+							<span style="font-size: 18px;"><span t-esc="total_received" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/></span><br/>
+
+
+							<strong><span style="font-size: 20px;">Total Caja:</span></strong>
+							<t t-set="total_received" t-value="total_received + doc.cash_register_balance_start"/>
+							<span style="font-size: 18px;"><span t-esc="total_received" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/></span>
+						</div>
+					</div>
+				</t>
+			</t>
+			</t>
+		</template>
+
+
+	<data>
+		<report
+			id="action_report_pos_details_cash"
+			model="pos.session"
+			string="Cierre de Caja Detallado"
+			report_type="qweb-pdf"
+			name="pos_inherit.report_pos_details_cash"
+			file="pos_inherit.report_pos_details_cash"
+		/>
+	</data>
+
+
+
+
+</odoo>
+

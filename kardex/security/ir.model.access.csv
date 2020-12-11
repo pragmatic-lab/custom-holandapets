@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+kardex_asistente_kardex_manager,kardex_asistente_kardex_manager,model_kardex_asistente_kardex,stock.group_stock_manager,1,1,1,1
+access_report_kardex_lines,report_kardex_lines,model_report_kardex_lines,stock.group_stock_manager,1,1,1,1

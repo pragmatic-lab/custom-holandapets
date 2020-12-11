@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve" noupdate="1">
+
+
+	<t t-extend="PosTicket">
+
+		<t t-jquery=".pos-center-align" t-operation="replace"/>
+			
+
+		<t t-jquery="t[t-if='! receipt.dian_resolution_sequence.active_resolution']" t-operation="after">
+			<!--
+			<t><br />
+				Punto de Venta: <t t-value="widget.pos.shop.name"/>
+			</t>-->
+			<t><br />
+				Vendedor: <t t-esc="widget.pos.get_cashier().name" />
+			</t>
+		</t>
+
+		<t t-jquery="t[t-if='order.get_client_address()']" t-operation="before">
+			<t t-if="order.get_client_mobile()"><br />
+				Teléfono: <t t-esc="order.get_client_mobile()" />
+			</t>
+		</t>
+
+		<t t-jquery="t[t-if='order.get_client_address()']" t-operation="append">
+			<t t-if="order.get_client_street2()"><br />
+				Otra Dirección: <t t-esc="order.get_client_street2()" />
+			</t>
+			<t><br />
+			 <t t-esc="order.get_client_state()[1]"/> <t t-if="order.get_client_city()"> - <t t-esc="order.get_client_city()[1]"/></t>
+			</t>
+			<t t-if="order.get_client_neighborhood()"><br />
+				Barrio: <t t-esc="order.get_client_neighborhood()" />
+			</t>
+		</t>
+
+	</t>
+
+</templates>

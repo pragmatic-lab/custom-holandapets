@@ -1,0 +1,11 @@
+.pos .modal-dialog .popup-paymentrefinfo{
+    text-align: left;
+    width: 500px;
+    height: 300px;
+}
+
+
+.paymentrefinfo-detail input{
+    width: 300px !important;
+}
+

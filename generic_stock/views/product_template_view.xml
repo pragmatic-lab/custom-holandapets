@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<record model="ir.ui.view" id="product_template_form_view">
+		<field name="name">product.template.form</field>
+		<field name="model">product.template</field>
+		<field name="inherit_id"
+			ref="stock.product_template_form_view_procurement_button" />
+		<field name="arch" type="xml">
+			<button name="action_update_quantity_on_hand"
+				position="attributes">
+				<attribute name="groups">stock.group_stock_manager</attribute>
+			</button>
+		</field>
+	</record>
+
+	<record id="view_product_template_buttons_from" model="ir.ui.view">
+		<field name="name">product.template.button.inherit</field>
+		<field name="model">product.template</field>
+		<field name="inherit_id" ref="product.product_template_only_form_view" />
+		<field name="arch" type="xml">
+			<button name="toggle_active" position="before">
+				<button string="Costo Historico" type="object"
+					name="action_view_cost_history" class="oe_stat_button" icon="fa-list" />
+			</button>
+		</field>
+	</record>
+
+</odoo>

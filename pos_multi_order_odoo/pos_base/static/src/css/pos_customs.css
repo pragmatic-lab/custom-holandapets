@@ -1,0 +1,54 @@
+.pos .buttons_pane {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    position: absolute;
+    left: 0px;
+    right: 220px;
+    top: 5px;
+    width: 320px;
+    border-right: none;
+}
+
+.pos .pos-rightheader {
+    float: right;
+    position: unset;
+}
+
+.pos .leftpane {
+    left: 320px;
+}
+
+.pos .rightpane {
+    left: 760px;
+    border-right: white;
+}
+
+.pos .order-selector {
+    display: -webkit-contents;
+    display: contents;
+}
+
+.pos .orders {
+    display: -webkit-contents;
+    display: contents;
+}
+
+.pos .order-button{
+	min-width: 310px;
+	max-width: 310px;
+}
+
+.pos .order-button .order-client{
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.pos .order-button.neworder-button{
+	min-width: 85px;
+}
+
+.pos .order-button.deleteorder-button{
+	min-width: 85px;
+}

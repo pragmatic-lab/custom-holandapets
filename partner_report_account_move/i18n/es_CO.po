@@ -1,0 +1,349 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* partner_report_account_move
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-05-23 03:32+0000\n"
+"PO-Revision-Date: 2020-05-23 03:32+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move_view__account_ml_id
+msgid "Apunte Contable"
+msgstr ""
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move_view__account_move_id
+msgid "Asiento Contable"
+msgstr ""
+
+#. module: partner_report_account_move
+#: selection:account.partner_report_move_view,l10n_co_document_type:0
+msgid "Carné Diplomatico"
+msgstr ""
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move_view__city_id
+msgid "City"
+msgstr "Ciudad"
+
+#. module: partner_report_account_move
+#: model_terms:ir.ui.view,arch_db:partner_report_account_move.partner_report_move_view_search
+msgid "Cliente"
+msgstr ""
+
+#. module: partner_report_account_move
+#: model_terms:ir.ui.view,arch_db:partner_report_account_move.partner_report_move_view_form
+msgid "Contabilidad"
+msgstr ""
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move__create_uid
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move_view__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move__create_date
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move_view__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move_view__balance
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move_view__credit
+msgid "Crédito"
+msgstr ""
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move_view__account_id
+#: model_terms:ir.ui.view,arch_db:partner_report_account_move.partner_report_move_view_search
+msgid "Cuenta"
+msgstr ""
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move__account_ids
+#: model_terms:ir.ui.view,arch_db:partner_report_account_move.account_partner_report_move_view_form
+msgid "Cuentas"
+msgstr ""
+
+#. module: partner_report_account_move
+#: selection:account.partner_report_move_view,l10n_co_document_type:0
+msgid "Cédula"
+msgstr ""
+
+#. module: partner_report_account_move
+#: selection:account.partner_report_move_view,l10n_co_document_type:0
+msgid "Cédula Extranjera"
+msgstr ""
+
+#. module: partner_report_account_move
+#: selection:account.partner_report_move_view,l10n_co_document_type:0
+msgid "Cédula de ciudadanía"
+msgstr ""
+
+#. module: partner_report_account_move
+#: model_terms:ir.ui.view,arch_db:partner_report_account_move.partner_report_move_view_form
+msgid "Datos Cuenta"
+msgstr ""
+
+#. module: partner_report_account_move
+#: model_terms:ir.ui.view,arch_db:partner_report_account_move.partner_report_move_view_form
+msgid "Datos Tercero"
+msgstr ""
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move_view__debit
+msgid "Debito"
+msgstr ""
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move_view__state_id
+msgid "Departamento"
+msgstr ""
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move__document
+msgid "Descargar Excel"
+msgstr ""
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move__display_name
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move_view__display_name
+msgid "Display Name"
+msgstr "Nombre a mostrar"
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move_view__date
+msgid "Fecha"
+msgstr ""
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move__date_to
+msgid "Fecha Fin"
+msgstr ""
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move__date_from
+msgid "Fecha Inicio"
+msgstr ""
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move_view__first_name
+msgid "First Name"
+msgstr "Primer Nombre"
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move_view__first_surname
+msgid "First Surname"
+msgstr "Segundo Nombre"
+
+#. module: partner_report_account_move
+#: model_terms:ir.ui.view,arch_db:partner_report_account_move.account_partner_report_move_view_form
+msgid "Generar Excel"
+msgstr ""
+
+#. module: partner_report_account_move
+#: model_terms:ir.ui.view,arch_db:partner_report_account_move.partner_report_move_view_search
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move__id
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move_view__id
+msgid "ID"
+msgstr ""
+
+#. module: partner_report_account_move
+#: selection:account.partner_report_move_view,l10n_co_document_type:0
+msgid "ID del Exterior"
+msgstr ""
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move_view__vat
+#: model_terms:ir.ui.view,arch_db:partner_report_account_move.partner_report_move_view_tree
+msgid "Identification"
+msgstr "Identificación"
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move__include_lines
+msgid "Incluir Lineas"
+msgstr ""
+
+#. module: partner_report_account_move
+#: selection:account.partner_report_move_view,person_type:0
+msgid "Juridical [1]"
+msgstr ""
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move_view__l10n_co_document_type
+msgid "L10N Co Document Type"
+msgstr "Tipo Documento"
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move____last_update
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move_view____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move__write_uid
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move_view__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move__write_date
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move_view__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: partner_report_account_move
+#: model:ir.actions.act_window,name:partner_report_account_move.account_partner_report_move_action
+#: model:ir.ui.menu,name:partner_report_account_move.account_partner_report_move_menu
+msgid "Movimientos Tercero"
+msgstr ""
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move_view__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: partner_report_account_move
+#: selection:account.partner_report_move_view,person_type:0
+msgid "Natural [2]"
+msgstr ""
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move__filename
+msgid "Nombre Archivo"
+msgstr ""
+
+#. module: partner_report_account_move
+#: selection:account.partner_report_move_view,l10n_co_document_type:0
+msgid "Pasaporte"
+msgstr ""
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move_view__country_id
+msgid "País"
+msgstr ""
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move_view__person_type
+msgid "Person Type"
+msgstr "Tipo de Persona"
+
+#. module: partner_report_account_move
+#: selection:account.partner_report_move_view,l10n_co_document_type:0
+msgid "RUT"
+msgstr ""
+
+#. module: partner_report_account_move
+#: model_terms:ir.ui.view,arch_db:partner_report_account_move.account_partner_report_move_view_form
+msgid "Rango de Fechas"
+msgstr ""
+
+#. module: partner_report_account_move
+#: selection:account.partner_report_move_view,l10n_co_document_type:0
+msgid "Registro Civil"
+msgstr ""
+
+#. module: partner_report_account_move
+#: code:addons/partner_report_account_move/wizard/account_partner_report_move.py:227
+#: code:addons/partner_report_account_move/wizard/account_partner_report_move.py:487
+#: model_terms:ir.ui.view,arch_db:partner_report_account_move.account_partner_report_move_view_form
+#: model_terms:ir.ui.view,arch_db:partner_report_account_move.partner_report_move_view_form
+#, python-format
+msgid "Resumen de Apuntes Contables"
+msgstr ""
+
+#. module: partner_report_account_move
+#: selection:account.partner_report_move_view,l10n_co_document_type:0
+msgid "Salvoconducto de Permanencia"
+msgstr ""
+
+#. module: partner_report_account_move
+#: model_terms:ir.ui.view,arch_db:partner_report_account_move.partner_report_move_view_search
+msgid "Search"
+msgstr "Búsqueda"
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move_view__second_name
+msgid "Second Name"
+msgstr "Segundo Nombre"
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move_view__second_surname
+msgid "Second Surname"
+msgstr "Segundo Apellido"
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move_view__street
+msgid "Street"
+msgstr "Calle"
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move_view__street2
+msgid "Street 2"
+msgstr "Calle 2"
+
+#. module: partner_report_account_move
+#: selection:account.partner_report_move_view,l10n_co_document_type:0
+msgid "Tarjeta de Identidad"
+msgstr ""
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move_view__partner_id
+msgid "Tercero"
+msgstr ""
+
+#. module: partner_report_account_move
+#: model:ir.model.fields,field_description:partner_report_account_move.field_account_partner_report_move__partner_ids
+#: model_terms:ir.ui.view,arch_db:partner_report_account_move.account_partner_report_move_view_form
+msgid "Terceros"
+msgstr ""
+
+#. module: partner_report_account_move
+#: model_terms:ir.ui.view,arch_db:partner_report_account_move.partner_report_move_view_form
+msgid "Total"
+msgstr ""
+
+#. module: partner_report_account_move
+#: model_terms:ir.ui.view,arch_db:partner_report_account_move.account_partner_report_move_view_form
+msgid "Ver"
+msgstr ""
+
+#. module: partner_report_account_move
+#: model:ir.model,name:partner_report_account_move.model_account_partner_report_move
+msgid "account.partner_report_move"
+msgstr ""
+
+#. module: partner_report_account_move
+#: model:ir.model,name:partner_report_account_move.model_account_partner_report_move_view
+msgid "account.partner_report_move_view"
+msgstr ""
+
+#. module: partner_report_account_move
+#: model_terms:ir.ui.view,arch_db:partner_report_account_move.partner_report_move_view_tree
+msgid "total_balance"
+msgstr ""
+
+#. module: partner_report_account_move
+#: model_terms:ir.ui.view,arch_db:partner_report_account_move.partner_report_move_view_tree
+msgid "total_credit"
+msgstr ""
+
+#. module: partner_report_account_move
+#: model_terms:ir.ui.view,arch_db:partner_report_account_move.partner_report_move_view_tree
+msgid "total_debit"
+msgstr ""
+

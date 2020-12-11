@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="account_hierarchy_view_pivot" model="ir.ui.view">
+		 <field name="name">account.hierarchy.pivot</field>
+		 <field name="model">account.hierarchy</field>
+		 <field name="arch" type="xml">
+			 <pivot string="Account Analysis" disable_linking="True">
+				 <field name="move_date" interval="month" type="col"/>
+				 <field name="account_id" type="row"/>
+				 <!--
+				 <field name="partner_id" type="row"/>
+				 <field name="user_id" type="row"/>
+			 -->
+				 <field name="one_digit" type="row"/>
+				 <field name="two_digit" type="row"/>
+				 <field name="four_digit" type="row"/>
+				 <field name="six_digit" type="row"/>
+				 <field name="eight_digit" type="row"/>
+				 <field name="name" type="row"/>
+				 <field name="credit" type="measure"/>
+				 <field name="debit" type="measure"/>
+				 <field name="balance" type="measure"/>
+			 </pivot>
+		 </field>
+	</record>
+	<record id="account_hierarchy_view_graph" model="ir.ui.view">
+		 <field name="name">account.hierarchy.pivot</field>
+		 <field name="model">account.hierarchy</field>
+		 <field name="arch" type="xml">
+			 <graph string="Analisis Cuenta">
+				 <field name="debit" type="measure"/>
+				 <field name="credit" type="measure"/>
+				 <field name="balance" type="measure"/>
+			 </graph>
+		 </field>
+	</record>
+
+		<record id="account_hierarchy_view_search" model="ir.ui.view">
+			<field name="name">account.hierarchy.search</field>
+			<field name="model">account.hierarchy</field>
+			<field name="arch" type="xml">
+
+				<search string="Search">
+					<field name="move_date"/>
+					<field name="account_id" />
+					<field name="one_digit" />
+					<field name="two_digit" />
+					<field name="four_digit" />
+					<field name="six_digit" />
+					<field name="eight_digit" />
+					<field name="name" />
+					<field name="credit" />
+					<field name="debit" />
+					<field name="balance" />
+
+
+					<filter string="Hoy" name="today_date_invoice" domain="[('move_date','=', (context_today()).strftime('%%Y-%%m-%%d'))]" help="Movimientos realizados Hoy"/>
+					<filter name="move_year" string="This Year"  invisible="1" domain="[('move_date','&lt;=', time.strftime('%%Y-12-31')),('move_date','&gt;=',time.strftime('%%Y-01-01'))]"/>
+					<separator/>
+					<filter name="draft" string="Sin Publicar" domain="[('state','=','draft')]" help="Unposted Journal Items"/>
+					<filter name="posted" string="Publicado" domain="[('state','=','posted')]" help="Posted Journal Items"/>
+
+					<group expand="0" name="group_by" string="Group By">
+						<filter name="one_digit" string="1 Nivel" context="{'group_by':'one_digit'}" />
+						<filter name="two_digit" string="2 Niveles" context="{'group_by':'two_digit'}" />
+						<filter name="four_digit" string="4 Niveles" context="{'group_by':'four_digit'}" />
+						<filter name="six_digit" string="6 Niveles" context="{'group_by':'six_digit'}" />
+						<filter name="eight_digit" string="8 Niveles" context="{'group_by':'eight_digit'}" />
+						<filter name="account_name" string="Cuenta" context="{'group_by':'name'}"/>
+						<filter name="journal_id" string="Diario" context="{'group_by':'journal_id'}"/>
+						<separator/>
+						<filter string="Hoy" name="today_date_invoice" domain="[('move_date','=', (context_today()).strftime('%%Y-%%m-%%d'))]" help="Movimientos realizados Hoy"/>
+						<filter name="move_month" string="Fecha" context="{'group_by':'move_date:month'}"
+							help="move date of the account move line"/>
+					</group>
+
+				</search>
+			</field>
+		</record>
+
+	<record id="account_hierarchy_action" model="ir.actions.act_window">
+		<field name="name">Account Analysis</field>
+		<field name="res_model">account.hierarchy</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">pivot,graph</field>
+		<field name="view_id"></field>
+		<field name="search_view_id" ref="account_hierarchy_view_search"/>
+		<field name="context">{'group_by':['one_digit']}</field>
+	</record>
+
+	<menuitem id="account_hierarchy_menu" name="Jerarquía de Cuentas"
+			  action="account_hierarchy_action" sequence="12"
+			  parent="account.menu_finance_reports"/>
+</odoo>

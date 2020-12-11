@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+	<record id="module_category_point_of_sale" model="ir.module.category">
+		<field name="name">Punto de Venta</field>
+		<field name="description">Personalización referente al Punto de Venta</field>
+		<field name="sequence">210</field>
+	</record>
+</odoo>

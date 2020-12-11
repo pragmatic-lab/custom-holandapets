@@ -1,0 +1,1124 @@
+code,name,user_type
+1,ACTIVO,5
+11,EFECTIVO Y EQUIVALENTES DE EFECTIVO,3
+1105,CAJA,3
+110505,Caja general,3
+110510,Cajas menores,3
+110515,Caja menor moneda extranjera,3
+1110,DEPOSITO EN INSTITUCIONES FINANCIERAS Y COOPERATIVAS,3
+111005,Cuenta corriente,3
+111006,Cuenta de ahorro,3
+111008,Depósitos a Corto Plazo,3
+111009,Fiducias,3
+111010,Fondos,3
+111011,Depósitos en el exterior,3
+111020,Descubiertos o Sobregiros Bancarios,3
+1130,FONDOS DE USO RESTRINGIDO,3
+113005,Caja,3
+113010,Depósitos en Instituciones Financieras y Cooperativas,3
+113012,Fondos Especiales para la Administración de Liquidez,3
+113020,Fondos en Tránsito,3
+113025,Efectivo y equivalentes al efectivo restringido corriente,3
+113030,Efectivo y equivalentes al efectivo restringido no corriente,3
+1140,EQUIVALENTES DE EFECTIVO,3
+114005,Depósitos a corto plazo,3
+114010,Inversiones a corto plazo,3
+114015,Otros acuerdos bancarios,3
+12,ACTIVOS FINANCIEROS,5
+1201,ACTIVOS FINANCIEROS A VALOR RAZONABLE CON CAMBIOS EN RESULTADOS,5
+120101,Activos financieros a valor razonable con cambios en resultados designados en el momento del reconocimiento inicial,5
+120105,Activos financieros a valor razonable con cambios en resultados clasificados como mantenidos para negociar,5
+120106,Activos financieros a valor razonable con cambios en resultados medidos obligatoriamente a valor razonable,5
+1202,ACTIVOS FINANCIEROS DISPONIBLES PARA LA VENTA,5
+120201,Títulos de Renta Fija,5
+120205,Títulos de Renta Variable Contabilizados al Costo,5
+120210,Títulos de Renta Variable Contabilizados al Valor Razonable,5
+120290,Otros Títulos,5
+120299,Deterioro (Cr),5
+1203,INVERSIONES NO CORRIENTES MANTENIDAS HASTA EL VENCIMIENTO,6
+120301,Títulos de Renta Fija,6
+120390,Otros Títulos,6
+120395,Rendimientos por Cobrar,6
+120399,Deterioro (Cr),6
+1204,INVERSIONES EN SUBSIDIARIAS NEGOCIOS CONJUNTOS Y ASOCIADAS,5
+120401,Inversiones en subsidiarias ,5
+120402,Inversiones en negocios conjuntos,5
+120403,Inversiones en asociadas,5
+120499,Deterioro (Cr),5
+13,CUENTAS COMERCIALES POR COBRAR Y OTRAS CUENTAS POR COBRAR,1
+1306,VENTA DE BIENES,1
+130606,Nacionales,1
+130607,Del exterior,1
+130690,Difícil cobro,1
+130699,Deterioro (Cr),1
+1308,PRESTACIÓN DE SERVICIOS,1
+130806,Nacionales,1
+130807,Del exterior,1
+130890,Difícil cobro,1
+130899,Deterioro (Cr),1
+1320,AVANCES Y ANTICIPOS ENTREGADOS,1
+132019,Anticipo a contratos,1
+132020,Anticipos para Mantenimientos,1
+132030,Depósitos,1
+132090,Arrendamientos pagados por anticipados,1
+132095,Pólizas de seguro,1
+132097,Anticipos a proveedores,1
+132090,Difícil cobro,1
+132099,Deterioro (Cr),1
+1325,CUENTAS POR COBRAR A CARGO DE PARTES RELACIONADAS,1
+132505,Cuentas por cobrar a cargo de la controladora,1
+132510,Cuentas por cobrar a cargo de personal clave de la gerencia,1
+1340,ANTICIPO DE SERVICIOS NO RECIBIDOS,1
+134001,Seguros,1
+134003,Comisiones,1
+134004,Arrendamientos,1
+134006,Honorarios,1
+134099,Otros pagos anticipados,1
+1390,OTROS DEUDORES,1
+139012,Créditos a empleados,1
+139017,Préstamos a particulares,1
+139090,Difícil cobro,1
+139099,Deterioro (Cr),1
+14,INVENTARIOS,5
+1405,MATERIAS PRIMAS ,5
+140505,Materias primas,5
+140599,Deterioro (Cr),5
+1410,TRABAJO EN CURSO,5
+141005,Productos en proceso,5
+141010,Obras de construcción en curso,5
+141015,Contratos en ejecución,5
+141020,Otros trabajos en curso,5
+1430,PRODUCTOS TERMINADOS,5
+143005,Productos manufacturados,5
+143010,Otros productos,5
+143099,Deterioro (Cr),5
+1435,MERCADERIAS,5
+143505,Mercancías no fabricadas por la empresa,5
+143599,Deterioro (Cr),5
+1455,SUMINISTROS DE PRODUCCION,5
+145525,Materiales y accesorios,5
+145599,Deterioro (Cr),5
+1460,PIEZAS DE REPUESTO,5
+146005,Repuesto,5
+146099,Deterioro (Cr),5
+1465,INVENTARIOS QUE SURGEN DE ACTIVIDADES DE EXTRACCIÓN,5
+146505,Reserva de mineral,5
+146510,Petróleo crudo,5
+146515,Petróleo y productos petroquímicos,5
+146520,Gas natural,5
+146099,Deterioro (Cr),5
+1470,INVENTARIOS QUE SURGEN DE ACTIVIDADES AGRICOLAS,5
+147005,Cultivos en desarrollo,5
+147010,Productos agrícolas,5
+147099,Deterioro (Cr),5
+1490,OTROS INVENTARIOS,5
+146005,Otros inventarios,5
+146099,Deterioro (Cr),5
+15,PROPIEDADES PLANTA Y EQUIPO,8
+1504,TERRENOS Y CONSTRUCCIONES,8
+150405,TERRENOS,8
+15040505,Modelo de Costo,8
+15040510,Modelo de Revaluación,8
+15040599,Deterioro (Cr),8
+150410,EDIFICIOS,8
+15041005,Modelo de Costo,8
+15041010,Modelo de Revaluación,8
+15041015,Depreciación (Cr),15
+15040599,Deterioro (Cr),8
+1505,ACTIVOS DE MINERIA,8
+150505,Modelo de Costo,8
+150510,Modelo de Revaluación,8
+150515,Depreciación (Cr),15
+150599,Deterioro (Cr),8
+1506,ACTIVOS DE PETROLEO Y GAS,8
+150605,Modelo de Costo,8
+150610,Modelo de Revaluación,8
+150615,Depreciación (Cr),15
+150699,Deterioro (Cr),8
+1507,ACTIVOS TANGIBLES PARA EXPLORACIÓN Y EVALUACIÓN,5
+150705,Modelo de Costo,5
+150710,Modelo de Revaluación,5
+150715,Depreciación (Cr),15
+150799,Deterioro (Cr),5
+1508,CONSTRUCCIONES EN PROCESO,5
+150805,Modelo de Costo,5
+150899,Deterioro (Cr),5
+1520,MAQUINARIA Y EQUIPO,8
+152005,Modelo de Costo,8
+152010,Modelo de Revaluación,8
+152015,Depreciación (Cr),15
+152099,Deterioro (Cr),8
+1524,EQUIPO DE OFICINA,8
+152405,Equipo de oficina,8
+15240505,Modelo de Costo,8
+15240510,Modelo de Revaluación,8
+15240515,Depreciación (Cr),15
+15240599,Deterioro (Cr),8
+152410,Equipo de computación y comunicación,8
+15241005,Modelo de Costo,8
+15241010,Modelo de Revaluación,8
+15241015,Depreciación (Cr),15
+15241099,Deterioro (Cr),8
+1525,ENSERES Y ACCESORIOS,8
+152505,Modelo de Costo,8
+152510,Modelo de Revaluación,8
+152515,Depreciación (Cr),15
+152599,Deterioro (Cr),8
+1540,VEHICULOS,8
+154005,Buques,8
+15400505,Modelo de Costo,8
+15400510,Modelo de Revaluación,8
+15400515,Depreciación Acumulada (Cr),15
+15400599,Deterioro (Cr),8
+154010,Aeronaves,8
+15401005,Modelo de Costo,8
+15401010,Modelo de Revaluación,8
+15401015,Depreciación Acumulada (Cr),15
+15401099,Deterioro (Cr),8
+154015,Equipo de transporte terrestre,8
+15401505,Modelo de Costo,8
+15401510,Modelo de Revaluación,8
+15401515,Depreciación Acumulada (Cr),15
+15401599,Deterioro (Cr),8
+1581,BIENES ADQUIRIDOS EN ARRENDAMIENTO FINANCIERO,5
+158105,Modelo de Costo,5
+158106,Mejoras,5
+158110,Modelo de Revaluación,5
+158115,Depreciación Acumulada (Cr),15
+158199,Deterioro (Cr),5
+1590,OTRAS PROPIEDADES PLANTA Y EQUIPO,8
+159005,Modelo de Costo,8
+159010,Modelo de Revaluación,8
+159015,Depreciación Acumulada (Cr),15
+159099,Deterioro (Cr),8
+16,ACTIVOS INTANGIBLES Y PLUSVALIA (CRÉDITO MERCANTIL),5
+1605,PLUSVALIA (CRÉDITO MERCANTIL),5
+160505,Costo,5
+160599,Deterioro (Cr),5
+1610,ACTIVOS INTANGIBLES DISTINTOS DE LA PLUSVALÍA,5
+161005,Marcas comerciales,5
+16100505,Modelo de Costo,5
+16100510,Modelo de Revaluación,5
+16100515,Amortización Acumulada (Cr),5
+16100599,Deterioro (Cr),5
+161010,Derechos de propiedad intelectual patentes y otros derechos de propiedad industrial servicios y derechos de explotación,5
+16101005,Modelo de Costo,5
+16101010,Modelo de Revaluación,5
+16101015,Amortización Acumulada (Cr),5
+16101099,Deterioro (Cr),5
+161015,Licencias y franquicias,5
+16101505,Modelo de Costo,5
+16101510,Modelo de Revaluación,5
+16101515,Amortización Acumulada (Cr),5
+16101599,Deterioro (Cr),5
+161020,Activos intangibles para exploración y evaluación,5
+16102005,Modelo de Costo,5
+16102010,Modelo de Revaluación,5
+16102015,Amortización Acumulada (Cr),5
+16102099,Deterioro (Cr),5
+161025,Cebeceras de periódicos o revistas y títulos de publicaciones,5
+16102505,Modelo de Costo,5
+16102510,Modelo de Revaluación,5
+16102515,Amortización Acumulada (Cr),5
+16102599,Deterioro (Cr),5
+161030,Programas de computador,5
+16103005,Modelo de Costo,5
+16103010,Modelo de Revaluación,5
+16103015,Amortización Acumulada (Cr),5
+16103099,Deterioro (Cr),5
+161035,Recetas fórmulas modelos dise–os y prototipos,5
+16103505,Modelo de Costo,5
+16103510,Modelo de Revaluación,5
+16103515,Amortización Acumulada (Cr),5
+16103599,Deterioro (Cr),5
+161040,Activos intangibles en desarrollo,5
+16104005,Modelo de Costo,5
+16104010,Modelo de Revaluación,5
+16104015,Amortización Acumulada (Cr),5
+16104099,Deterioro (Cr),5
+161045,Otros activos intangibles,5
+16104505,Modelo de Costo,5
+16104510,Modelo de Revaluación,5
+16104515,Amortización Acumulada (Cr),5
+16104599,Deterioro (Cr),5
+17,ACTIVOS POR IMPUESTOS CORRIENTES,5
+1705,ACTIVOS POR IMPUESTOS CORRIENTES,5
+170501,Anticipo de impuesto sobre la renta,5
+170502,Retención en la fuente,5
+1710,ACTIVOS POR IMPUESTOS CORRIENTES DISTINTOS AL IMPUESTO DE RENTA,5
+171003,Anticipo de impuesto de industria y comercio,5
+171004,Impuesto a las ventas retenido,5
+171010,Impuesto industria y comercio retenido,5
+171011,Sobrantes en liquidación privada de impuestos,5
+171050,Otros,5
+18,PROPIEDADES DE INVERSIÓN,5
+1805,TERRENOS,5
+180505,Costo,5
+180510,Revaluación,5
+180515,Ajustes a Valor Razonable,5
+180525,Deterioro (Cr),5
+1810,EDIFICIOS,5
+181005,Costo,5
+181010,Revaluación,5
+181015,Ajustes a Valor Razonable,5
+181020,Depreciación Acumulada (Cr),15
+181025,Deterioro (Cr),5
+19,OTROS ACTIVOS,5
+1912,ACTIVOS POR IMPUESTOS DIFERIDOS,5
+191205,Inversiones financieras,5
+191206,Otros Pasivos,5
+1965,ACTIVOS BIOLîGICOS,5
+196505,Costo,5
+196510,Valor Razonable menos costos de venta,5
+196515,Amortización Acumulada (Cr),5
+196590,Deterioro (Cr),5
+196599,Otros,5
+1970,ACTIVOS NO CORRIENTES MANTENIDOS PARA LA VENTA,5
+197005,Inversiones Financieras,5
+197010,Deudores Comerciales y otras cuentas por cobrar,5
+197015,Propiedad Planta y Equipo,5
+197020,Activos Intangibles,5
+197090,Otros Activos,5
+197099,Deterioro (Cr),5
+2,PASIVO,2
+21,OBLIGACIONES FINANCIERAS E INSTRUMENTOS DERIVADOS,2
+2101,PRESTAMOS BANCARIOS,2
+210304,Préstamos bancarios garantizados,2
+210305,Préstamos bancarios no garantizados,2
+210307,Descubiertos o Sobregiros Bancarios,2
+210308,Contratos de arrendamiento financiero,2
+210309,Pagares,2
+210392,Costos de Transacción Directamente Atribuibles (Db),2
+210394,Anticipo para amortizar obligaciones en moneda legal (Db),2
+210395,Intereses pagados por anticipado (Db),2
+210397,Intereses por Pagar,2
+210398,Comisiones por Pagar,2
+2102,BONOS EMITIDOS ,2
+210201,Bonos emitidos ,2
+210292,Costos de Transacción Directamente Atribuibles (Db),2
+210294,Anticipo para amortizar obligaciones en moneda legal (Db),2
+210295,Intereses pagados por anticipado (Db),2
+210297,Intereses por Pagar,2
+210298,Comisiones por Pagar,2
+2103,OBLIGACIONES SIN GARANTÍA Y PAGARÉS EMITIDOS,2
+210301,Obligaciones sin garantía y pagarés emitidos,2
+210392,Costos de Transacción Directamente Atribuibles (Db),2
+210394,Anticipo para amortizar obligaciones en moneda legal (Db),2
+210395,Intereses pagados por anticipado (Db),2
+210397,Intereses por Pagar,2
+210398,Comisiones por Pagar,2
+2104,PAPEL COMERCIAL EMITIDO,2
+210301,Papel comercial emitido,2
+210392,Costos de Transacción Directamente Atribuibles (Db),2
+210394,Anticipo para amortizar obligaciones en moneda legal (Db),2
+210395,Intereses pagados por anticipado (Db),2
+210397,Intereses por Pagar,2
+210398,Comisiones por Pagar,2
+2105,OTROS PRESTAMOS,2
+210301,Otros préstamos,2
+210392,Costos de Transacción Directamente Atribuibles (Db),2
+210394,Anticipo para amortizar obligaciones en moneda legal (Db),2
+210395,Intereses pagados por anticipado (Db),2
+210397,Intereses por Pagar,2
+210398,Comisiones por Pagar,2
+2106,PASIVOS FINANCIEROS AL VALOR RAZONABLE CON CAMBIOS EN RESULTADOS,2
+210605,Pasivos financieros a valor razonable con cambios en resultados que cumplen la definición de mantenidos para negociar,2
+21060505,Aceptaciones Bancarias,2
+21060520,Contratos de Forward - Especulación,2
+21060525,Contratos de Forward - cobertura,2
+21060530,Contratos de Futuros - Especulación,2
+21060535,Contratos de Futuros - cobertura,2
+21060540,Swaps Ð Especulación,2
+21060545,Swaps Ð cobertura,2
+21060550,Opciones ÐEspeculación,2
+21060555,Opciones Ðcobertura,2
+210610,Pasivos financieros a valor razonable con cambios en resultados designados en el momento del reconocimiento incial,2
+21060505,Aceptaciones Bancarias,2
+21060520,Contratos de Forward - Especulación,2
+21060525,Contratos de Forward - cobertura,2
+21060530,Contratos de Futuros - Especulación,2
+21060535,Contratos de Futuros - cobertura,2
+21060540,Swaps Ð Especulación,2
+21060545,Swaps Ð cobertura,2
+21060550,Opciones ÐEspeculación,2
+21060555,Opciones Ðcobertura,2
+2107,PASIVOS FINANCIEROS A COSTO AMORTIZADO,2
+210705,Aceptaciones Bancarias,2
+210720,Contratos de Forward - Especulación,2
+210725,Contratos de Forward - cobertura,2
+210730,Contratos de Futuros - Especulación,2
+210735,Contratos de Futuros - cobertura,2
+210740,Swaps Ð Especulación,2
+210745,Swaps Ð cobertura,2
+210750,Opciones ÐEspeculación,2
+210755,Opciones Ðcobertura,2
+23,CUENTAS COMERCIALES POR PAGAR Y OTRAS CUENTAS POR PAGAR,2
+2305,PROVEEDORES NACIONALES,2
+230510,Crédito de proveedores,2
+230515,Contratos de arrendamiento financiero,2
+230592,Costos de Transacción Directamente Atribuibles (Db),2
+230594,Anticipo para amortizar crédito proveedores nacionales (Db),2
+230595,Intereses pagados por anticipado (Db),2
+230597,Intereses por Pagar,2
+230598,Comisiones por Pagar,2
+2310,DEL EXTERIOR,2
+231010,Crédito de proveedores,2
+231015,Contratos de arrendamiento financiero,2
+231092,Costos de Transacción Directamente Atribuibles (Db),2
+231094,Anticipo para amortizar crédito Público en Moneda Extranjera (Db),2
+231095,Intereses pagados por anticipado (Db),2
+231097,Intereses por Pagar,2
+231098,Comisiones por Pagar,2
+2315,CUENTAS POR PAGAR CON PARTES RELACIONADAS,2
+231505,Cuentas por cobrar a cargo de la controladora,2
+231510,Cuentas por cobrar a cargo de personal clave de la gerencia,2
+2335,CUENTAS COMERCIALES POR PAGAR,2
+233502,Suscripción de acciones o participaciones,2
+233503,Dividendos y participaciones,2
+233504,Deudas con accionistas o socios,2
+233505,Costos financieros,2
+233510,Costos legales,2
+233515,Libros- suscripciones- periódicos y revistas,2
+233520,Comisiones,2
+233525,Honorarios,2
+233530,Servicios técnicos,2
+233535,Servicios de mantenimiento,2
+233540,Arrendamientos,2
+233545,Transportes- fletes y acarreos,2
+233550,Servicios públicos,2
+233555,Seguros,2
+233560,Gastos de viaje,2
+233565,Gastos de representación y relaciones publicas,2
+233570,Servicios aduaneros,2
+233590,Otros acreedores,2
+24,PASIVOS POR IMPUESTOS CORRIENTES,2
+2405,PASIVOS POR IMPUESTO CORRIENTE - IMPUESTO DE RENTA,2
+240505,Impuesto de renta y complementarios,2
+24040501,Vigencia fiscal corriente,2
+24040502,Vigencias fiscales anteriores,2
+240510,Retención en la fuente,2
+24051001,Salarios y pagos laborales,2
+24051002,Honorarios,2
+24051003,Comisiones,2
+24051004,Servicios,2
+24051005,Arrendamientos,2
+24051006,Rendimientos financieros,2
+24051007,Compras,2
+24051008,Por pagos al exterior,2
+24051009,Por impuesto de timbre,2
+24051010,Autorretenciones,2
+24051011,Retención cree,2
+24051012,Pago retención en la fuente,2
+2410,PASIVOS POR IMPUESTO CORRIENTE DISTINTOS DEL IMPUESTO DE RENTA,2
+241005,Impuesto al valor agregado,2
+24100501,Venta de bienes,2
+24100502,Venta de servicios,2
+24100503,Devoluciones en compra de bienes,2
+24100504,Devoluciones en compra de servicios,2
+24100505,Compra de bienes (DB),2
+24100506,Compra de servicios (DB),2
+24100507,Devoluciones en venta de bienes (DB),2
+24100508,Devoluciones en venta de servicios (DB),2
+24100575,Impuesto a las ventas retenido (DB),2
+24100580,Valor pagado (DB),2
+241010,Impuesto de Industria y comercio,2
+24101004,Vigencia actual por pagar,2
+24101005,Impuesto de industria y comercio retenido Bogotá,2
+24101006,Impuesto de industria y comercio retenido Samacá,2
+24101010,Impuesto de industria y comercio retenido Sutatausa,2
+24101015,Impuesto de industria y comercio retenido Soacha,2
+241015,Impuestos contribucuiones y tasas por pagar ,2
+24101503,Predial unificado,2
+24101505,Valorización,2
+24101509,Registro,2
+24101514,Cuotas de fiscalización y auditaje,2
+24101516,Impuesto sobre vehículos automotores,2
+24101522,Impuesto al patrimonio,2
+24101527,Impuestos contribuciones y tasas en el exterior,2
+24101580,Otros impuestos departamentales,2
+24101585,Otros impuestos municipales,2
+24101590,Otros impuestos distritales,2
+24101595,Multas y sanciones,2
+25,OBLIGACIONES LABORALES Y DE SEGURIDAD SOCIAL,2
+2505,SALARIOS Y PRESTACIONES SOCIALES,2
+250501,Nómina por pagar,2
+250502,Cesantías,2
+250503,Intereses sobre cesantías,2
+250504,Vacaciones,2
+250506,Prima de servicios,2
+2510,RETENCIONES Y APORTES DE NîMINA,2
+251005,Aportes a entidades promotoras de salud- eps,2
+251006,Aportes a administradoras de riesgos profes.- arp,2
+251010,Aportes al i.c.b.f.- sena y cajas de compensación,2
+251025,Embargos judiciales,2
+251030,Libranzas,2
+251045,Fondos,2
+251095,Otros,2
+2515,PASIVO POR PLAN DE BENEFICIOS DEFINIDOS,2
+251505,Pasivo por plan de beneficios definidos,2
+2550,PASIVO ESTIMADO PARA OBLIGACIONES LABORALES,2
+255005,Cesantías,2
+255010,Intereses sobre cesantías,2
+255015,Vacaciones,2
+255020,Prima de servicios,2
+26,PROVISIONES,2
+2605,PROVISIONES POR GARANTÍA,2
+261004,Provisiones por garantía,2
+2610,PROVISIONES POR PROCESOS LEGALES,2
+261004,Provisiones por litigios o demandas por préstamos,2
+261005,Provisiones por litigios o demandas laborales,2
+261006,Provisiones por litigios o demandas comerciales,2
+2615,PROVISIONES POR COSTOS DE DESMANTELAMIENTO RESTAURACIÓN Y REHABILITACIÓN,2
+261504,Provisiones por costos de desmantelamiento,2
+261505,Provisiones por costos de restauración,2
+261506,Provisiones por costos de rehabilitación,2
+2620,PROVISIONES PARA REESTRUCTURACIONES Y CONTRATOS ONEROSOS,2
+262002,Indemnizaciones por reestructuración,2
+262004,Bonificaciones por reestructuración,2
+262006,Contratos Onerosos,2
+2690,OTRAS PROVISIONES,2
+269011,Provisiones por riesgos no asegurados,2
+269012,Provisiones por Mecanismos alternativos de solución de conflictos,2
+269090,Provisiones por reembolsos,2
+27,INGRESOS DIFERIDOS,2
+2705,INGRESOS DEVENGADOS POR FACTURAR,2
+270521,intereses,2
+270522,Comisiones,2
+270523,Arrendamientos,2
+270524,Honorarios,2
+270525,Servicios técnicos,2
+270528,Otros,2
+28,PASIVOS INCLUIDOS EN  GRUPOS DE ACTIVOS PARA SU DISPOSICIÓN CLASIFICADOS COMO MANTENIDOS PARA LA VENTA,2
+2805,PASIVOS INCLUIDOS EN  GRUPOS DE ACTIVOS PARA SU DISPOSICIÓN CLASIFICADOS COMO MANTENIDOS PARA LA VENTA,2
+280521,Obligaciones Financieras e Instrumentos Derivados,2
+280522,Operaciones de Crédito Público y Financiamiento con Banca Central,2
+280523,Impuestos por pagar,2
+280524,Acreedores comerciales y otras cuentas por pagar,2
+280525,Obligaciones laborales y de seguridad social integral,2
+280528,Provisiones,2
+280529,Otros pasivos,2
+29,OTROS PASIVOS,2
+2905,ANTICIPOS Y AVANCES RECIBIDOS,2
+290505,De clientes,2
+290510,Sobre contratos,2
+290595,Otros,2
+2912,PASIVOS POR IMPUESTOS DIFERIDOS,2
+291212,Inversiones financieras,2
+291213,Activos no corrientes o grupos de activos mantenidos para la venta o para distribuir a los propietarios,2
+291214,Deudores comerciales y otras cuentas por cobrar,2
+291215,Inventarios,2
+291216,Propiedades Planta y Equipo,2
+291217,Activos intangibles y crédito mercantil,2
+291218,Propiedades de Inversión,2
+291219,Otros Activos,2
+291221,Obligaciones Financieras e Instrumentos Derivados,2
+291224,Acreedores Comerciales y otras cuentas por pagar,2
+291225,Obligaciones laborales y de seguridad social integral,2
+291228,Provisiones,2
+291229,Otros Pasivos,2
+2915,RECAUDOS A FAVOR DE TERCEROS,2
+291501,Regalías y compensaciones monetarias,2
+291502,Impuestos,2
+291503,Ventas por cuenta de terceros,2
+291505,Cobro cartera de terceros,2
+2920,SUBVENCIONES DEL GOBIERNO,2
+292005,Pasivos por subvenciones del gobierno,2
+3,PATRIMONIO,11
+31,CAPITAL SOCIAL,11
+3105,CAPITAL SUSCRITO Y PAGADO,11
+310505,Capital autorizado,11
+310510,Capital por suscribir (DB),11
+310515,Capital suscrito por cobrar (DB),11
+3115,ACCIONES PROPIAS EN CARTERA,11
+311505,Acciones propias en cartera,11
+311510,Acciones propias readquiridas (DB),11
+32,SUPERAVIT DE CAPITAL,11
+3205,PRIMA EN COLOCACIÓN ACCIONES CUOTAS O PARTES DE INTERÉS,11
+320505,Prima en colocación de acciones,11
+320510,Prima en colocación de acciones por cobrar (DB),11
+320515,Prima en colocación de cuotas o partes de interés social,11
+320520,Prima en colocación de cuotas o partes de interés social por cobrar (DB),11
+3243,SUPERçVIT MÉTODO DE PARTICIPACIÓN PATRIMONIAL,11
+324302,Inversiones en Entidades Asociadas ,11
+324304,Inversiones en Entidades Controladas Conjuntamente ,11
+324306,Inversiones en otros acuerdos conjuntos  (Operaciones y Activos Conjuntos),11
+324308,Inversiones en Entidades Controladas (Subsidiarias O Subordinadas),11
+33,RESERVAS,11
+3305,RESERVAS OBLIGATORIAS,11
+330505,Reserva legal,11
+330515,Reserva para readquisición de acciones,11
+330590,Otras reservas,11
+3310,RESERVAS ESTATUTARIAS,11
+331005,Para futuras capitalizaciones,11
+331010,Para reposición de activos,11
+331015,Futuros ensanches,11
+331090,Otras reservas,11
+3315,RESERVAS OCASIONALES,11
+331505,Para fomento económico,11
+331510,Para capital de trabajo,11
+331515,A disposición del máximo órgano social,11
+331590,Otras reservas,11
+35,DIVIDENDOS Y PARTICIPACIONES DECRETADOS,11
+3505,DIVIDENDOS Y PARTICIPACIONES DECRETADOS,11
+350505,Dividendos decretados en acciones,11
+350510,Participaciones decretadas en cuotas o partes de interés social,11
+36,RESULTADOS DEL EJERCICIO,11
+3605,RESULTADOS DEL EJERCICIO,11
+360501,Utilidad o excedente del ejercicio,11
+360502,Pérdida o déficit del ejercicio,11
+37,RESULTADO DE EJERCICIOS ANTERIORES,11
+3705,RESULTADO DE EJERCICIOS ANTERIORES,11
+370501,Utilidad o Excedente del ejercicio,11
+370502,Pérdida o Déficit del ejercicio,11
+3710,GANANCIAS (PÉRDIDAS)  BALANCE DE APERTURA,11
+371002,Efectivo y Equivalentes de Efectivo,11
+371004,Inversiones Financieras,11
+371006,Activos no corrientes o grupos de activos mantenidos para la venta o para distribuir a los propietarios,11
+371008,Deudores Comerciales y otras cuentas por cobrar,11
+371010,Inventarios,11
+371012,Propiedades Planta y Equipo,11
+371014,Activos Intangibles y Crédito Mercantil,11
+371016,Propiedades de Inversión,11
+371022,Otros Activos,11
+371024,Obligaciones Financieras e Instrumentos Derivados,11
+371026,Operaciones de Crédito Público y financiamiento banca Central,11
+371028,Impuestos por pagar,11
+371030,Acreedores comerciales y otras cuentas por pagar,11
+371032,Obligaciones laborales y de seguridad social integral,11
+371034,Bonos y Otros títulos,11
+371038,Provisiones,11
+371040,Otros Pasivos,11
+38,GANANCIAS (PÉRDIDAS) POR OTROS RESULTADOS INTEGRALES QUE NO SE RECLASIFICARAN AL RESULTADO DEL PERIODO,11
+3805,OTRO RESULTADO INTEGRAL NETO DE IMPUESTOS GANANCIAS (PÉRDIDAS) DE INVERSIONES EN INSTRUMENTO DE PATRIMONIO,11
+380505,Inversiones en Instrumentos de Patrimonio,11
+3810,OTRO RESULTADO INTEGRAL NETO DE IMPUESTOS GANANCIAS (PÉRDIDAS) POR REVALUACIÓN ,11
+381005,Activos no corrientes o grupos de activos mantenidos para la venta,11
+381010,Propiedades Planta y Equipo,11
+381015,Activos Intangibles,11
+381020,Propiedades de Inversión,11
+381025,Otros Activos,11
+3815,OTRO RESULTADO INTEGRAL NETO DE IMPUESTOS GANANCIAS (PÉRDIDAS) POR NUEVAS MEDICIONES DE PLANES DE BENEFICIOS DEFINIDOS,11
+381505,Nuevas mediciones de planes de beneficios definidos,11
+3820,OTRO RESULTADO INTEGRAL NETO DE IMPUESTOS GANANCIAS (PÉRDIDAS) CAMBIO EN EL VALOR RAZONABLE DE PASIVOS FINANCIEROS ATRIBUIBLE A CAMBIOS EN EL RIESGO DE CREDITO DEL PASIVO,11
+382005,Instrumentos financieros pasivos,11
+3825,PARTICIPACIÓN DE OTRO RESULTADO INTEGRAL DE ASOCIADAS Y NEGOCIOS CONJUNTOS CONTABILIZADOS UTILIZANDO EL MÉTODO DE LA PARTICIPACIÓN QUE NO SE RECLASIFICARç AL RESULTADO DEL PERIODO NETO DE IMPUESTOS,11
+382505,Inversiones en Asociadas ,11
+382510,Inversiones en negocios conjuntos,11
+39,GANANCIAS (PÉRDIDAS) POR OTROS RESULTADOS INTEGRALES QUE SE RECLASIFICARAN AL RESULTADO DEL PERIODO,11
+3905,DIFERENCIA DE CAMBIO POR CONVERSIÓN EN OPERACIONES EXTRANJERAS,11
+390505,Ganancias (pérdidas) por diferencias de cambio de conversión netas de impuestos,11
+390510,Ajustes de reclasificación en diferencias de cambio de conversión neto de impuestos,11
+390515,Otro resultado integral neto de impuestos diferencias de cambio por conversión,11
+3910,ACTIVOS FINANCIEROS DISPONIBLES PARA LA VENTA,11
+390505,Ganancias (pérdidas) por nuevas mediciones de activos financieros disponibles para la venta, neta de impuestos,11
+390510,Ajustes de reclasificación activos financieros disponibles para la venta neto de impuestos,11
+390515,Otro resultado integral neto de impuestos activos financieros disponibles para la venta,11
+3915,COBERTURAS DEL FLUJO DE EFECTIVO,11
+391505,Ganancias (pérdidas) por coberturas de flujos de efectivo neta de impuestos,11
+391510,Ajustes de reclasificación coberturas de flujos de efectivo neto de impuestos,11
+391515,Importes eliminados del patrimonio e incluidos en el importe en libros de activos (pasivos) no financieros que se hayan adquirido o incurrido mediante una transacción prevista altamente probable cubierta neto de impuestos,11
+391520,Otro resultado integral neto de impuestos coberturas del flujo de efectivo,11
+3920,COBERTURAS DE INVERSIONES NETAS EN NEGOCIOS EN EL EXTRANJERO,11
+392005,Ganancias (pérdidas) por coberturas de inversiones netas en negocios en el extranjero neto de impuestos,11
+392010,Ajustes de reclasificación por coberturas de inversiones netas en negocios en el extranjero netos de impuestos,11
+392015,Otro resultado integral neto de impuestos coberturas de inversiones netas en negocios en el extranjero,11
+3925,PARTICIPACIÓN DE OTRO RESULTADO INTEGRAL DE ASOCIADAS Y NEGOCIOS CONJUNTOS CONTABILIZADOS UTILIZANDO EL MÉTODO DE LA PARTICIPACIÓN QUE SE RECLASIFICARç AL RESULTADO DEL PERIODO NETO DE IMPUESTOS,11
+392505,Inversiones en Asociadas ,11
+392510,Inversiones en negocios conjuntos,11
+4,INGRESOS,14
+41,VENTA DE BIENES ,14
+4115,EXPLOTACIÓN DE MINAS Y CANTERAS,14
+411505,Carbón,14
+411508,Coque,14
+4135,COMERCIO AL POR MAYOR,14
+413508,Venta de combustibles solidos,14
+4175,DEVOLUCIONES REBAJAS Y DESCUENTOS EN VENTA DE BIENES,14
+417505,Devolución por venta de carbón,14
+417508,Devolución por venta de coque,14
+417505,Descuento obtenido condicionado al volumen (probable),14
+417505,Descuento por pronto pago (probable),14
+42,VENTA DE SERVICIOS,14
+4215,SERVICIOS VARIOS,14
+421505,Servicio de transporte,14
+421508,Alquiler maquinaria y equipo,14
+44,OTROS INGRESOS,13
+4402,RENDIMIENTOS DE INVERSIONES Y OTROS INGRESOS FINANCIEROS,13
+440202,Depósitos en Instituciones Financieras y Cooperativas,13
+440204,Fondos Especiales para Administración de Liquidez,13
+440216,Inversiones Mantenidas para Negociación,13
+440218,Inversiones Disponibles para la Venta,13
+440220,Inversiones hasta el Vencimiento,13
+440224,Derechos Fiduciarios,13
+440256,Dividendos,13
+440260,Descuentos obtenidos por pronto pago no planeados,13
+440270,Descuentos obtenidos condicionados al volumen no planeados,13
+440290,Otros ingresos Financieros,13
+4406,AJUSTE POR DIFERENCIA EN CAMBIO,13
+440605,Efectivo y equivalentes de efectivo,13
+440620,Deudores Comerciales y otras cuentas por cobrar,13
+440625,Inventarios,13
+440630,Propiedades Planta y Equipo,13
+440635,Activos Intangibles y Crédito Mercantil,13
+440640,Propiedades de Inversión,13
+440645,Otros Activos,13
+440650,Obligaciones Financieras e Instrumentos Derivados,13
+4409,UTILIDAD EN VENTA DE INVERSIONES Y OTROS ACTIVOS,13
+440901,Inversiones Mantenidas para Negociación,13
+440902,Inversiones Disponibles para la Venta,13
+440903,Inversiones Hasta el Vencimiento,13
+440916,Deudores Comerciales y otras cuentas por cobrar,13
+440918,Propiedades Planta y Equipo,13
+440920,Activos intangibles y crédito Mercantil,13
+440922,Otros Activos,13
+4490,OTROS INGRESOS DIVERSOS,13
+449002,Arriendos,13
+449003,Ingresos por condonación de deudas,13
+449004,Indemnizaciones Compa–ías de Seguros,13
+449049,Indemnizaciones,13
+48,OTROS RESULTADOS INTEGRALES,13
+4820,GANANCIA (PÉRDIDA) DE OTROS RESULTADOS INTEGRALES,13
+482005,Ganancias (pérdidas) por diferencias de cambio de conversión antes de impuestos,13
+482006,Ajustes de reclasificación en diferencias de cambio de conversión antes de impuestos,13
+482007,Impuesto a las ganancias relacionado con diferencias de cambio de conversión de otro resultado integral,13
+482008,Ganancias (pérdidas) por nuevas mediciones de inversiones disponibles para la venta antes de impuestos,13
+482009,Ajustes de reclasificación inversiones disponibles para la venta antes de impuestos,13
+482010,Impuesto a las ganancias relacionadas con inversiones disponibles para la venta de otro resultado integral,13
+482011,Ganancias (pérdidas) por coberturas de flujos de efectivo antes de impuestos,13
+482012,Ajustes de reclasificación en coberturas de flujos de efectivo antes de impuestos,13
+482014,Impuesto a las ganancias relacionado con coberturas de flujos de efectivo de otro resultado integral,13
+482015,Ganancias (pérdidas) sobre coberturas de inversión neta de negocios en el extranjero antes de impuestos,13
+482016,Ajustes por reclasificación sobre coberturas de una inversión neta en negocios en el extranjero antes de impuestos.,13
+482017,Impuesto a las ganancias relacionado con coberturas de una inversión neta en negocios en el extranjero de otro resultado integral,13
+482020,Ganancias (pérdidas) clasificada en otros ingresos del resultado integral por revaluación de Propiedades Planta y Equipo y Otros Activos antes de impuestos,13
+482021,Impuesto a las ganancias relacionado con cambios en el superávit de revaluación de Propiedades planta y equipo y otros activos de otro resultado integral,13
+482022,Ganancias (pérdidas) actuariales clasificadas en otros ingresos del resultado integral por planes de beneficios definidos antes de impuestos,13
+482023,Impuesto a las ganancias relacionado con planes de beneficios definidos de otro resultado integral,13
+482024,Cambios en el valor razonable de pasivos financieros atribuibles a cambios  en el riesgo de crédito de pasivos clasificados en otros ingresos del resultado integral antes de impuestos,13
+482025,Impuestos a las ganancias relacionado con cambios en el valor razonable de pasivos financieros atribuibles a cambios en el riesgo de crédito de pasivos,13
+482026,Participación en otros resultados integrales de entidades subordinadas asociadas y negocios conjuntos contabilizadas por el Método de Participación Patrimonial clasificados en otros resultados integrales antes de impuestos,13
+482027,Impuestos a las ganancias relacionado  con la participación en Asociadas y Negocios Conjuntos contabilizadas por el Método de Participación patrimonial,13
+482028,Ganancias (Pérdidas) clasificadas  en otros resultados integrales por activos no corrientes clasificados como mantenidos para la venta antes de impuestos,13
+482029,Impuestos a las ganancias relacionado con activos no corrientes o grupos en desapropiación clasificados como mantenidos para la venta,13
+482030,Ajustes de reclasificación en el impuesto a las ganancias relacionado con componentes de otro resultado integral,13
+5,GASTO,16
+51,OPERACIONALES DE VENTA,16
+5101,SUELDOS Y SALARIOS,16
+510101,Sueldos del personal,16
+510102,Jornales,16
+510103,Horas extras y festivos,16
+510104,Incapacidades,16
+510105,Gastos de representación,16
+510109,Honorarios,16
+510113,Prima,16
+510117,Vacaciones,16
+510118,Bonificaciones,16
+510123,Auxilio de transporte,16
+510124,Cesantías,16
+510125,Intereses a las cesantías,16
+510131,Dotación y suministro a trabajadores,16
+510145,Salario integral,16
+510146,Contratos de personal temporal,16
+510147,Viáticos,16
+510148,Gastos de viaje,16
+510149,Comisiones,16
+510150,Apoyo de sostenimiento,16
+510151,Inactividad,16
+5102,HONORARIOS,16
+510210,Revisoría fiscal,16
+510220,Avalúos,16
+510225,Asesoría jurídica,16
+510235,Asesoría técnica,16
+510295,Otros,16
+5104,APORTES SOBRE LA NîMINA,16
+510401,Aportes al ICBF,16
+510402,Aportes al SENA,16
+510403,Aportes a administradoras de riesgos profesionales,16
+510404,Aportes a entidades promotoras de salud- EPS,16
+510405,Aportes a fondos de pensiones y/o cesantías,16
+510406,Aportes cajas de compensación familiar,16
+5108,IMPUESTOS,16
+510802,Industria y comercio,16
+510803,De timbres,16
+510804,A la propiedad raíz,16
+510805,De vehículos,16
+510806,Al patrimonio,16
+510808,Estampilla prodesarrollo,16
+510809,IVA descontable,16
+510819,Otros,16
+5111,GENERALES,16
+511103,Arrendamientos,16
+511104,Contribuciones y afiliaciones,16
+511106,Seguros,16
+511108,Servicios,16
+511110,Gastos legales,16
+511112,Mantenimiento y reparaciones,16
+511114,Adecuación e instalación,16
+511115,Gastos de viaje,16
+511119,Diversos,16
+52,DE ADMINISTRACIÓN,16
+5201,SUELDOS Y SALARIOS,16
+520101,Sueldos del personal,16
+520102,Jornales,16
+520103,Horas extras y festivos,16
+520104,Incapacidades,16
+520105,Gastos de representación,16
+520109,Honorarios,16
+520113,Prima,16
+520117,Vacaciones,16
+520118,Bonificaciones,16
+520123,Auxilio de transporte,16
+520124,Cesantías,16
+520125,Intereses a las cesantías,16
+520131,Dotación y suministro a trabajadores,16
+520145,Salario integral,16
+520146,Contratos de personal temporal,16
+520147,Viáticos,16
+520148,Gastos de viaje,16
+520149,Comisiones,16
+520150,Apoyo de sostenimiento,16
+520151,Inactividad,16
+5202,HONORARIOS,16
+520210,Revisoría fiscal,16
+520220,Avalúos,16
+520225,Asesoría jurídica,16
+520235,Asesoría técnica,16
+520295,Otros,16
+5204,APORTES SOBRE LA NîMINA,16
+520401,Aportes al ICBF,16
+520402,Aportes al SENA,16
+520403,Aportes a administradoras de riesgos profesionales,16
+520404,Aportes a entidades promotoras de salud- EPS,16
+520405,Aportes a fondos de pensiones y/o cesantías,16
+520406,Aportes cajas de compensación familiar,16
+5208,IMPUESTOS,16
+520802,Industria y comercio,16
+520803,De timbres,16
+520804,A la propiedad raíz,16
+520805,De vehículos,16
+520806,Al patrimonio,16
+520808,Estampilla prodesarrollo,16
+520809,IVA descontable,16
+520819,Otros,16
+5211,GENERALES,16
+521103,Arrendamientos,16
+521104,Contribuciones y afiliaciones,16
+521106,Seguros,16
+521108,Servicios,16
+521110,Gastos legales,16
+521112,Mantenimiento y reparaciones,16
+521114,Adecuación e instalación,16
+521115,Gastos de viaje,16
+521119,Diversos,16
+53,NO OPERACIONALES,16
+5305,FINANCIEROS,16
+530505,Gastos bancarios,16
+530515,Comisiones,16
+530520,Intereses,16
+530525,Diferencia en cambio,16
+530530,Descuentos concedidos por pronto pago no planeados,16
+530535,Descuentos concedidos condicionados al volumen no planeados,16
+5395,OTROS GASTOS NO OPERACIONALES,16
+539517,Multas sanciones y litigios,16
+539519,Donaciones,16
+539530,Impuestos asumidos,16
+54,DETERIORO AGOTAMIENTO DEPRECIACIÓN AMORTIZACIÓN PASIVOS ESTIMADOS Y CçLCULO ACTUARIAL,16
+5402,DETERIORO INVERSIONES FINANCIERAS,16
+540202,Inversiones Disponibles para la Venta,16
+540203,Inversiones Hasta el Vencimiento,16
+540295,Recuperaciones - cambios en estimaciones (Cr),16
+5404,DETERIORO CUENTAS POR COBRAR COMERCIALES Y OTRAS CUENTAS POR COBRAR,16
+540406,Venta de bienes,16
+540420,Avances y anticipos Entregados,16
+540490,Otros deudores,16
+540495,Recuperaciones - cambios en estimaciones (Cr),16
+5406,DETERIORO INVENTARIOS,16
+540610,Mercancías en existencia,16
+540615,Prestación de Servicios,16
+540618,Materiales para la prestación de servicios,16
+540690,Otros Inventarios,16
+540695,Recuperaciones - cambios en estimaciones (Cr),16
+5407,DETERIORO DE PROPIEDADES PLANTA Y EQUIPO,16
+540705,Terrenos,16
+540715,Construcciones en Curso,16
+540720,Maquinaria planta y equipo en montaje,16
+540740,Edificaciones,16
+540755,Maquinaria y Equipo,16
+540765,Muebles Enseres y Equipos de Oficina,16
+540770,Equipos de Comunicación y Computación,16
+540795,Recuperaciones - cambios en estimaciones (Cr),16
+5408,DETERIORO DE ACTIVOS INTANGIBLES Y CRÉDITO MERCANTIL,16
+540825,Derechos,16
+540835,Licencias,16
+540840,Software,16
+540882,Otros Activos Intangibles,16
+540895,Recuperaciones - cambios en estimaciones (Cr),16
+5409,DETERIORO DE ACTIVOS NO CORRIENTES O GRUPOS DE ACTIVOS MANTENIDOS PARA LA VENTA O PARA DISTRIBUIRI A LOS PROPIETARIOS,16
+540905,Activos no corrientes mantenidos para la venta,16
+540907,Activos no corrientes para distribuir a los propietarios,16
+540995,Recuperaciones - cambios en estimaciones (Cr),16
+5410,DETERIORO DE PROPIEDADES DE INVERSIÓN,16
+541005,Terrenos,16
+541010,Edificaciones,16
+541095,Recuperaciones - cambios en estimaciones (Cr),16
+5411,DETERIORO OTROS ACTIVOS,16
+541160,Bienes de Arte y Cultura,16
+541165,Activos Biológicos,16
+5413,PASIVO ESTIMADO PARA OBLIGACIONES FISCALES,16
+541337,Impuesto de industria y comercio,16
+541340,Impuesto de renta y complementarios - Impuesto Corriente,16
+541350,Impuesto de renta y complementarios - Impuesto Diferido,16
+541390,Otras provisiones para obligaciones fiscales,16
+5414,PROVISIONES PARA LITIGIOS Y/O DEMANDAS,16
+541404,Litigios o demandas por préstamos,16
+541405,Litigios o demandas laborales,16
+541406,Litigios o demandas comerciales,16
+541407,Litigios o demandas por impuestos,16
+5417,PROVISIONES DIVERSAS,16
+541790,Otras Provisiones,16
+5425,PASIVOS ESTIMADOS PARA PRESTACIONES SOCIALES,16
+542501,Cesantías,16
+542502,Intereses sobre cesantías,16
+542503,Vacaciones,16
+542504,Prima de servicios,16
+542505,Bonificaciones,16
+5430,DEPRECIACIÓN DE PROPIEDADES PLANTA Y EQUIPO,16
+543005,Terrenos,16
+543040,Edificaciones,16
+543055,Maquinaria y Equipo,16
+543065,Muebles Enseres y Equipos de Oficina,16
+543070,Equipos de Comunicación y Computación,16
+543082,Otras Propiedades Planta y Equipo,16
+5438,AMORTIZACIÓN DE ACTIVOS INTANGIBLES Y CRÉDITO MERCANTIL,16
+543825,Derechos,16
+543835,Licencias,16
+543840,Software,16
+543882,Otros Activos Intangibles,16
+543895,Recuperaciones - cambios en estimaciones (Cr),16
+5440,DEPRECIACIÓN / AMORTIZACIÓN PROPIEDADES DE INVERSIÓN,16
+544005,Edificios,16
+6,COSTOS DE VENTAS,17
+61,COSTO DE VENTAS Y PRESTACIÓN DE SERVICIOS,17
+6135,COMERCIO AL POR MAYOR Y AL POR MENOR,17
+613595,Venta de otros productos,17
+62,COMPRAS,17
+6210,DE MATERIAS PRIMAS,17
+621002,Carbón,17
+621005,Coque,17
+6215,DE MATERIALES INDIRECTOS,17
+621505,Materiales indirectos,17
+6225,DEVOLUCIONES EN COMPRAS,17
+622505,Devoluciones en compras,17
+7,COSTOS DE PRODUCCIÓN O DE OPERACIÓN,17
+73,COSTOS INDIRECTOS,17
+7310,HONORARIOS,17
+731025,Asesoría jurídica,17
+731035,Asesoría técnica,17
+7315,IMPUESTOS,17
+731505,Industria Y Comercio,17
+731510,De Timbres,17
+731515,A La Propiedad Raíz,17
+731540,De Vehículos,17
+731550,Cuotas De Fomento,17
+731570,IVA Descontable,17
+731575,Regalías,17
+731595,Otros,17
+7320,ARRENDAMIENTOS,17
+732005,Terrenos,17
+732010,Construcciones Y Edificaciones,17
+732015,Maquinaria Y Equipo,17
+732040,Flota Y Equipo De Transporte,17
+732095,Otros,17
+7325,CONTRIBUCIONES Y AFILIACIONES,17
+732510,Afiliación Y Sostenimiento,17
+7330,SEGUROS,17
+733025,Incendio,17
+733030,Terremoto,17
+733035,Sustracción Y Hurto,17
+733040,Flota Y Equipo De Transporte,17
+733060,Responsabilidad Civil Y Contractual,17
+733070,Rotura De Maquinaria,17
+733075,Obligatorio Accidente De Transito,17
+733080,Todo Riesgo,17
+733095,Otros Seguros,17
+7335,SERVICIOS,17
+733505,Aseo Y Vigilancia,17
+733515,Asistencia Técnica,17
+733520,Procesamiento Electrónico De Datos,17
+733525,Acueducto Y Alcantarillado,17
+733530,Energía Eléctrica,17
+733535,Teléfono,17
+733540,Correo- Portes Y Telegramas,17
+733545,Gas,17
+733550,Transporte- Fletes Y Acarreos,17
+733560,Publicidad Propaganda Y Promoción,17
+733575,Manejo De Carga,17
+733592,Agenciamiento Aduanero,17
+733595,Otros,17
+7340,GASTOS LEGALES,17
+734015,Tramites Y Licencias,17
+734020,Aduaneros,17
+734095,Otros,17
+7345,MANTENIMIENTO Y REPARACIONES,17
+734505,Terrenos,17
+734510,Construcciones Y Edificaciones,17
+734515,Maquinaria Y Equipo,17
+734520,Equipo De Oficina,17
+734525,Equipo De Computación Y Comunicación,17
+734540,Flota Y Equipo De Transporte,17
+734560,Acueductos Plantas Y Redes,17
+734570,Vías De Comunicación,17
+7350,ADECUACIÓN E INSTALACIÓN,17
+735005,Instalaciones Eléctricas,17
+735010,Arreglos Ornamentales,17
+735015,Reparaciones Locativas,17
+7355,GASTOS DE VIAJE,17
+735505,Alojamiento Y Manutención,17
+735515,Pasajes Aéreos,17
+735520,Pasajes Terrestres,17
+735595,Otros,17
+7360,DEPRECIACIONES,17
+736005,Construcciones Y Edificaciones,17
+736010,Maquinaria Y Equipo,17
+736015,Equipo De Oficina,17
+736020,Equipo De Computación Y Comunicación,17
+736035,Flota Y Equipo De Transporte,17
+7365,AMORTIZACIONES,17
+736515,Cargos Diferidos,17
+7395,DIVERSOS,17
+739520,Gastos De Representación Y Relaciones Publicas,17
+739525,Elementos De Aseo Y Cafetería,17
+739530,Útiles- Papelería Y Fotocopias,17
+739535,Combustibles Y Lubricantes,17
+739540,Envases Y Empaques,17
+739545,Taxis Y Buses,17
+739560,Casino Y Restaurante,17
+739565,Parqueaderos,17
+739580,Peajes,17
+739585,Cargues Y Descargues,17
+739590,Servicio De Grúa Y Montacargas,17
+739595,Servicio De Camabaja,17
+739510,De Timbres,17
+739515,A La Propiedad Raíz,17
+74,CONTRATOS DE SERVICIOS,17
+740101,Contratos de servicios,17
+8,CUENTAS DE ORDEN DEUDORAS,17
+81,DERECHOS CONTINGENTES,17
+8105,BIENES Y VALORES ENTREGADOS EN CUSTODIA,17
+810505,Valores mobiliarios,17
+810510,Bienes muebles,17
+8110,BIENES Y VALORES ENTREGADOS EN GARANTÍA,17
+811005,Valores mobiliarios,17
+811010,Bienes muebles,17
+811015,Bienes inmuebles,17
+8115,BIENES Y VALORES EN PODER DE TERCEROS,17
+811505,En arrendamiento,17
+811510,En préstamo,17
+811515,En depósito,17
+811520,En consignación,17
+811525,Subsidio cuentas ahorro programado,17
+8120,LITIGIOS Y O DEMANDAS,17
+812005,Ejecutivos,17
+812010,Incumplimiento de contratos,17
+8125,PROMESAS DE COMPRAVENTA,17
+812501,Promesas de compraventa,17
+8135,RECLAMACIONES,17
+813505,Pólizas alto costo régimen subsidiado,17
+813595,Otras régimen subsidiado,17
+8140,CONVENIOS DE PAGO,17
+814005,Aportes empresas afiliadas,17
+8195,DIVERSAS,17
+819505,Valores adquiridos por recibir,17
+819595,Otras,17
+82,DEUDORAS FISCALES,17
+8201,DEUDORAS FISCALES,17
+820101,Deudoras fiscales,17
+83,DEUDORAS DE CONTROL,17
+8305,BIENES RECIBIDOS EN ARRENDAMIENTO FINANCIERO,17
+830505,Bienes muebles,17
+830510,Bienes inmuebles,17
+8315,PROPIEDADES PLANTA Y EQUIPO TOTALMENTE DEPRECIADOS,17
+831504,Terrenos,17
+831516,Construcciones y edificaciones,17
+831520,Maquinaria y equipo,17
+831524,Equipo de oficina,17
+831528,Equipo de computación y comunicación,17
+831532,Equipo médico-científico,17
+831536,Equipo de hoteles restaurantes y cafeterías,17
+831540,Flota y equipo de transporte,17
+831544,Flota y equipo fluvial y/o maritimo,17
+831548,Flota y equipo aéreo,17
+831560,Armamento de vigilancia,17
+831588,Semovientes,17
+8325,ACTIVOS CASTIGADOS,17
+832505,Inversiones,17
+832510,Deudores,17
+832595,Otros activos,17
+8345,CONTRATOS DEL RÉGIMEN SUBSIDIADO Y CONTRIBUTIVO,17
+834501,Deudores UPC Régimen Subsidiado,17
+8395,OTRAS CUENTAS DEUDORAS DE CONTROL,17
+839505,Cheques posfechados,17
+839510,Certificados de depósito a término,17
+839515,Cheques devueltos,17
+839520,Bienes y valores en fideicomiso,17
+839525,Intereses sobre deudas vencidas,17
+839595,Diversas,17
+84,DERECHOS CONTINGENTES POR CONTRA (CR),17
+8401,DERECHOS CONTINGENTES POR CONTRA (CR),17
+840101,Derechos contingentes por contra (CR),17
+85,DEUDORAS FISCALES POR CONTRA (CR),17
+8501,DEUDORAS FISCALES POR CONTRA (CR),17
+850101,Deudoras fiscales por contra (CR),17
+9,CUENTAS DE ORDEN ACREEDORAS,17
+91,RESPONSABILIDADES CONTINGENTES,17
+9105,BIENES Y VALORES RECIBIDOS EN CUSTODIA,17
+910505,Valores mobiliarios,17
+910510,Bienes muebles,17
+9110,BIENES Y VALORES RECIBIDOS EN GARANTÍA,17
+911005,Valores mobiliarios,17
+911010,Bienes muebles,17
+911015,Bienes inmuebles,17
+9115,BIENES Y VALORES RECIBIDOS DE TERCEROS,17
+911505,Arrendamiento,17
+911510,En préstamo,17
+911515,En depósito,17
+911520,En consignación,17
+911525,En comodato,17
+9120,LITIGIOS Y O DEMANDAS,17
+912005,Laborales,17
+912010,Civiles,17
+912015,Administrativos o arbitrales,17
+912020,Tributarios,17
+9125,PROMESAS DE COMPRAVENTA,17
+912501,Promesas de compraventa,17
+9135,CUENTAS EN PARTICIPACIÓN,17
+913501,Cuentas en participación,17
+9195,OTRAS RESPONSABILIDADES CONTINGENTES,17
+919501,Otras responsabilidades contingentes,17
+92,ACREEDORAS FISCALES,17
+9201,ACREEDORAS FISCALES,17
+920101,Acreedoras fiscales,17
+93,ACREEDORAS DE CONTROL,17
+9305,CONTRATOS DE ARRENDAMIENTO FINANCIERO,17
+930505,Bienes Muebles,17
+930510,Bienes Inmuebles,17
+9310,CONTRATOS CAPITACIÓN,17
+931001,Régimen contributivo,17
+931002,Régimen subsidiado,17
+931003,Planes adicionales de salud,17
+931004,Otros,17
+9395,OTRAS CUENTAS DE ORDEN ACREEDORAS DE CONTROL,17
+939505,Documentos por cobrar descontados,17
+939510,Convenios de pago,17
+939515,Contratos de construcciones e instalaciones por ejecutar,17
+939525,Adjudicaciones pendientes de legalizar,17
+939535,Reserva costo reposición semovientes,17
+939595,Diversas,17
+94,RESPONSABILIDADES CONTINGENTES POR CONTRA (DB),17
+9401,RESPONSABILIDADES CONTINGENTES POR CONTRA (DB),17
+940101,Responsabilidades contingentes por contra (DB),17
+95,ACREEDORAS FISCALES POR CONTRA (DB),17
+9501,ACREEDORAS FISCALES POR CONTRA (DB),17
+950101,Acreedoras fiscales por contra (DB),17
+96,ACREEDORAS DE CONTROL POR CONTRA (DB),17
+9601,ACREEDORAS DE CONTROL POR CONTRA (DB),17
+960101,Acreedoras de control por contra (DB),17

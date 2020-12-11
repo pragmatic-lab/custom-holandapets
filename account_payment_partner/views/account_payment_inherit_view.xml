@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+		<record model="ir.ui.view" id="view_account_payment_form_view_inherit">
+			<field name="name">account.payment.form</field>
+			<field name="model">account.payment</field>
+			<field name="inherit_id" ref="account.view_account_payment_form" />
+			<field name="arch" type="xml">
+
+				<xpath expr="//field[@name='journal_id']" position="after">
+					<field name="payment_invoices" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+				</xpath>
+
+				<xpath expr="//form/sheet/group" position="after">
+
+					<group col="3">
+
+						<group string="Tercero" attrs="{'invisible': [('payment_invoices', '=', False)]}">
+							<field name="payment_partner_id" nolabel="1" style="width: 70%%"/>
+						</group>
+
+						<group string="Valor Crédito" attrs="{'invisible': [('payment_invoices', '=', False)]}">
+							<h3>$<field name="payment_amount_total" nolabel="1" style="width: 50%%"/></h3>
+						</group>
+
+						<group string="Saldo Actual" attrs="{'invisible': [('payment_invoices', '=', False)]}">
+							<h3>$<field name="payment_current_amount" nolabel="1" style="width: 50%%"/></h3>
+						</group>
+
+					</group>
+
+					<notebook attrs="{'invisible': [('payment_partner_id', '=', False)]}">
+						<page name="configuration" string="Configuración de los Pagos" attrs="{'invisible': ['|', ('payment_invoices', '=', False), ('state', 'not in', ['draft'])]}">
+							
+							<group>
+								<group string="Facturas del Tercero" attrs="{'invisible': [('payment_invoices', '=', False)]}">
+									
+								</group>
+								<group>
+									<button name="load_register_payments_ids" string="Cargar Pagos" type="object" class="btn-primary" attrs="{'invisible': ['|', ('payment_invoices', '=', False), ('state', 'not in', ['draft'])]}"/>
+
+								</group>
+							</group>
+
+							<field name="partner_register_ids" nolabel="1" attrs="{'invisible': [('payment_invoices', '=', False)]}">
+								<tree editable="top" create="false" edit="false">
+									<field name="invoice_id"/>
+									<field name="partner_id"/>
+									<field name="amount_total" sum="Total"/>
+									<field name="amount_payment" sum="Total Payment"/>
+									<field name="residual" sum="Total Residual"/>
+									<field name="amount" total="Total Amount"/>
+								</tree>
+							</field>
+
+						</page>
+
+						<page name="configuration_payments" string="Creditos">
+							<group>
+
+								<group string="Pagos a Realizar" attrs="{'invisible': [('payment_invoices', '=', False)]}">
+				
+								</group>
+								<group>
+									<!--
+									<button name="payment_quick_invoice" string="Realizar Pagos" type="object" class="btn-primary" attrs="{'invisible': ['|', ('payment_invoices', '=', False), ('state', 'not in', ['posted'])]}"/>
+								-->
+								</group>
+
+							</group>
+
+
+							<field name="register_payments_ids" nolabel="1" attrs="{'invisible': [('payment_invoices', '=', False)]}">
+								<tree create="false" edit="false" editable="bottom">
+									<field name="invoice_id"/>
+									<field name="partner_id"/>
+									<field name="amount_total" sum="Total"/>
+									<field name="amount_payment" sum="Total Payment"/>
+									<field name="residual" sum="Total Residual"/>
+									<field name="amount" sum="Total Amount"/>
+									<field name="state" widget="boolean_toggle"/>
+								</tree>
+							</field>
+					
+
+											
+						</page>
+					</notebook>
+
+
+
+							
+					
+				</xpath>
+
+			</field>
+		</record>
+
+</odoo>

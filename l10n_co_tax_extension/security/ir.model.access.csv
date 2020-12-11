@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sequence_dian_resolution,ir_sequence_dian_resolution,model_ir_sequence_dian_resolution,base.group_user,1,1,1,1
+access_account_fiscal_position_base_tax,account.fiscal.position.base.tax,model_account_fiscal_position_base_tax,base.group_user,1,1,1,1
+access_account_base_tax,account.base.tax,model_account_base_tax,base.group_user,1,1,1,1
+access_sale_order_tax,sale.order.tax,model_sale_order_tax,,1,1,1,1
+access_purchase_order_tax,purchase.order.tax,model_purchase_order_tax,,1,1,1,1

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!--Report-->
+    <template id="journal_entries_report_template">
+        <t t-call="web.external_layout">
+            <t t-set="o" t-value="doc.with_context({'lang': 'en_US'})"/>
+            <div class="page">
+                <t t-foreach="docs" t-as="o">
+                    <br/>
+                    <br/>
+                    <h1 class="text-center" style="margin-top:60px;">
+                        <span t-esc="o.journal_id.name"/>
+                    </h1>
+                    <h2>
+                        <t t-esc="o.name"/>
+                    </h2>
+                    <div id="informations" class="row mt32 mb32">
+                        <div class="col-auto mw-100 mb-2" >
+                            <strong>Date</strong>
+                            <p class="m-0" t-field="o.date"/>
+                        </div>
+                        <div class="col-auto mw-100 mb-2" >
+                            <strong>Reference</strong>
+                            <p class="m-0" t-field="o.ref"/>
+                        </div>
+                        <div class="col-auto mw-100 mb-2" t-if="o.company_id.id" name="company">
+                            <strong>Company</strong>
+                            <p class="m-0" t-field="o.company_id.name"/>
+                        </div>
+                        <div class="col-auto mw-100 mb-2" >
+                            <strong>Status</strong>
+                            <p class="m-0" t-field="o.state"/>
+                        </div>
+                    </div>
+
+                    <div style="font-size:24px;margin-top:50px;">Journal Items</div>
+                    <table class="table table-bordered" border="3" style="margin-bottom:700px;font-size:12px;">
+                        <thead>
+
+                            <tr>
+                                <th>Account</th>
+                                <th width="100px">Due Date</th>
+                                <th>Partner</th>
+                                <th width="110px">Label</th>
+                                <th>Analytic Account</th>
+                                <th>Debit</th>
+                                <th>Credit</th>
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            <tr t-foreach="o.line_ids" t-as="l">
+                                <td>
+                                    <span t-esc="l.account_id.code"/>
+                                    <span t-esc="l.account_id.name"/>
+
+                                </td>
+
+                                <td width="100px">
+                                    <span t-field="l.date_maturity"
+                                          t-field-options="{&quot;format&quot;: &quot;dd MMMM, YYYY&quot;}"/>
+                                </td>
+                                <td width="110px">
+
+                                    <span t-esc="l.partner_id.name"/>
+                                </td>
+                                <td>
+
+                                    <span t-esc="l.name"/>
+
+                                </td>
+                                <td>
+
+                                    <span t-esc="l.analytic_account_id.name"/>
+
+                                </td>
+
+                                <td>
+                                    <span t-esc="'{0:,.2f}'.format(int(l.debit))"/>
+
+
+                                </td>
+                                <td class="text-right">
+
+                                    <span t-esc="'{0:,.2f}'.format(int(l.credit))"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </t>
+
+            </div>
+        </t>
+    </template>
+    <!--TEMPLATE [JOURNAL ENTRIES REPORT]-->
+    <template id="journal_entries_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="de_print_journal_entries.journal_entries_report_template"/>
+            </t>
+        </t>
+    </template>
+
+    <report id="action_journal_entries_report"
+            model="account.move"
+            string="Journal Entries"
+            report_type="qweb-pdf"
+            name="de_print_journal_entries.journal_entries_report"
+            file="de_print_journal_entries.journal_entries_report"
+            attachment_use="True"
+    />
+    <!--FORM JOURNAL ENTRIES-->
+    <record id="view_account_bank_statement_form_inherit" model="ir.ui.view">
+        <field name="name">account.bank.statement.report.form</field>
+        <field name="model">account.bank.statement</field>
+        <field name="inherit_id" ref="account.view_bank_statement_form"/>
+        <field name="arch" type="xml">
+            <button name="check_confirm_bank" position="after">
+                <button name="print_journal_entries" string="Print Journal Entries" type="object" help="Print in Pdf"/>
+            </button>
+        </field>
+
+    </record>
+
+</odoo>

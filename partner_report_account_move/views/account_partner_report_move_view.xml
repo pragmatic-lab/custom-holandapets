@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="account_partner_report_move_view_form" model="ir.ui.view">
+		<field name="name">Account Partner Report Move View Form</field>
+		<field name="model">account.partner_report_move</field>
+		<field name="arch" type="xml">
+			<form>
+				<h3 class="panel-title">Resumen de Apuntes Contables</h3>
+
+				<group col="4" string="Rango de Fechas">
+					<field name="date_from"/>
+					<field name="date_to"/>
+				</group>
+
+				<group string="Terceros" >
+					<field name="partner_ids" nolabel="1" widget="many2many_tags"/>
+				</group>
+
+				<group string="Plantilla Cuentas">
+					<field name="save_report_id" nolabel="1"/>
+				</group>
+
+				<group string="Cuentas" >
+					<field name="account_ids" nolabel="1" widget="many2many_tags"/>
+				</group>
+
+				<group>
+					<field name="include_lines"/>
+				</group>
+		
+                <newline/>
+				<footer>
+
+					<!--
+					<button name="generate_pdf" string="Generar Pdf" type="object" class="btn-primary" />
+				-->
+					<button name="generate_excel" string="Generar Excel" type="object" class="btn-primary" />
+					<button name="generate_report_partner_move" string="Ver" type="object" class="btn-primary" />
+
+					<field name="document" readonly="1" filename='filename'/>
+					<field name="filename" readonly="1" invisible="1"/>
+				</footer>
+
+			</form>
+		</field>
+	</record>
+		
+		
+	<record id="account_partner_report_move_action" model="ir.actions.act_window">
+		<field name="name">Movimientos Tercero</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">account.partner_report_move</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+	</record>
+
+</odoo>

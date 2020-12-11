@@ -1,0 +1,10 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_model_pos_order_tax_group_user","access_model_pos_order_tax_group_user","model_pos_order_tax","base.group_user",1,0,0,0
+"access_model_report_pos_payment_group_pos_report","access_model_report_pos_payment_group_pos_report","model_report_pos_payment","group_pos_report",1,0,0,0
+"access_model_accoun_invoice_group_pos_user","access_model_accoun_invoice_group_pos_user","account.model_account_invoice","point_of_sale.group_pos_user",1,0,0,0
+"access_model_accoun_invoice_line_group_pos_user","access_model_accoun_invoice_line_group_pos_user","account.model_account_invoice_line","point_of_sale.group_pos_user",1,0,0,0
+"access_model_accoun_invoice_tax_group_pos_user","access_model_accoun_invoice_tax_group_pos_user","account.model_account_invoice_tax","point_of_sale.group_pos_user",1,0,0,0
+"access_model_accoun_move_group_pos_user","access_model_accoun_move_group_pos_user","account.model_account_move","point_of_sale.group_pos_user",1,0,0,0
+"access_model_accoun_move_line_group_pos_user","access_model_accoun_move_line_group_pos_user","account.model_account_move_line","point_of_sale.group_pos_user",1,0,0,0
+"access_model_pos_order_tax_group_pos_user","access_model_pos_order_tax_group_pos_user","model_pos_order_tax","point_of_sale.group_pos_user",1,1,1,1
+"access_model_pos_session_group_pos_delete_session","access_model_pos_session_group_pos_delete_session","point_of_sale.model_pos_session","group_pos_delete_session",0,0,0,1

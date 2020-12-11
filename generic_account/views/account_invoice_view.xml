@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<record model="ir.ui.view" id="account_inovice_search_view">
+		<field name="name">account.invoice.search</field>
+		<field name="model">account.invoice</field>
+		<field name="inherit_id" ref="account.view_account_invoice_filter" />
+		<field name="arch" type="xml">
+			<field name="date" position="before">
+				<field name="date_invoice" />
+			</field>
+			<filter name="myinvoices" position="after">
+				<filter name="this_month" string="Fecha" date="date_invoice" />
+				<separator />
+			</filter>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="account_invoice_sales_form_view">
+		<field name="name">account.invoice.form</field>
+		<field name="model">account.invoice</field>
+		<field name="inherit_id" ref="account.invoice_form" />
+		<field name="priority" eval="20" />
+		<field name="arch" type="xml">
+			<xpath
+				expr="//header//button[@name='action_invoice_open'][@states='draft']"
+				position="attributes">
+				<attribute name="name">action_check_number_lines</attribute>
+			</xpath>
+			<xpath expr="//field[@name='date_invoice']" position="before">
+				<xpath expr="//field[@name='journal_id']" position="move" />
+			</xpath>
+			<xpath expr="//field[@name='journal_id']" position="attributes">
+				<attribute name="groups">account.group_account_invoice</attribute>
+				<attribute name="options">{'no_create': True}</attribute>
+			</xpath>
+			<xpath expr="//field[@name='payment_term_id']" position="attributes">
+				<attribute name="options">{'no_create': True}</attribute>
+			</xpath>
+			<xpath expr="//field[@name='user_id']" position="attributes">
+				<attribute name="options">{'no_create': True}</attribute>
+			</xpath>
+			<xpath expr="//field[@name='date_due']" position="attributes">
+				<attribute name="groups">account.group_account_invoice</attribute>
+			</xpath>
+			<xpath expr="//field[@name='invoice_line_ids']//field[@name='product_id']"
+				position="attributes">
+				<attribute name="options">{'no_quick_create': True}</attribute>
+			</xpath>
+			<xpath expr="//field[@name='invoice_line_ids']//field[@name='account_id']"
+				position="attributes">
+				<attribute name="options">{'no_quick_create': True}</attribute>
+			</xpath>
+			<xpath expr="//field[@name='invoice_line_ids']//field[@name='account_analytic_id']"
+				position="attributes">
+				<attribute name="options">{'no_quick_create': True}</attribute>
+			</xpath>
+			<xpath expr="//field[@name='invoice_line_ids']//field[@name='analytic_tag_ids']"
+				position="attributes">
+				<attribute name="options">{'color_field': 'color', 'no_quick_create': True}</attribute>
+			</xpath>
+			<xpath expr="//field[@name='invoice_line_ids']//field[@name='uom_id']"
+				position="attributes">
+				<attribute name="options">{'no_create': True}</attribute>
+			</xpath>
+			<xpath
+				expr="//field[@name='invoice_line_ids']/tree//field[@name='price_subtotal']"
+				position="before">
+				<field name="amount_cost" />
+			</xpath>
+			<xpath expr="//field[@name='invoice_line_ids']/tree//field[@name='discount']"
+				position="attributes">
+				<attribute name="attrs">{'readonly': [('discount_value', '&gt;', 0)]}</attribute>
+				<attribute name="force_save">1</attribute>
+			</xpath>
+			<xpath expr="//field[@name='invoice_line_ids']/tree//field[@name='discount']"
+				position="after">
+				<field name="discount_value" 
+					force_save="1" attrs="{'readonly': [('discount', '&gt;', 0)]}"
+					groups="generic_account.group_account_discount_value" />
+			</xpath>
+			<xpath expr="//page[@name='other_info']//field[@name='account_id']"
+				position="attributes">
+				<attribute name="options">{'no_create': True}</attribute>
+			</xpath>
+			<xpath expr="//page[@name='other_info']//field[@name='move_id']"
+				position="replace">
+				<label for="move_id" groups="account.group_account_user" />
+				<div attrs="{'invisible': [('move_id', '=', False)]}">
+					<field name="move_id" groups="account.group_account_user"
+						attrs="{'invisible': [('move_id', '=', False)]}" class="oe_inline" />
+					<button name='action_change_account_move' type='object'
+						string='Cambiar Asiento Contable'
+						attrs="{'invisible': [('state','not in',('open','paid'))]}"
+						class="oe_link oe_inline" groups="generic_account.group_account_invoice_change" />
+				</div>
+			</xpath>
+			<!-- el campo Referencia de factura pasarlo a la ventana principal, ya 
+				que esto es lo q se pasa al asiento contable y es visible en el extracto 
+				de cliente dejarlo en lugar mas visible para ingresar informacion 
+				Antes de moverlo, asignarle atributos -->
+			<xpath expr="//page[@name='other_info']//field[@name='name']" position="attributes">
+				<attribute name="attrs">{'required': [('type','=','out_refund')]}</attribute>
+			</xpath>
+			<xpath expr="//field[@name='move_name']" position="after">
+				<xpath expr="//page[@name='other_info']//field[@name='name']" position="move" />
+			</xpath>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="account_invoice_purchase_form_view">
+		<field name="name">account.invoice.form</field>
+		<field name="model">account.invoice</field>
+		<field name="priority" eval="20" />
+		<field name="inherit_id" ref="account.invoice_supplier_form" />
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='date_invoice']" position="before">
+				<xpath expr="//field[@name='journal_id']" position="move" />
+			</xpath>
+			<xpath expr="//field[@name='journal_id']" position="attributes">
+				<attribute name="groups">account.group_account_invoice</attribute>
+				<attribute name="options">{'no_create': True}</attribute>
+			</xpath>
+			<xpath expr="//field[@name='date_due']" position="after">
+				<xpath expr="//field[@name='date']" position="move" />
+			</xpath>
+			<xpath expr="//field[@name='date']" position="attributes">
+				<attribute name="groups">account.group_account_user</attribute>
+			</xpath>
+			<xpath expr="//field[@name='invoice_line_ids']//field[@name='product_id']"
+				position="attributes">
+				<attribute name="options">{'no_quick_create': True}</attribute>
+			</xpath>
+			<xpath expr="//field[@name='invoice_line_ids']//field[@name='account_id']"
+				position="attributes">
+				<attribute name="options">{'no_quick_create': True}</attribute>
+				<attribute name="required">1</attribute>
+			</xpath>
+			<xpath expr="//field[@name='invoice_line_ids']//field[@name='account_analytic_id']"
+				position="attributes">
+				<attribute name="options">{'no_quick_create': True}</attribute>
+			</xpath>
+			<xpath expr="//field[@name='invoice_line_ids']//field[@name='analytic_tag_ids']"
+				position="attributes">
+				<attribute name="options">{'color_field': 'color', 'no_quick_create': True}</attribute>
+			</xpath>
+			<xpath expr="//field[@name='invoice_line_ids']//field[@name='uom_id']"
+				position="attributes">
+				<attribute name="options">{'no_create': True}</attribute>
+			</xpath>
+			<xpath
+				expr="//field[@name='invoice_line_ids']/tree//field[@name='price_subtotal']"
+				position="before">
+				<field name="amount_cost" />
+			</xpath>
+			<xpath expr="//field[@name='invoice_line_ids']//field[@name='discount']"
+				position="attributes">
+				<attribute name="attrs">{'readonly': [('discount_value', '&gt;', 0)]}</attribute>
+				<attribute name="force_save">1</attribute>
+			</xpath>
+			<xpath expr="//field[@name='invoice_line_ids']//field[@name='discount']"
+				position="after">
+				<field name="discount_value" 
+					force_save="1" attrs="{'readonly': [('discount', '&gt;', 0)]}"
+					groups="generic_account.group_account_discount_value" />
+			</xpath>
+			<xpath expr="//page[@name='other_info']//field[@name='move_id']"
+				position="replace">
+				<label for="move_id" groups="account.group_account_user" />
+				<div attrs="{'invisible': [('move_id', '=', False)]}">
+					<field name="move_id" groups="account.group_account_user"
+						attrs="{'invisible': [('move_id', '=', False)]}" class="oe_inline" />
+					<button name='action_change_account_move' type='object'
+						string='Cambiar Asiento Contable'
+						attrs="{'invisible': [('state','not in',('open','paid'))]}"
+						class="oe_link oe_inline" groups="generic_account.group_account_invoice_change" />
+				</div>
+			</xpath>
+			<xpath expr="//page[@name='other_info']//field[@name='account_id']" position="attributes">
+				<attribute name="options">{'no_quick_create': True}</attribute>
+			</xpath>
+		</field>
+	</record>
+
+	<!-- filtros favoritos en Pedido de compra -->
+
+	<record id="filter_account_invoice_partner" model="ir.filters">
+		<field name="name">Por Empresa</field>
+		<field name="model_id">account.invoice</field>
+		<field name="user_id" eval="False" />
+		<field name="context">{'group_by': ['partner_id']}</field>
+	</record>
+
+	<record id="filter_account_invoice_user" model="ir.filters">
+		<field name="name">Por Usuario</field>
+		<field name="model_id">account.invoice</field>
+		<field name="user_id" eval="False" />
+		<field name="context">{'group_by': ['user_id']}</field>
+	</record>
+
+	<record id="filter_account_invoice_month" model="ir.filters">
+		<field name="name">Ventas Mensuales</field>
+		<field name="model_id">account.invoice</field>
+		<field name="user_id" eval="False" />
+		<field name="context">{'group_by': ['date_invoice:month']}</field>
+	</record>
+
+	<record id="filter_account_invoice_day" model="ir.filters">
+		<field name="name">Ventas Diarias</field>
+		<field name="model_id">account.invoice</field>
+		<field name="user_id" eval="False" />
+		<field name="context">{'group_by': ['date_invoice:day']}</field>
+	</record>
+
+	<!-- reemplazar la accion de facturas de proveedor para mostrar filtro de este mes por defecto-->
+	<record id="account.action_vendor_bill_template" model="ir.actions.act_window">
+		<field name="context">{'default_type': 'in_invoice', 'type': 'in_invoice', 'journal_type': 'purchase', 'search_default_this_month': 1}</field>
+	</record>
+
+	<!-- reemplazar la accion de facturas de clientes para mostrar filtro de este mes por defecto--> 
+	<record id="account.action_invoice_tree1" model="ir.actions.act_window">
+		<field name="context">{'type':'out_invoice', 'journal_type': 'sale', 'search_default_this_month': 1}</field>
+	</record>
+
+	<!-- activar filtro de fecha del mes actual en las NC -->
+	<record id="account.action_invoice_out_refund" model="ir.actions.act_window">
+		<field name="context">{'default_type': 'out_refund', 'type': 'out_refund', 'journal_type': 'sale', 'search_default_this_month': 1}</field>
+	</record>
+
+	<record id="account.action_invoice_in_refund" model="ir.actions.act_window">
+		<field name="context">{'default_type': 'in_refund', 'type': 'in_refund', 'journal_type': 'purchase', 'search_default_this_month': 1}</field>
+	</record>
+
+</odoo>

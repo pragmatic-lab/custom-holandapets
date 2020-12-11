@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+	<record id="product_template_clasification_view_form" model="ir.ui.view">
+		<field name="name">product.template_clasification.form</field>
+		<field name="model">product.template_clasification</field>
+		<field name="arch" type="xml">
+			<form>
+
+				<group>
+					<field name="name" string="Clasificación Producto"/>
+				</group>
+
+				<group>
+					<field name="description" string="Descripción"/>
+				</group>
+
+			</form>
+		</field>
+	</record>
+
+
+	<record id="product_template_clasification_view_tree" model="ir.ui.view">
+		<field name="name">product.template_clasification.tree</field>
+		<field name="model">product.template_clasification</field>
+		<field name="arch" type="xml">
+
+			<tree>
+				<field name="name" string="Clasificación Producto"/>
+			</tree>
+			
+		</field>
+	</record>
+
+
+
+</odoo>

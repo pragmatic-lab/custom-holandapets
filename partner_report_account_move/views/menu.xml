@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<data>
+
+		<!-- Agregando menu en Facturas, en el menu de Informes -->
+       <menuitem  
+       	id="account_partner_report_move_menu" 
+       	action="account_partner_report_move_action"
+       	sequence="205" 
+       	parent="account.menu_finance_reports" />
+        
+    </data>
+</odoo>
+

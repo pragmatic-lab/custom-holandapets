@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-extend="Product">
+        <t t-jquery=".product-img" t-operation="append">
+            <span t-attf-class="qty-tag #{product.qty_available lte 0 ? 'not-available':''}">
+                <t t-esc="product.qty_available"/>
+            </span>
+        </t>
+    </t>
+    <t t-extend="Orderline">
+        <t t-jquery=".info-list>t:first-child">
+            this.attr('t-if', "line.get_quantity_str() !== '1' || line.selected || line.get_product().qty_available lt line.quantity ");
+        </t>
+        <t t-jquery="t[t-esc='line.get_quantity_str()']" t-operation="after">
+            <t t-set='qty_available' t-value='line.get_product().qty_available'/>
+            (of <span t-attf-class="qty-info #{qty_available lt line.quantity ? 'not-available':''}"><t t-esc="qty_available"/></span>)
+        </t>
+    </t>
+
+    <t t-name="Reminder">
+        <div class="modal-dialog">
+            <div class="popup popup-warning" style="height: 40%; width: 40%; border-radius: 0; background: white">
+                <p class="title" style="font-size: 18px; height: 30px; padding: 8px;">
+                    <t t-esc=" widget.options.title || 'Warning' "/>
+                </p>
+                <div class="body">
+                    <div style="display: flex; flex-flow: row;">
+                        <div>
+                            <img t-att-src="widget.options.product_image_url" style="max-width: 128px;"/>
+                        </div>
+                        <div style="flex-grow: 1; margin-left: 16px; text-align: center;">
+                            <p style="font-weight: bold;">
+                                <t t-esc="widget.options.product_name"/>
+                            </p>
+                            <p>
+                                Maximum quantity available is
+                                <b style="color: #32a868"><t t-esc="  widget.options.max_available || '' "/></b>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer">
+                    <div class="button cancel" style="width: 64px;">
+                        Cancel
+                    </div>
+                    <div class="button confirm" style="color: #32a868; width: 64px;">
+                        Order
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

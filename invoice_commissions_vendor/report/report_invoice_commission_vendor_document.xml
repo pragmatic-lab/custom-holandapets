@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+	<template id="report_invoice_comission_vendor">
+		<t t-call="web.html_container">
+			<t t-call="web.external_layout">
+
+
+				<div class="page">
+
+					
+					<t t-set="date_from" t-value="form['used_context']['date_from']"/>
+					<t t-set="date_to" t-value="form['used_context']['date_to']"/>
+					<t t-set="user_ids" t-value="form['used_context']['user_ids']"/>
+					<t t-set="commission_ids" t-value="form['used_context']['commission_vendor_conf_ids']"/>
+
+					<t t-set="data_user" t-value="request.env['commission.vendor'].return_users(user_ids)"/>
+					
+					<t t-if="data_user">
+						<t t-foreach="data_user" t-as="item_user">
+
+							<t t-set="user_id" t-value="item_user['user_id']"/>
+							<t t-set="user_name" t-value="item_user['name']"/>
+
+							<t t-set="data" t-value="request.env['commission.vendor'].return_data_invoice(date_from, date_to, user_id)"/>
+
+							<t t-if="data">
+
+								<t t-set="validate_data" t-value="request.env['commission.vendor'].validate_record_payments(data)"/>
+
+								<t t-if="validate_data">
+
+									<h3>Informe de Comisión</h3>
+
+									<!-- Informacion basica -->
+									<div id="informations" class="row mt32 mb32">
+										<div class="col-auto mw-100 mb-2">
+											<strong>Vendedor:</strong>
+											<p class="m-0" t-esc="user_name"/>
+										</div>
+										<div class="col-auto mw-100 mb-2" t-if="date_from">
+											<strong>Fecha Inicial:</strong>
+											<p class="m-0" t-esc="date_from" t-options="{'widget': 'datetime'}"/>
+										</div>
+										<div class="col-auto mw-100 mb-2" t-if="date_to">
+											<strong>Fecha Final:</strong>
+											<p class="m-0" t-esc="date_to" t-options="{'widget': 'datetime'}"/>
+										</div>
+										<div class="col-auto mw-100 mb-2" t-if="date_to">
+											<strong>Fecha Creación:</strong>
+											<p class="m-0" t-esc="date_to" t-options="{'widget': 'datetime'}"/>
+										</div>
+									</div>
+									<!-- Informacion basica -->
+
+										<t t-set="sum_total_amount" t-value="0"/>
+										<t t-set="sum_total_amount_untaxed" t-value="0"/>
+										<t t-set="sum_total_payment" t-value="0"/>
+										<t t-set="sum_residual" t-value="0"/>
+										<t t-set="sum_total_commission" t-value="0"/>
+										<t t-set="sum_payment_user" t-value="0"/>
+										<t t-set="sum_base_total_commission" t-value="0"/>
+										
+										
+
+										<!-- <table class='receipt-orderlines' style="width: 80%; border: 2px; border: 1px solid #000;" name="invoice_line_table"> -->
+										<table class="table table-sm o_main_table" name="invoice_line_table">
+	<!-- 										<colgroup>
+												<col width='15%' />
+												<col width='10%' />
+												<col width='15%' />
+												<col width='10%' />
+												<col width='20%' />
+												<col width='10%' />
+												<col width='15%' />
+											</colgroup> -->
+
+											<thead class='receipt-orderlines' style="width: 100%; border: 2px; border: 1px solid #000;">
+												<tr>
+													<th class="text-left"><span style="margin-left:5px; margin-right:5px;">FECHA </span></th>
+													<th class="text-left"><span style="margin-left:5px; margin-right:5px;">F. VENCIMIENTO </span></th>
+													<th class="text-left"><span style="margin-left:5px; margin-right:5px;">FACTURA</span></th>
+													<th class="text-left"><span style="margin-left:5px; margin-right:5px;">CLIENTE</span></th>
+													<th class="text-left"><span style="margin-left:5px; margin-right:5px;">REF. PAGO</span></th>
+													<th class="text-left"><span style="margin-left:5px; margin-right:5px;">CIRCULAR</span></th>
+													<th class="text-left"><span style="margin-left:5px; margin-right:5px;">COMI(%)</span></th>
+													<th class="text-left"><span style="margin-left:5px; margin-right:5px;">TOTAL SIN IVA</span></th>
+													<th class="text-right"><span style="margin-left:5px; margin-right:5px;">TOTAL</span></th>
+													<th class="text-left"><span style="margin-left:5px; margin-right:5px;">MONTO PAGO</span></th>
+													<th class="text-left"><span style="margin-left:5px; margin-right:5px;">BASE COMISIÓN</span></th>
+													<th class="text-right"><span style="margin-left:5px; margin-right:5px;">COMISIÓN</span></th>
+												</tr>
+											</thead>
+											<tbody class='receipt-orderlines' style="width: 100%; border: 2px; border: 1px solid #000;">
+												<t t-foreach="data" t-as="x">
+													<t t-if="x.payment_ids">
+
+														<tr t-foreach="x.payment_ids" t-as="payment">
+
+															<t t-set="data_commission" t-value="request.env['commission.vendor'].return_comission(str(x.date_invoice), str(x.date_due), commission_ids)"/>
+															<t t-set="range_days" t-value="data_commission['day_begin'] + '  - ' + data_commission['day_end'] + ' dias'"/>
+															<t t-set="percent_commission" t-value="data_commission['value_commission']"/>
+
+															
+															<t t-set="base_total_commission" t-value="(payment.amount*x.amount_untaxed)/x.amount_total"/>
+
+															<t t-set="total_commission" t-value="(percent_commission/100) * base_total_commission"/>
+
+
+															<td class="text-left">
+																<span style="margin-left:5px; margin-right:5px;" t-esc="x.date_invoice"/>
+															</td>
+
+															<td class="text-left">
+																<span style="margin-left:5px; margin-right:5px;" t-esc="x.date_due"/>
+															</td>
+
+															<td class="text-left">
+																<span style="margin-left:5px; margin-right:5px;" t-esc="x.number"/>
+															</td>
+
+															<td class="text-left">
+																<span style="margin-left:5px; margin-right:5px;" t-esc="x.partner_id.name"/>
+															</td>
+
+															<td class="text-left">
+																<span style="margin-left:5px; margin-right:5px;" t-esc="payment.name"/>
+															</td>
+
+															<td class="text-left">
+																<span style="margin-left:5px; margin-right:5px;" t-esc="payment.communication"/>
+															</td>
+
+															<td class="text-right">
+																<span style="margin-left:5px; margin-right:5px;" t-esc="percent_commission"/>
+															</td>
+
+															<td class="text-right">
+																<span style="margin-left:5px; margin-right:5px;" t-esc="x.amount_untaxed" t-options="{'widget': 'float', 'precision': 0}"/>
+															</td>
+
+															<td class="text-right">
+																<span style="margin-left:5px; margin-right:5px;" t-esc="x.amount_total" t-options="{'widget': 'float', 'precision': 0}"/>
+															</td>
+											
+	<!-- 														<td class="text-right">
+																<t t-set="total_payment" t-value="(x.amount_total - x.residual)"/>
+																<t t-set="sum_total_payment" t-value="sum_total_payment + total_payment"/>
+																<span style="margin-left:5px; margin-right:5px;" t-esc="total_payment" t-options="{'widget': 'float', 'precision': 0}"/>
+															</td>
+
+															<td class="text-right">
+																<span style="margin-left:5px; margin-right:5px;" t-esc="x.residual" t-options="{'widget': 'float', 'precision': 0}"/>
+															</td>
+	 -->
+
+
+															<td class="text-right">
+																<span style="margin-left:5px; margin-right:5px;" t-esc="payment.amount" t-options="{'widget': 'float', 'precision': 0}"/>
+															</td>
+
+															<td class="text-right">
+																<span style="margin-left:5px; margin-right:5px;" t-esc="base_total_commission" t-options="{'widget': 'float', 'precision': 0}"/>
+															</td>
+
+															<td class="text-right">
+																<span style="margin-left:5px; margin-right:5px;" t-esc="total_commission" t-options="{'widget': 'float', 'precision': 0}"/>
+															</td>
+															
+															<t t-set="sum_total_amount_untaxed" t-value="sum_total_amount_untaxed + x.amount_untaxed"/>
+															<t t-set="sum_total_amount" t-value="sum_total_amount + x.amount_total"/>
+															<t t-set="sum_residual" t-value="sum_residual + x.residual"/>
+															<t t-set="sum_total_commission" t-value="sum_total_commission + total_commission"/>
+
+															<t t-set="sum_payment_user" t-value="sum_payment_user + payment.amount"/>
+
+															<t t-set="sum_base_total_commission" t-value="sum_base_total_commission + base_total_commission"/>
+															
+
+
+
+														</tr>
+													</t>
+												</t>
+												<tr>
+													<td class="text-left">
+													</td>
+
+													<td class="text-left">
+													</td>
+													
+													<td class="text-left">
+													</td>
+
+													<td class="text-left">
+													</td>
+
+													<td class="text-left">
+													</td>
+
+													<td class="text-left">
+													</td>
+
+													<td class="text-left">
+														<h6><strong><span style="margin-left:5px; margin-right:5px;">Total</span></strong></h6>
+													</td>
+
+													<td class="text-right">
+														<h6><strong><span style="margin-left:5px; margin-right:5px;" t-esc="sum_total_amount_untaxed" t-options="{'widget': 'float', 'precision': 0}"/></strong></h6>
+													</td>
+													
+													<td class="text-right">
+														<h6><strong><span style="margin-left:5px; margin-right:5px;" t-esc="sum_total_amount" t-options="{'widget': 'float', 'precision': 0}"/></strong></h6>
+													</td>
+
+													<td class="text-right">
+														<h6><strong><span style="margin-left:5px; margin-right:5px;" t-esc="sum_payment_user" t-options="{'widget': 'float', 'precision': 0}"/></strong></h6>
+													</td>
+
+													<td class="text-right">
+														<h6><strong><span style="margin-left:5px; margin-right:5px;" t-esc="sum_base_total_commission" t-options="{'widget': 'float', 'precision': 0}"/></strong></h6>
+													</td>
+
+													<td class="text-right">
+														<h6><strong><span style="margin-left:5px; margin-right:5px;" t-esc="sum_total_commission" t-options="{'widget': 'float', 'precision': 0}"/></strong></h6>
+													</td>								
+
+												</tr> 
+											</tbody>
+										</table>
+
+									<div class="last-page">
+										<p style="page-break-after:always;"/>
+									</div>
+
+
+
+
+								</t>
+
+
+
+							</t>
+
+
+
+							
+						</t>
+
+					</t>
+
+				</div>
+
+			</t>
+		</t>
+	</template>
+
+
+	<report
+		id="action_report_invoice_comission_vendor"
+		model="commission.vendor"
+		string="Comisión Vendedor"
+		report_type="qweb-pdf"
+		name="invoice_commissions_vendor.report_invoice_comission_vendor"
+		file="invoice_commissions_vendor.report_invoice_comission_vendor"
+		menu="False"
+	/>
+
+
+	<record id="action_report_invoice_comission_vendor" model="ir.actions.report">
+		<field name="paperformat_id" ref="base.paperformat_euro"/>
+	</record>
+
+</odoo>

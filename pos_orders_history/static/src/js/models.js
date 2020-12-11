@@ -1,0 +1,253 @@
+/* Copyright 2017-2018 Dinar Gabbasov <https://it-projects.info/team/GabbasovDinar>
+ * Copyright 2018 Artem Losev
+ * Copyright 2018 Kolushov Alexandr <https://it-projects.info/team/KolushovAlexandr>
+ * License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html). */
+odoo.define('pos_orders_history.models', function (require) {
+    "use strict";
+    var models = require('point_of_sale.models');
+    var rpc = require('web.rpc');
+    var longpolling = require('pos_longpolling.connection');
+
+
+    var _super_pos_model = models.PosModel.prototype;
+    models.PosModel = models.PosModel.extend({
+        initialize: function () {
+            _super_pos_model.initialize.apply(this, arguments);
+            this.bus.add_channel_callback("pos_orders_history", this.on_orders_history_updates, this);
+            this.subscribers = [];
+        },
+        add_subscriber: function (subscriber) {
+            this.subscribers.push(subscriber);
+        },
+        on_orders_history_updates: function(message) {
+            var self = this;
+            // state of orders
+            var state = ['paid', 'invoiced'];
+            if (this.config.show_cancelled_orders) {
+                state.push('cancel');
+            }
+            if (this.config.show_posted_orders) {
+                state.push('done');
+            }
+            message.updated_orders.forEach(function (id) {
+                self.get_order_history(id).done(function(order) {
+                    if (order instanceof Array) {
+                        order = order[0];
+                    }
+                    if (state.indexOf(order.state) !== -1) {
+                        self.update_orders_history(order);
+                    }
+                });
+                self.get_order_history_lines_by_order_id(id).done(function (lines) {
+                    self.update_orders_history_lines(lines);
+                });
+            });
+        },
+        get_order_history: function (id) {
+            return rpc.query({
+                model: 'pos.order',
+                method: 'search_read',
+                args: [[['id', '=', id]]]
+            });
+        },
+        get_order_history_lines_by_order_id: function (id) {
+            return rpc.query({
+                model: 'pos.order.line',
+                method: 'search_read',
+                args: [[['order_id', '=', id]]]
+            });
+        },
+        manual_update_order_history: function(query) {
+            var self = this;
+            var def = new $.Deferred();
+            this.get_order_histories(query).then(function(data) {
+                if (!data) {
+                    def.resolve();
+                    return;
+                }
+
+                self.update_orders_history(data);
+                self.get_order_lines(_.pluck(data, 'id')).then(function(lines){
+                    self.update_orders_history_lines(lines);
+                    def.resolve();
+                });
+
+            });
+            return def;
+        },
+        get_domain_for_order_history(query){
+        	var self = this;
+        	var state = ['paid', 'invoiced'];
+            if (self.config.show_cancelled_orders) {
+                state.push('cancel');
+            }
+            if (self.config.show_posted_orders) {
+                state.push('done');
+            }
+            var res = [['state','in',state]];
+            if (query){
+            	res.push(['pos_history_reference_uid','=',query]);
+            } else if (self.config.load_orders_of_last_n_days) {
+            	// number of orders
+                var today = new Date();
+                today.setHours(0,0,0,0);
+                // load orders from the last date
+                var last_date = new Date(today.setDate(today.getDate()-self.config.number_of_days)).toISOString();
+                res.push(['date_order','>=',last_date]);
+            } else if (self.config.load_barcode_order_only){
+            	res.push(['id', '=', 0]);
+            }
+            return res;
+        },
+        get_order_histories: function(query) {
+            return rpc.query({
+                model: 'pos.order',
+                method: 'search_read',
+                args: [this.get_domain_for_order_history(query)]
+            });
+        },
+        get_order_lines: function(order_ids) {
+            return rpc.query({
+                model: 'pos.order.line',
+                method: 'search_read',
+                args: [[['order_id','in',order_ids]]]
+            });
+        },
+        update_orders_history: function (orders) {
+            var self = this,
+                orders_to_update = [];
+            if (!(orders instanceof Array)) {
+                orders = [orders];
+            }
+            if (this.db.pos_orders_history.length !== 0) {
+                _.each(orders, function (updated_order) {
+                    var max = self.db.pos_orders_history.length;
+                    for (var i = 0; i < max; i++) {
+                        if (updated_order.id === self.db.pos_orders_history[i].id) {
+                            self.db.pos_orders_history.splice(i, 1);
+                            delete self.db.orders_history_by_id[updated_order.id];
+                            orders_to_update.push(updated_order.id);
+                            break;
+                        }
+                    }
+                });
+            }
+
+            var all_orders = this.db.pos_orders_history.concat(orders);
+            this.db.pos_orders_history = all_orders;
+            this.db.sorted_orders_history(all_orders);
+            all_orders.forEach(function (current_order) {
+                self.db.orders_history_by_id[current_order.id] = current_order;
+            });
+            this.publish_db_updates(orders_to_update);
+        },
+        publish_db_updates: function (ids) {
+            _.each(this.subscribers, function (subscriber) {
+                var callback = subscriber.callback,
+                    context = subscriber.context;
+                callback.call(context, 'update', ids);
+            });
+        },
+        update_orders_history_lines: function(lines) {
+            var self = this;
+            var all_lines = this.db.pos_orders_history_lines.concat(lines);
+            this.db.pos_orders_history_lines = all_lines;
+            all_lines.forEach(function (line) {
+                self.db.line_by_id[line.id] = line;
+            });
+        },
+        get_date: function() {
+            var currentdate = new Date();
+            var year = currentdate.getFullYear();
+            var month = (currentdate.getMonth()+1);
+            var day = currentdate.getDate();
+            if (Math.floor(month / 10) === 0) {
+                month = '0' + month;
+            }
+            if (Math.floor(day / 10) === 0) {
+                day = '0' + day;
+            }
+            return year + "-" + month + "-" + day;
+        },
+    });
+
+    var _super_order_model = models.Order.prototype;
+    models.Order = models.Order.extend({
+    	initialize: function(attributes,options) {
+			var res = _super_order_model.initialize.call(this, attributes,options);
+			this.pos_reference_clean = this.uid.toString().replace("-", "").replace("-", "");
+			return res;
+	    },
+        set_mode: function(mode) {
+            this.mode = mode;
+        },
+        get_mode: function() {
+            return this.mode;
+        },
+        export_as_JSON: function() {
+            var data = _super_order_model.export_as_JSON.apply(this, arguments);
+            data.mode = this.mode;
+            data.pos_reprint_reference = this.pos_reprint_reference || '';
+            data.pos_reference_clean = this.pos_reference_clean || '';
+            return data;
+        },
+        init_from_JSON: function(json) {
+            this.mode = json.mode;
+            this.pos_reprint_reference = json.pos_reprint_reference || '';
+            _super_order_model.init_from_JSON.call(this, json);
+        }
+    });
+
+    models.load_models({
+        model: 'pos.order',
+        fields: [],
+        domain: function(self) {
+            var domain = [];
+
+            // state of orders
+            var state = ['paid', 'invoiced'];
+            if (self.config.show_cancelled_orders) {
+                state.push('cancel');
+            }
+            if (self.config.show_posted_orders) {
+                state.push('done');
+            }
+
+            domain.push(['state','in',state]);
+
+            // number of orders
+            if (self.config.load_orders_of_last_n_days) {
+                var today = new Date();
+                today.setHours(0,0,0,0);
+                // load orders from the last date
+                var last_date = new Date(today.setDate(today.getDate()-self.config.number_of_days)).toISOString();
+                domain.push(['date_order','>=',last_date]);
+            }
+
+            return domain;
+        },
+        condition: function(self) {
+            return self.config.orders_history && !self.config.load_barcode_order_only;
+        },
+        loaded: function (self, orders) {
+            self.update_orders_history(orders);
+            self.order_ids = _.pluck(orders, 'id');
+        },
+    });
+
+    models.load_models({
+        model: 'pos.order.line',
+        fields: [],
+        domain: function(self) {
+            return [['order_id', 'in', self.order_ids]];
+        },
+        condition: function(self) {
+            return self.config.orders_history && !self.config.load_barcode_order_only;
+        },
+        loaded: function (self, lines) {
+            self.update_orders_history_lines(lines);
+        },
+    });
+
+    return models;
+});

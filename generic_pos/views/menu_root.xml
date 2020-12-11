@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<!-- reemplazar menu para cambiar los grupos para menus de informes -->
+	<record id="point_of_sale.menu_point_rep" model="ir.ui.menu">
+		<field name="groups_id"
+			eval="[(3, ref('point_of_sale.group_pos_manager')), 
+						(4, ref('generic_pos.group_pos_report'))]" />
+	</record>
+
+	<!-- reemplazar menu para cambiar los grupos para menus de configuracion -->
+	<record id="point_of_sale.menu_point_config_product" model="ir.ui.menu">
+		<field name="groups_id"
+			eval="[(3, ref('point_of_sale.group_pos_manager')), 
+						(4, ref('generic_pos.group_pos_config'))]" />
+	</record>
+
+</odoo>

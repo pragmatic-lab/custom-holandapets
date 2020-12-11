@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<record model="ir.ui.view" id="product_uom_tree_view">
+		<field name="name">uom.uom.tree</field>
+		<field name="model">uom.uom</field>
+		<field name="inherit_id" ref="uom.product_uom_tree_view" />
+		<field name="arch" type="xml">
+			<field name="category_id" position="after">
+				<field name="factor" />
+			</field>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="product_uom_form_view">
+		<field name="name">uom.uom.form</field>
+		<field name="model">uom.uom</field>
+		<field name="inherit_id" ref="uom.product_uom_form_view" />
+		<field name="arch" type="xml">
+			<field name="rounding" position="after">
+				<h3 style="color: blue;">
+					<label for="value_uom" />
+					<field name="value_uom" readonly="1" />
+				</h3>
+				<h3 style="color: blue;" attrs="{'invisible': [('uom_type','=','reference')]}">
+					<label for="uom_reference_id" />
+					<field name="uom_reference_id" readonly="1" options="{'no_open': True}" />
+				</h3>
+			</field>
+			<xpath expr="/form" position="inside">
+				<div class="oe_chatter">
+					<field name="message_follower_ids" widget="mail_followers"
+						groups="base.group_user" />
+					<field name="message_ids" widget="mail_thread" />
+				</div>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="stock_uom_uom_search_view" model="ir.ui.view">
+		<field name="name">uom.uom.search</field>
+		<field name="model">uom.uom</field>
+		<field name="arch" type="xml">
+			<search string="Unidad de Medida">
+				<field name="name" />
+				<field name="category_id" />
+				<group name="group_by" string="Agrupar por">
+					<filter name="group_by_category_id" string="Categoria"
+						context="{'group_by': 'category_id'}" />
+				</group>
+			</search>
+		</field>
+	</record>
+
+</odoo>

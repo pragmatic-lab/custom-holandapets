@@ -1,0 +1,25 @@
+{
+    "name": "Mejoras en Proceso de Stock-Contabilidad",
+    'version': '1.0.0.0',
+    "author": "Carlos Lopez Mite",
+    "website": "https://blaze-otp.com",
+    "category": "Accounting",
+    "description": """Mejoras en Proceso de Stock-Contabilidad""",
+    "depends": [
+        "base",
+        "account",
+        "product",
+        "stock_account",
+        "generic_stock",
+    ],
+    'data': [
+        'security/ir.model.access.csv',
+        'wizard/wizard_change_product_category.xml',
+        'views/picking_view.xml',
+        'views/product_category_view.xml',
+        'views/stock_config_view.xml',
+        'views/menu_root.xml',
+    ],
+    'installable': True,
+    'auto_install': True,
+}

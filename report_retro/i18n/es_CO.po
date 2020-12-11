@@ -1,0 +1,283 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* report_retro
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-08-09 04:30+0000\n"
+"PO-Revision-Date: 2019-08-09 04:30+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_invoice_document_inherit
+msgid "&amp;nbsp;<span>on</span>"
+msgstr "&amp;nbsp;<span>en</span>"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_saleorder_document_inherit
+msgid "&amp;nbsp;<span>on</span>&amp;nbsp;"
+msgstr "&amp;nbsp;<span>en</span>&amp;nbsp;"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_invoice_document_inherit
+msgid "<span groups=\"account.group_show_line_subtotals_tax_excluded\">Amount</span>\n"
+"									<span groups=\"account.group_show_line_subtotals_tax_included\">Total Precio</span>"
+msgstr ""
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_saleorder_document_inherit
+msgid "<span style=\"font-weight:bold; font-size: 24px; color: #70d4ff;\">Pro-Forma Invoice # </span>"
+msgstr ""
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_invoice_document_inherit
+msgid "<span>Description</span>"
+msgstr "<span>Descripción</span>"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_invoice_document_inherit
+#: model_terms:ir.ui.view,arch_db:report_retro.report_saleorder_document_inherit
+msgid "<span>Disc.(%)</span>"
+msgstr "<span>Desc.(%)</span>"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_invoice_document_inherit
+msgid "<span>Quantity</span>"
+msgstr "<span>Cantidad</span>"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_invoice_document_inherit
+msgid "<span>Source Document</span>"
+msgstr "<span>Documento de Origen</span>"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_invoice_document_inherit
+msgid "<span>Taxes</span>"
+msgstr "<span>Impuestos</span>"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_invoice_document_inherit
+msgid "<span>Unit Price</span>"
+msgstr "<span>Precio Unitario</span>"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_invoice_document_inherit
+#: model_terms:ir.ui.view,arch_db:report_retro.report_saleorder_document_inherit
+msgid "<strong class=\"mr16\">Subtotal</strong>"
+msgstr ""
+
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_saleorder_document_inherit
+msgid "Shipping address:"
+msgstr "Dirección de Envío"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_invoice_document_inherit
+#: model_terms:ir.ui.view,arch_db:report_retro.report_saleorder_document_inherit
+msgid "<strong>Subtotal</strong>"
+msgstr ""
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_invoice_document_inherit
+#: model_terms:ir.ui.view,arch_db:report_retro.report_saleorder_document_inherit
+msgid "<strong>Total</strong>"
+msgstr ""
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_invoice_document_inherit
+#: model_terms:ir.ui.view,arch_db:report_retro.report_saleorder_document_inherit
+msgid "Alien Registration Card:"
+msgstr "Tarjeta de extranjería:"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_invoice_document_inherit
+#: model_terms:ir.ui.view,arch_db:report_retro.report_saleorder_document_inherit
+msgid "Amount"
+msgstr "Importe"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_invoice_document_inherit
+#: model_terms:ir.ui.view,arch_db:report_retro.report_saleorder_document_inherit
+msgid "Base"
+msgstr "Base"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_invoice_document_inherit
+#: model_terms:ir.ui.view,arch_db:report_retro.report_saleorder_document_inherit
+msgid "Birth Certificate:"
+msgstr "Registro civíl de nacimiento:"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_invoice_document_inherit
+#: model_terms:ir.ui.view,arch_db:report_retro.report_saleorder_document_inherit
+msgid "C.C:"
+msgstr "C.C:"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_invoice_document_inherit
+#: model_terms:ir.ui.view,arch_db:report_retro.report_saleorder_document_inherit
+msgid "Client"
+msgstr "Cliente"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_invoice_document_inherit
+msgid "Date Due:"
+msgstr "Fecha de Vencimiento:"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_saleorder_document_inherit
+msgid "Description"
+msgstr "Descripción"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_saleorder_document_inherit
+msgid "Expected Date:"
+msgstr "Fecha Prevista"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_invoice_document_inherit
+#: model_terms:ir.ui.view,arch_db:report_retro.report_saleorder_document_inherit
+msgid "Foreign Identification Document:"
+msgstr "Documento de Identificación Extranjero:"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_invoice_document_inherit
+#: model_terms:ir.ui.view,arch_db:report_retro.report_saleorder_document_inherit
+msgid "Foreigner ID:"
+msgstr "Cédula de Extranjería:"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_saleorder_document_inherit
+msgid "Invoicing address:"
+msgstr "Dirección de facturación:"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_saleorder_document_inherit
+msgid "Invoicing and shipping address:"
+msgstr "Dirección de Facturación y de Envío:"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.external_layout_retro
+msgid "Logo"
+msgstr "Logo"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.external_layout_retro
+msgid "Mail:"
+msgstr "Correo:"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_invoice_document_inherit
+#: model_terms:ir.ui.view,arch_db:report_retro.report_saleorder_document_inherit
+msgid "NIT / DI:"
+msgstr "NIT / DI:"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.external_layout_retro
+msgid "NIT:"
+msgstr "NIT:"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_invoice_document_inherit
+#: model_terms:ir.ui.view,arch_db:report_retro.report_saleorder_document_inherit
+msgid "No Foreign Identification"
+msgstr "Sin Identificación del exterior:"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_invoice_document_inherit
+#: model_terms:ir.ui.view,arch_db:report_retro.report_saleorder_document_inherit
+msgid "No identification"
+msgstr "Sin Identificación"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_saleorder_document_inherit
+msgid "Order #"
+msgstr "Orden #"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_invoice_document_inherit
+#: model_terms:ir.ui.view,arch_db:report_retro.report_saleorder_document_inherit
+msgid "Passport:"
+msgstr "Pasaporte"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_invoice_document_inherit
+msgid "Provider"
+msgstr "Proveedor"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.external_layout_retro
+msgid "Página: <span class=\"page\"/> / <span class=\"topage\"/>"
+msgstr ""
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_saleorder_document_inherit
+msgid "Quantity"
+msgstr "Cantidad"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_saleorder_document_inherit
+msgid "Quotation #"
+msgstr "Cotización #"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_invoice_document_inherit
+#: model_terms:ir.ui.view,arch_db:report_retro.report_saleorder_document_inherit
+msgid "T.I:"
+msgstr "T.I:"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_invoice_document_inherit
+#: model_terms:ir.ui.view,arch_db:report_retro.report_saleorder_document_inherit
+msgid "TIN:"
+msgstr "TIN:"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_invoice_document_inherit
+#: model_terms:ir.ui.view,arch_db:report_retro.report_saleorder_document_inherit
+msgid "Tax"
+msgstr "Impuestos"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_saleorder_document_inherit
+msgid "Taxes"
+msgstr "Impuestos"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.external_layout_retro
+msgid "Tel:"
+msgstr "Tel.:"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_saleorder_document_inherit
+msgid "Total Price"
+msgstr "Total Precio"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_invoice_document_inherit
+#: model_terms:ir.ui.view,arch_db:report_retro.report_saleorder_document_inherit
+msgid "Total:"
+msgstr "Total:"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_saleorder_document_inherit
+msgid "Unit Price"
+msgstr "Precio Unitario"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.external_layout_retro
+msgid "Web:"
+msgstr "Web"
+
+#. module: report_retro
+#: model_terms:ir.ui.view,arch_db:report_retro.report_invoice_document_inherit
+msgid "Sales Invoice N°"
+msgstr "Factura de Venta N°"

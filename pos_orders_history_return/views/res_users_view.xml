@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="res_users_form_view" model="ir.ui.view">
+		<field name="name">res.users.form.view</field>
+		<field name="model">res.users</field>
+		<field name="inherit_id"
+			ref="pos_disable_payment.res_users_form_view" />
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='allow_create_order_line']"
+				position="before">
+				<field name="allow_credit_note" />
+			</xpath>
+		</field>
+	</record>
+</odoo>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <template id="assets_bankend" name="aspl_pos_order_sync_ee index" inherit_id="point_of_sale.assets">
+            <xpath expr="." position="inside">
+	            <script type="text/javascript" src="/aspl_pos_order_sync_ee/static/src/js/pos.js"></script>
+                <link rel="stylesheet" type="text/css" href="/aspl_pos_order_sync_ee/static/src/css/pos.css"/>
+            </xpath>
+        </template>
+
+</odoo>

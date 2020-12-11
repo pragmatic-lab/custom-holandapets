@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	
+	<record model="ir.ui.view" id="edit_payment_method_view">
+		<field name="name">Edit Payment Method</field>
+		<field name="model">edit.payment_method</field>
+		<field name="arch" type="xml">
+			<form>
+				<group>
+					<field name="journal_id"/>
+				</group>
+				<footer>
+				<button name="change_payment_method" string="Cambiar" type="object" default_focus="1" class="oe_highlight" confirm="Esta seguro de cambiar el método de pago?"/>
+				
+				<button string="Cancel" class="oe_link" special="cancel" />
+
+				</footer>
+			</form>
+
+
+		</field>
+	</record>
+	
+</odoo>

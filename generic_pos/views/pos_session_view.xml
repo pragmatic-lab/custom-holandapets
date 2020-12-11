@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record model="ir.ui.view" id="pos_session_form_view">
+		<field name="name">pos.session.form</field>
+		<field name="model">pos.session</field>
+		<field name="inherit_id" ref="point_of_sale.view_pos_session_form" />
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='config_id']" position="attributes">
+				<attribute name="readonly">1</attribute>
+				<attribute name="options">{'no_open': True}</attribute>
+			</xpath>
+		</field>
+	</record>
+
+</odoo>

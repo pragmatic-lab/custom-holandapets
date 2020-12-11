@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<template id="report_payment_receipt_document_inherit" inherit_id="account.report_payment_receipt_document">
+
+		<xpath expr="//div[@class='page']/table[@class='table table-sm']" position="before">
+			<p t-if='o.text_amount'>
+				<h5><strong>La Suma de: </strong>
+				<span t-field="o.text_amount"/></h5>
+			</p>
+		</xpath>
+
+
+		<xpath expr="//div[@class='page']/table[@class='table table-sm']" position="after">
+
+
+			<div class="clearfix">
+				<div id="total" class="row">
+					<div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto">
+						<table class="table table-sm">
+							<tr class="border-black o_subtotal" style="">
+								<td><strong>Valor Total</strong></td>
+								<td class="text-right">
+								
+								</td>
+							</tr>
+							<tr class="border-black o_total">
+								<td><strong>Valor</strong></td>
+								<td class="text-right">
+									<span t-field="o.amount"/>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+					
+			<t t-if="o.load_records_move_lines()">
+
+				<h5>Contabilización</h5>
+				<t t-set="amount_debit" t-value="0"/>
+				<t t-set="amount_credit" t-value="0"/>
+				<t t-set="account_analytic" t-value="0"/>
+				<table class="table table-sm">
+					<thead>
+						<tr>
+							<th><span>Cuenta</span></th>
+							<t t-foreach="o.load_records_move_lines()" t-as="payment">
+								<t t-if="payment.analytic_account_id">
+									<t t-set="account_analytic" t-value="1"/>
+								</t>
+							</t>
+
+							<t t-if="account_analytic == 1">
+								<th><span>Centro de Costo</span></th>
+							</t>
+
+							<th><span>Ref.</span></th>
+							<th class="text-left"><span>Tercero</span></th>
+							<th class="text-right"><span>Debitos</span></th>
+							<th class="text-right"><span>Créditos</span></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr t-foreach="o.load_records_move_lines()" t-as="payment">
+							<td>[<span t-field="payment.account_id.code"/>] <span t-field="payment.account_id.name"/></td>
+							<t t-if="account_analytic == 1">
+								<td>
+									<t t-if="payment.analytic_account_id.code">
+										[<span t-field="payment.analytic_account_id.code"/>] 
+									</t>
+									<span t-field="payment.analytic_account_id.name"/>
+								</td>
+							</t>
+							<td><span t-field="payment.name"/></td>
+							<td class="text-left">
+								<t t-if="o.partner_id.xidentification">
+									<span t-field="payment.partner_id.xidentification"/> - 
+								</t>
+								<span t-field="payment.partner_id.name"/>
+							</td>
+							<td class="text-right">
+								<span t-field="payment.debit"/>
+							</td>
+							<td class="text-right">
+								<span t-field="payment.credit"/>
+							</td>
+
+							<t t-set="amount_debit" t-value="amount_debit + payment.debit"/>
+							<t t-set="amount_credit" t-value="amount_credit + payment.credit"/>
+						</tr>
+					</tbody>
+				</table>
+
+				<div class="clearfix">
+					<div id="total" class="row">
+						<div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto">
+							<table class="table table-sm">
+								<tr class="border-black o_subtotal" style="">
+									<td><strong>Total Débito:</strong></td>
+									<td class="text-right">
+										<span t-esc="amount_debit"/>
+									</td>
+								</tr>
+								<tr class="border-black o_subtotal" style="">
+									<td><strong>Total Crédito:</strong></td>
+									<td class="text-right">
+										<span t-esc="amount_credit"/>
+									</td>
+								</tr>
+								<tr class="border-black o_total" style="">
+									<td></td>
+									<td>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+
+			</t>
+
+
+		</xpath>
+
+	</template>
+
+</odoo>

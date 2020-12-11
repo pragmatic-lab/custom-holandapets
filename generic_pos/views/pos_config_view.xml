@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="pos_config_kanban_view" model="ir.ui.view">
+		<field name="name">pos.config.kanban</field>
+		<field name="model">pos.config</field>
+		<field name="inherit_id" ref="point_of_sale.view_pos_config_kanban" />
+		<field name="arch" type="xml">
+			<xpath expr="/kanban" position="attributes">
+				<attribute name="group_create">0</attribute>
+			</xpath>
+			<xpath expr="//div[hasclass('o_kanban_manage_new')]" position="attributes">
+				<attribute name="groups">generic_pos.group_pos_report</attribute>
+			</xpath>
+			<xpath expr="//div[hasclass('o_kanban_card_manage_settings')]"
+				position="attributes">
+				<attribute name="groups">generic_pos.group_pos_config</attribute>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="pos_config_form_view" model="ir.ui.view">
+		<field name="name">pos.config.form</field>
+		<field name="model">pos.config</field>
+		<field name="inherit_id" ref="point_of_sale.pos_config_view_form" />
+		<field name="arch" type="xml">
+			<!-- solo mostrar valores de apertura/cierre que no se usen en otros TPV 
+				al ser o2m con widget m2m puede dejar inconsistencias al tomar registros 
+				usados en otros TPV -->
+			<xpath expr="//field[@name='default_cashbox_lines_ids']"
+				position="attributes">
+				<attribute name="domain">[('default_pos_id', '=', False), ('cashbox_id', '=', False)]</attribute>
+			</xpath>
+			<button name="toggle_active" position="attributes">
+				<attribute name="groups">point_of_sale.group_pos_manager</attribute>
+			</button>
+			<xpath expr="//field[@name='stock_location_id']" position="after">
+				<field name="warehouse_id" invisible="1" />
+			</xpath>
+		</field>
+	</record>
+
+	<!-- reemplazar accion de tablero de pos, para no mostrar la vista de arbol -->
+	<record id="point_of_sale.action_pos_config_kanban" model="ir.actions.act_window">
+		<field name="view_mode">kanban,form</field>
+	</record>
+
+</odoo>

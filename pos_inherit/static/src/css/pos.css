@@ -1,0 +1,51 @@
+.pos .product {
+    position:relative;
+    vertical-align: top;
+    display: inline-block;
+    line-height: 100px;
+    font-size: 11px;
+    margin: 8px !important;
+    width: 162px;
+    height:185px;
+    background:#fff;
+    border: 1px solid #e2e2e2;
+    border-radius: 3px;
+    border-bottom-width: 3px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+
+.pos .product .product-name {
+    position: absolute;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+            box-sizing: border-box;
+    bottom:0;
+    top:auto;
+    line-height: 14px;
+    width:100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: -webkit-linear-gradient(-90deg,rgba(255,255,255,0),rgba(255,255,255,1), rgba(255,255,255,1));
+    background:    -moz-linear-gradient(-90deg,rgba(255,255,255,0),rgba(255,255,255,1), rgba(255,255,255,1));
+    background:     -ms-linear-gradient(-90deg,rgba(255,255,255,0),rgba(255,255,255,1), rgba(255,255,255,1));
+    /* troublesome in latest webkit
+    background:         linear-gradient(-90deg,rgba(255,255,255,0),rgba(255,255,255,1), rgba(255,255,255,1));
+    */
+    /*background:#FFF;*/
+    padding: 3px;
+    padding-top:15px;
+    font-weight: bold;
+}
+
+
+.screen .screen-content{
+    margin: 0px auto;
+    max-width: 1424px;
+    text-align: left;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}

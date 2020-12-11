@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+		<!-- Agregando menu en facturacion, en el menu de configuracion->contabilidad -->
+		<menuitem
+			id="taxes_collected_invoice_menu"
+			action="taxes_collected_action" 
+			parent="account.account_account_menu" 
+			sequence="12" 
+			groups="customer_company_taxes.group_cc_taxes_configuration"/>
+
+
+		<!-- Agregando menu en ventas, en el menu de configuracion -->
+		<menuitem
+			id="taxes_collected_sale_menu"
+			action="taxes_collected_action" 
+			parent="sale.menu_sale_config" 
+			sequence="2" 
+			groups="customer_company_taxes.group_cc_taxes_configuration"/>
+
+</odoo>

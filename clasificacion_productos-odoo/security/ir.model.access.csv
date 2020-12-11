@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+
+access_product_template_clasification,access_product_template_clasification,model_product_template_clasification,,1,1,1,1
+access_product_template_clasification_line,access_product_template_clasification_line,model_product_template_clasification_line,,1,1,1,1
+access_product_template_clasification_relation,access_product_template_clasification_relation,model_product_template_clasification_relation,,1,1,1,1

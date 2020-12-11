@@ -1,0 +1,11 @@
+Reporte de cierre de caja
+
+	1. Que salga el nombre de la caja en el repor
+	2. Imprimir la fecha en el reporte
+	3. Numero de la secuencia inicial y final
+	4. Ventas exentas, reportes del 5% y 19% totalizado
+	5. Descuento por departamento.
+	6. Quitar si es cero el metodo de pago.
+	7. Cambiar el medio de recaudo.
+
+900738175

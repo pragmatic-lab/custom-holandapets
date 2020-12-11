@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template_lines_inherit" xml:space="preserve" inherit_id="point_of_sale.template">
+
+	<t t-name="PosTicketProductNote">
+		<t t-if="orderline.get_note() and widget.pos.config.print_order_line_note">
+			<div class="pos-disc-font">
+				<t t-esc="orderline.get_note()"/>
+			</div>
+		</t>
+	</t>
+	
+	<t t-name="XmlPosTicketProductNote">
+		<t t-if="line.note and widget.pos.config.print_order_line_note">
+			<line indent='1'><left><t t-esc='line.note' /></left></line>
+		</t>
+	</t>
+	
+	<t t-extend="PosTicket">
+        <!-- POS Reorder end here -->
+        <t t-jquery="[t-esc='orderline.get_product().display_name']" t-operation="after">
+            <t t-call="PosTicketProductNote" />
+        </t>
+    </t>
+    
+    <t t-extend="XmlReceipt">
+		<t t-jquery="[t-if='simple']" t-operation="append">
+			<t t-call="XmlPosTicketProductNote" />
+		</t>
+		<t t-jquery="[t-if='!simple']" t-operation="append">
+			<t t-call="XmlPosTicketProductNote" />
+		</t>
+    </t>
+
+</templates>

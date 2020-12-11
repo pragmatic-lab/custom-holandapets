@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!--Report-->
+     <template id="report_journal_entry_document">
+        <t t-call="web.external_layout">
+            <t t-set="o" t-value="doc.with_context({'lang': 'en_US'})" />
+            <div class="page">
+
+                <center><h3><b>JOURNAL VOUCHER REPORT</b></h3></center>
+                <h2>
+                    <span t-field="o.name"/>
+                </h2>
+
+                <div class="row mt32 mb32">
+                    <div class="col-4" t-if="o.journal_id">
+                        <strong>Journal:</strong>
+                        <p t-field="o.journal_id"/>
+                    </div>
+                    <div class="col-4" t-if="o.ref">
+                        <strong>Reference:</strong>
+                        <p t-field="o.ref"/>
+                    </div>
+                    <div class="col-4" t-if="o.date">
+                        <strong>Date:</strong>
+                        <p t-field="o.date"/>
+                    </div>
+                </div>
+
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Account</th>
+                            <th  groups="analytic.group_analytic_accounting">
+                                Analytic Account
+                            </th>
+                            <th>Partner</th>
+                            <th>Label</th>
+                            <th>Debit</th>
+                            <th>Credit</th>
+                            <!--<th>Due Date</th>-->
+                        </tr>
+                    </thead>
+                    <tbody class="invoice_tbody">
+                        <tr t-foreach="o.line_ids" t-as="l">
+                            <td><span t-field="l.account_id"/></td>
+                            <td groups="analytic.group_analytic_accounting">
+                                <span t-field="l.analytic_account_id"/>
+                            </td>
+                            <td><span t-field="l.partner_id"/></td>
+                            <td><span t-field="l.name"/></td>
+                            <td><span t-field="l.debit"/></td>
+                            <td><span t-field="l.credit"/></td>
+                            <!--<td><span t-field="l.date_maturity"/></td>-->
+                        </tr>
+                        <tr/>
+                        <tr class="border-black">
+                            <td colspan="3"/>
+                            <td groups="analytic.group_analytic_accounting"/>
+                            <td> <span t-field="o.amount"/></td>
+                            <td> <span t-field="o.amount"/></td>
+                            <!--<td/>-->
+                        </tr>
+                        <tr class="border-black"/>
+                    </tbody>
+                </table>
+                <p t-field="o.narration"/>
+            </div>
+        </t>
+    </template>
+    <!--TEMPLATE [JOURNAL ENTRY REPORT]-->
+    <template id="report_journal_entry">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="iwesabe_reports_journal_entry.report_journal_entry_document"/>
+            </t>
+        </t>
+    </template>
+
+    <report id="action_report_journal_entry"
+            model="account.move"
+            string="Journal Entries"
+            report_type="qweb-pdf"
+            name="iwesabe_reports_journal_entry.report_journal_entry"
+            file="iwesabe_reports_journal_entry.report_journal_entry"
+            attachment_use="True"
+    />
+    <!--FORM JOURNAL ENTRY-->
+    <record id="view_move_form_inherit" model="ir.ui.view">
+        <field name="name">account.move.report.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <button name="action_post" position="after">
+                <button name="print_journal_entry" string="Print" type="object" help="Print in Pdf"/>
+            </button>
+        </field>
+
+    </record>
+
+</odoo>

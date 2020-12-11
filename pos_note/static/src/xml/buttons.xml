@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="button_order_note">
+        <div class='control-button'>
+            <i class='fa fa-tag' />  Add Order Note
+        </div>
+    </t>
+    
+    <t t-name="button_order_line_note">
+        <div class='control-button'>
+            <i class='fa fa-tag' />  Add Line Note
+        </div>
+    </t>
+
+</templates>

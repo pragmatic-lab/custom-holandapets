@@ -1,0 +1,83 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* pos_disable_payment
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-12-08 02:10+0000\n"
+"PO-Revision-Date: 2018-12-07 23:10-0300\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.1.1\n"
+"Last-Translator: Flectra Chile SpA <soporte@flectrachile.cl>\n"
+"Language: es_CL\n"
+
+#. module: pos_disable_payment
+#: model_terms:ir.ui.view,arch_db:pos_disable_payment.res_users_form_view
+msgid "Access"
+msgstr "Acceso"
+
+#. module: pos_disable_payment
+#: model:ir.model.fields,field_description:pos_disable_payment.field_res_users__allow_decrease_kitchen_only
+msgid "Allow change Qty for kitchen orders"
+msgstr "Permitir cambio QTY para las órdenes de cocina"
+
+#. module: pos_disable_payment
+#: model:ir.model.fields,field_description:pos_disable_payment.field_res_users__allow_create_order_line
+msgid "Allow create order line"
+msgstr "Permitir crear línea de pedido"
+
+#. module: pos_disable_payment
+#: model:ir.model.fields,field_description:pos_disable_payment.field_res_users__allow_decrease_amount
+msgid "Allow decrease quantity on order line"
+msgstr "Permitir disminución de cantidad en la línea de pedido"
+
+#. module: pos_disable_payment
+#: model:ir.model.fields,field_description:pos_disable_payment.field_res_users__allow_discount
+msgid "Allow discount"
+msgstr "Permitir descuento"
+
+#. module: pos_disable_payment
+#: model:ir.model.fields,field_description:pos_disable_payment.field_res_users__allow_edit_price
+msgid "Allow edit price"
+msgstr "Permitir edición de precio"
+
+#. module: pos_disable_payment
+#: model:ir.model.fields,field_description:pos_disable_payment.field_res_users__allow_manual_customer_selecting
+msgid "Allow manual customer selecting"
+msgstr "Permitir selección manual del cliente"
+
+#. module: pos_disable_payment
+#: model:ir.model.fields,field_description:pos_disable_payment.field_res_users__allow_payments
+msgid "Allow payments"
+msgstr "Permitir pagos"
+
+#. module: pos_disable_payment
+#: model:ir.model.fields,field_description:pos_disable_payment.field_res_users__allow_refund
+msgid "Allow refunds"
+msgstr "Permitir reembolsos"
+
+#. module: pos_disable_payment
+#: model:ir.model.fields,field_description:pos_disable_payment.field_res_users__allow_delete_order
+msgid "Allow remove non-empty order"
+msgstr "Permitir quitar orden no vacía"
+
+#. module: pos_disable_payment
+#: model:ir.model.fields,field_description:pos_disable_payment.field_res_users__allow_delete_order_line
+msgid "Allow remove order line"
+msgstr "Permitir quitar línea de pedido"
+
+#. module: pos_disable_payment
+#: model:ir.model.fields,field_description:pos_disable_payment.field_res_users__is_restaurant_installed
+msgid "Is Restaurant Installed"
+msgstr "Es restaurante instalado"
+
+#. module: pos_disable_payment
+#: model:ir.model,name:pos_disable_payment.model_res_users
+msgid "Users"
+msgstr "Usuarios"

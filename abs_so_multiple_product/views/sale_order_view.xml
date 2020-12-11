@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- add button in SaleOrder -->
+    <record id="view_order_form_inheritd" model="ir.ui.view">
+        <field name="name">sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref ="sale.view_order_form"/>	
+        <field name="arch" type="xml">
+            <xpath expr ="//notebook" position="before">
+                <button string="Add Multiple Products" name="%(open_view_multiple_product_sale_action)d" type="action" class="oe_highlight" attrs="{'invisible': [('state', 'in', ['sale', 'done', 'cancel'])]}" />  
+            </xpath>
+        </field>   
+    </record>
+
+</odoo>
+

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<template id="report_stock_inventory" inherit_id="stock.report_inventory">
+		<xpath expr="//th[hasclass('text-right')]" position="before">
+			<th>
+				<strong>Cantidad Teorica</strong>
+			</th>
+		</xpath>
+		<xpath expr="//th[hasclass('text-right')]" position="after">
+			<th>
+				<strong>Ajuste</strong>
+			</th>
+			<th>
+				<strong>Subtotal</strong>
+			</th>
+		</xpath>
+		<xpath expr="//span[@t-field='line.product_qty']/.." position="before">
+			<td class="text-right">
+				<span t-field="line.theoretical_qty" />
+			</td>
+		</xpath>
+		<xpath expr="//span[@t-field='line.product_qty']/.." position="after">
+			<td class="text-right">
+				<span t-esc="line.product_qty - line.theoretical_qty" />
+			</td>
+			<td class="text-right">
+				<span t-esc="line.price_unit * line.product_qty"
+					t-options="{'widget': 'monetary', 'display_currency': o.company_id.currency_id}" />
+			</td>
+		</xpath>
+		<xpath expr="//t[@t-as='location']/tr" position="inside">
+			<td />
+			<td />
+			<td />
+		</xpath>
+	</template>
+
+</odoo>

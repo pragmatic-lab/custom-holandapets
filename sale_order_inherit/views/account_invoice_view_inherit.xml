@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+<data>
+		<record model="ir.ui.view" id="account_invoice_view_form_inherit">
+			<field name="name">account.invoice.form</field>
+			<field name="model">account.invoice</field>
+			<field name="inherit_id" ref="account.invoice_form" />
+			<field name="arch" type="xml">
+
+				<xpath expr="//field[@name='team_id']" position="before">
+					<field name="sale_order_conf_text_id"/>
+				</xpath>
+
+				<xpath expr="//field[@name='date_invoice']" position="before">
+					<field name="date_invoice_complete" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+				</xpath>
+
+				<xpath expr="//field[@name='date_invoice']" position="attributes">
+					<attribute name="invisible">True</attribute>
+				</xpath>
+
+				<xpath expr="//button[@name='action_invoice_open']" position="before">
+
+					<button name="button_open_register_payments" string="Registrar Pagos Multiples" type="object" class="btn-primary" attrs="{'invisible': [('state', '!=', 'open')]}"/>
+					
+				</xpath>
+
+			</field>
+		</record>
+
+
+		<record model="ir.ui.view" id="invoice_supplier_form_view_inherit">
+			<field name="name">account.invoice.form</field>
+			<field name="model">account.invoice</field>
+			<field name="inherit_id" ref="account.invoice_supplier_form"  />
+			<field name="arch" type="xml">
+
+
+				<xpath expr="//field[@name='date_invoice']" position="before">
+					<field name="date_invoice_complete" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+				</xpath>
+
+				<xpath expr="//field[@name='date_invoice']" position="attributes">
+					<attribute name="invisible">True</attribute>
+				</xpath>
+
+				<xpath expr="//button[@name='action_invoice_open']" position="before">
+
+					<button name="button_open_register_payments" string="Registrar Pagos Multiples" type="object" class="btn-primary" attrs="{'invisible': [('state', '!=', 'open')]}"/>
+					
+				</xpath>
+
+			</field>
+		</record>
+</data>
+
+</odoo>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+		<record id="sale_order_form_view_inherit" model="ir.ui.view">
+			<field name="name">sale.order.inherit</field>
+			<field name="model">sale.order</field>
+			<field name="inherit_id" ref="sale.view_order_form"/>
+			<field name="arch" type="xml">
+
+				
+<!-- 				<xpath expr="//sheet/notebook" position="before">
+					<field name="html_active_amount_day" widget="html" attrs="{'invisible': [('active_day_iva', '=' , False)]}" nolabel="1"/>
+				</xpath>
+ -->
+
+				<xpath expr="//form/header" position="after">
+					<field name="html_active_amount_day" widget="html" attrs="{'invisible': [('active_day_iva', '=' , False)]}" nolabel="1" readonly="1"/>
+				</xpath>
+				
+				<xpath expr="//field[@name='payment_term_id']" position="after">
+					<field name="active_day_iva" invisible="1"/>
+					<field name="type_payment" attrs="{'invisible': [('active_day_iva', '=' , False)], 'required': [('active_day_iva', '=', True)]}"/>
+				</xpath>
+
+				<xpath expr="//sheet//notebook" position="attributes">
+                     <attribute name="attrs">{'invisible': [('type_payment', 'not in' , ['cash', 'bank']), ('active_day_iva', '=' , True)]      }</attribute>
+				</xpath>
+
+				<xpath expr="//field[@name='order_line']" position="before">
+					<button name="update_records_order_line" id="update_records_order_line" string="Actualizar Impuestos" class="btn-primary" type="object" attrs="{'invisible': [('state', 'not in', ['draft'])]}" invisible="1"/>
+				</xpath>
+
+
+				<xpath expr="//form/sheet/notebook/page[@name='order_lines']" position="after">
+					<page string="Impuestos y Retenciones">
+                        <field name="taxes_ids" nolabel="1" >
+                            <tree>
+                            	<field name="tax_id" />
+                                <field name="base" />
+                                <field name="amount" />
+                            </tree>
+                        </field>
+                    </page>
+				</xpath>
+
+                <xpath expr="//field[@name='amount_tax']" position="after">
+                    <field name="wh_taxes" />
+                </xpath>
+
+			</field>
+		</record>
+
+</odoo>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Assets for reports -->
+    <template id="report_assets_common" name="report assets" inherit_id="web.report_assets_common">
+    	<xpath expr="." position="inside">
+    		<link rel="stylesheet" type="text/scss" href="/odoo_utils/static/src/scss/report_layout.scss" />
+    	</xpath>
+    </template>
+    
+    <template id="web_assets_common" name="report assets" inherit_id="web.assets_common">
+    	<xpath expr="." position="inside">
+    		<link rel="stylesheet" type="text/scss" href="/odoo_utils/static/src/scss/report_layout.scss" />
+    	</xpath>
+    </template>
+
+</odoo>

@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+    <data>
+            <!-- Extending Invoice Form View -->
+            <record id="invoice_form" model="ir.ui.view">
+              <field name="model">account.invoice</field>
+              <field name="inherit_id" ref="account.invoice_form"/>
+                <field name="arch" type="xml">
+                  <!--  Withholding calculation -->
+
+
+
+                  <xpath expr="//form/header" position="after">
+                    <field name="html_active_amount_day" widget="html" attrs="{'invisible': [('active_day_iva', '=' , False)]}" nolabel="1"/>
+                  </xpath>
+
+
+                  <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="active_day_iva" invisible="1"/>
+                    <field name="type_payment" attrs="{'invisible': [('active_day_iva', '=' , False)], 'required': [('active_day_iva', '=', True)]}"/>
+                    
+                  </xpath>
+
+                  <xpath expr="//sheet//notebook" position="attributes">
+                    <attribute name="attrs">{'invisible': [('type_payment', 'not in' , ['cash', 'bank']), ('active_day_iva', '=' , True)]      }</attribute>
+                  </xpath>
+
+
+
+                  <field name="amount_tax" position="after">
+                    <field name="amount_without_wh_tax" attrs="{'invisible':[('fiscal_position_id', '=', False)]}" style="border-top: 1px solid #cacaca;"/>
+                  </field>
+                  <field name="amount_total" position="before">
+                    <field name="wh_taxes" attrs="{'invisible':[('fiscal_position_id', '=', False)]}" />
+                  </field>
+
+                  <xpath expr="//field[@name='has_outstanding']" position="after">
+                    <div class="alert alert-error" role="alert" style="margin-bottom:0px; background-color:#ff9e9e;" attrs="{'invisible': [('not_has_valid_dian','=',False)]}">
+                      La resolución de autorización de numeración de facturación está próxima a expirar o la numeración autorizada se está agotando. <br />
+                      <span style="font-weight:bold;">Por favor informe a la administración</span>
+                    </div>
+                    <field name="not_has_valid_dian" invisible="1"/>
+                  </xpath>
+
+          
+                  <xpath expr="//page[2]/field[@name='tax_line_ids']" position="replace"/>
+            
+                  <xpath expr="//page[2]" position="before">
+
+                    <page name="taxes_and_retenciones" string="Impuestos y retenciones">
+
+                      <field name="tax_line_ids">
+                        <tree editable="bottom" string="Taxes">
+                          <field name="tax_id"/>
+                          <field name="name"/>
+                          <!--Need invisible fields for on_change to create all necessary info -->
+                          <field name="sequence" invisible="1"/>
+                          <field name="manual" invisible="1"/>
+                          <field name="account_id" groups="account.group_account_user"/>
+                          <field name="amount" invisible="1"/>
+                          <field name="account_analytic_id" domain="[('company_id', '=', parent.company_id)]" groups="analytic.group_analytic_accounting"/>
+                          <field name="analytic_tag_ids" groups="analytic.group_analytic_tags" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                          <field name="amount_rounding" invisible="1"/>
+                          <field name="amount_total"/>
+                          <field name="currency_id" invisible="1" force_save="1"/>
+                          <field name="exclud_tax"/>
+                        </tree>
+                      </field>                      
+                    </page>
+
+                  </xpath>
+
+
+
+
+                </field>
+            </record>
+
+            <record id="invoice_supplier_form_inherit" model="ir.ui.view">
+              <field name="model">account.invoice</field>
+              <field name="inherit_id" ref="account.invoice_supplier_form"  />
+              <field name="arch" type="xml">
+                  <field name="amount_tax" position="after">
+                    <field name="amount_without_wh_tax" attrs="{'invisible':[('fiscal_position_id', '=', False)]}" style="border-top: 1px solid #cacaca;"/>
+                  </field>
+
+                  <xpath expr="//field[@name='tax_line_ids']" position="replace"/>
+                    
+
+                  
+                  <xpath expr="//notebook//page[2]" position="before">
+                    <page name="taxes_and_retenciones" string="Impuestos y retenciones">
+                      <div class="oe_inline">
+                        <field name="tax_line_ids">
+                          <tree editable="bottom" string="Taxes">
+                            <!--Need invisible fields for on_change to create all necessary info -->
+                            <field name="tax_id"/>
+                            <field name="name"/>
+                            <field name="sequence" invisible="1"/>
+                            <field name="manual" invisible="1"/>
+                            <field name="account_id" groups="account.group_account_user"/>
+                            <field name="account_analytic_id" domain="[('company_id', '=', parent.company_id)]" groups="analytic.group_analytic_accounting"/>
+                            <field name="analytic_tag_ids" groups="analytic.group_analytic_tags" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                            <field name="amount"/>
+                            <field name="amount_rounding" invisible="1"/>
+                            <field name="amount_total" invisible="1"/>
+                            <field name="currency_id" invisible="1" force_save="1"/>
+                            <field name="exclud_tax"/>
+                          </tree>
+                        </field>
+                      </div>
+                    </page>
+                  </xpath>
+
+
+                   <xpath expr="//notebook/page[1]/group/group[2]//field[3]" position="before">
+                      <field name="wh_taxes" attrs="{'invisible':[('fiscal_position_id', '=', False)]}" />
+                   </xpath>
+
+
+              
+              </field>
+            </record>
+
+            <record id="view_tax_form" model="ir.ui.view">
+              <field name="model">account.tax</field>
+              <field name="inherit_id" ref="account.view_tax_form"/>
+              <field name="arch" type="xml">
+                <field name="type_tax_use" position="after">
+                  <field name="tax_in_invoice" />
+                </field>
+
+                <xpath expr="//div[@attrs]" position="after">
+                  <field name="inactive_tax"/>
+                  <field name="dont_impact_balance" attrs="{'invisible':[('amount_type','=', 'group')]}"/>
+                </xpath> 
+
+                <field name="refund_account_id" position="after">
+                  <field name="account_id_counterpart" attrs="{'invisible':[('dont_impact_balance','=', False)]}"/>
+                  <field name="refund_account_id_counterpart" attrs="{'invisible':[('dont_impact_balance','=', False)]}"/>
+                </field>
+
+                <xpath expr="//notebook/page[1]" position="inside">
+                  <notebook>
+                    <page string="Bases">
+                      <group>
+                        <field name="base_taxes" widget="one2many_list" nolabel="1">
+                          <tree editable="bottom">
+                            <field name="start_date" />
+                            <field name="end_date" />
+                            <field name="amount" widget="monetary" />
+                            <!--<field name="currency_id" invisible="1" />-->
+                          </tree>
+                        </field>
+                      </group>
+                    </page>
+                  </notebook>
+                </xpath>
+              </field>
+            </record>
+
+            <record id="account_base_tax_form_view" model="ir.ui.view">
+              <field name="name">account.base.tax.form</field>
+              <field name="model">account.base.tax</field>
+              <field name="arch" type="xml">
+                <form string="Base taxes">
+                  <group>
+                    <group>
+                      <field name="start_date" />
+                      <field name="amount"/>
+                      <!--<field name="currency_id" invisible="1"/>-->
+                    </group>
+                    <group>
+                      <field name="end_date" />
+                    </group>
+                  </group>
+                </form>
+              </field>
+            </record>
+
+            <record id="product_template_form_view" model="ir.ui.view">
+              <field name="model">product.template</field>
+              <field name="inherit_id" ref="product.product_template_form_view"/>
+              <field name="priority">9</field>
+              <field name="arch" type="xml">
+                <field name="taxes_id" widget="many2many_tags" position="replace">
+                  <field name="taxes_id" widget="many2many_tags" domain="[('tax_in_invoice','!=',True),
+                                                                          ('type_tax_use', '=', 'sale')]" />
+                </field>
+                <field name="supplier_taxes_id" widget="many2many_tags" position="replace">
+                  <field name="supplier_taxes_id" widget="many2many_tags" domain="[('tax_in_invoice','!=',True),
+                                                                                   ('type_tax_use', '=', 'purchase')]" />
+                </field>
+              </field>
+            </record> 
+
+            <record id="account_fiscal_position_inherit_view" model="ir.ui.view">
+              <field name="model">account.fiscal.position</field>
+              <field name="inherit_id" ref="account.view_account_position_form"/>
+              <field name="priority">9</field>              
+              <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                  <page name="taxes_in_invoice" string="Taxes in invoice">
+                    <group>
+                      <field name="tax_ids_invoice" widget="one2many_list" nolabel="1">
+                        <tree editable="bottom">
+                          <field name="tax_id" domain="[('tax_in_invoice','=',True)]" />
+                          <field name="account_journal_ids" widget="many2many_tags"/>
+                          <field name="amount" widget="monetary"/>
+                        </tree>
+                      </field>
+                    </group>
+                  </page>                  
+                </xpath>
+              </field>
+            </record>
+
+            <record id="account_fiscal_position_base_tax_form" model="ir.ui.view">
+              <field name="name">account.fiscal.position.base.tax.form</field>
+              <field name="model">account.fiscal.position.base.tax</field>
+              <field name="arch" type="xml">
+                <form>
+                  <group>
+                    <group>
+                      <field name="tax_id" />
+                    </group>
+                    <group>
+                      <field name="amount" />
+                    </group>
+                  </group>
+                </form>
+              </field>
+            </record>
+
+    </data>
+</openerp>

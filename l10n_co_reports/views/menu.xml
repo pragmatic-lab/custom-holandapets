@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+		<!-- Agregando menu en Facturas, en el menu de Informes -->
+
+		<menuitem
+			id="account_reports_co_certification_menu" 
+			name="Colombian Statements" 
+			parent="account.menu_finance_reports" 
+			sequence="3" 
+			/>
+
+
+
+		<menuitem 
+			id="menu_report_certification_ica" 
+			
+			action="menu_action_account_report_certification_ica" 
+			parent="account_reports_co_certification_menu"/>
+
+		<menuitem 
+			id="menu_report_certification_iva" 
+			
+			action="menu_action_account_report_certification_iva" 
+			parent="account_reports_co_certification_menu"/>
+
+		<menuitem 
+			id="menu_eport_certification_fuente" 
+			
+			action="menu_action_account_report_certification_fuente" 
+			parent="account_reports_co_certification_menu"/>
+				  
+</odoo>

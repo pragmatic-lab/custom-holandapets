@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<!-- reemplazar menu para cambiar los grupos para menus de informes/Valoracion de stock -->
+	<record id="stock_account.menu_valuation" model="ir.ui.menu">
+		<field name="groups_id"
+			eval="[(4, ref('generic_stock.group_stock_report'))]" />
+	</record>
+
+</odoo>

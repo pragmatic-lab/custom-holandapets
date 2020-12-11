@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+	<t t-extend="Product">
+
+		<t t-jquery=".product-name" t-operation="append">
+
+			<br/>
+			<t t-if="product.warehouse_quantity">
+				<t t-foreach="(product.warehouse_quantity).split('**')" t-as="warehouse">
+					<span t-esc="warehouse" style="font-size: 10px; display: block !important; margin-bottom: -4px !important; font-weight: normal;"/>
+				</t>
+				<span  style="font-size: 9px; display: block !important; margin-bottom: -1px !important; font-weight: normal;"/>
+			</t>
+
+			<t t-if="!product.to_weight">
+				<t t-foreach='widget.pos.pricelists' t-as='pricelists'>
+					<span style="text-align: right;
+								color: white;
+								line-height: 11px;
+								font-size: 11px;
+								background: #7f82ac;
+								font-weight: normal;
+								border-radius: 2px;
+							
+								">
+						
+							<t t-esc='pricelists.name'/>
+							<t t-esc="widget.format_currency(product.get_price(pricelists, 1),'Product Price')"/>
+						
+					</span>
+					<span  style="font-size: 9px; display: block !important; margin-bottom: -1px !important; font-weight: normal;"/>	
+
+				</t>		    		
+				
+
+			</t>
+
+		</t>
+	</t>
+
+	<t t-extend="OrderWidget">
+		<t t-jquery="div[class='line']" t-operation="replace">
+			<div class="line">
+				<div class='entry total'>
+					<div class='subtotal'>Subtotal: <span class="value">0.00€</span></div>
+					<div class='subentry' style="font-size: 22px; text-align: right;">Taxes: <span class="value">0.00€</span></div>
+					<span class="badge" style="font-size: 22px; text-align: right;">Total: </span> <span class="value" style="font-size: 22px; text-align: right;">0.00 €</span>
+					
+				</div>
+			</div>
+		</t>
+	</t>
+
+</templates>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+
+		
+
+<!-- Template utilizado para imprimir el reporte -->
+
+	<template id="external_layout_retro">
+
+		<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" rel="stylesheet"/>
+		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/> 
+
+		<div class="header">
+		<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" rel="stylesheet"/>
+		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/> 
+
+<!--
+			<div class="o_retro_header">
+				<div class="row mb8">
+					<div class="col-6">
+						<img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo"/>
+					</div>
+					<div class="col-6 text-left mb4" name="company_address">
+						<h5 class="mt0" t-field="company.report_header"/>
+						<ul class="list-unstyled">
+							<strong><li t-if="company.name"><span class="fa fa-building-o"/> <span t-field="company.name"/></li></strong>
+							<li t-if="company.partner_id.xidentification"><span class="glyphicon glyphicon-credit-card"> NIT: <span t-field="company.partner_id.formatedNit"/> </span></li>
+							<li t-if="company.phone"><span class="glyphicon glyphicon-earphone"> Tel: <span t-field="company.phone"/></span></li>
+							<li t-if="company.email"><span class="glyphicon glyphicon-envelope"> <span t-field="company.email"/> </span></li>
+							<li t-if="company.website"><span class="glyphicon glyphicon-globe"> <span t-field="company.website"/> </span></li>
+						</ul>
+
+					</div>
+				</div>
+			</div>
+
+
+
+
+		-->
+			<div class="o_retro_header">
+
+						<div style = "float:right; top: 150px">
+							<img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo"/>
+
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<div style = "float:right; border: 5px;  margin: 5px;" name="company_address">
+								<h5 class="mt0" t-field="company.report_header"/>
+						<table >
+
+						  <tr>
+
+							<td t-if="company.name">
+								<span class="fa fa-building-o">  <span t-field="company.name"/> </span>
+							</td>
+
+							<td t-if="company.partner_id.xidentification">
+								<span class="glyphicon glyphicon-credit-card"> NIT: <span t-field="company.partner_id.formatedNit"/> 
+								</span>
+							</td>
+
+						  </tr>
+
+						  <tr>
+
+							<td t-if="company.phone">
+								<span class="glyphicon glyphicon-earphone"> <span t-field="company.phone"/></span>
+							</td>
+
+							<td t-if="company.email">
+								<span class="glyphicon glyphicon-envelope"> <span t-field="company.email"/> </span>
+							</td>
+
+						  </tr>
+
+						  <tr>
+
+							<td t-if="company.website">
+								<span class="glyphicon glyphicon-globe"> <span t-field="company.website"/> </span>
+							</td>
+
+							<td >
+								
+							</td>
+
+						  </tr>
+
+						</table>
+
+							</div>
+
+
+						</div>
+
+
+
+</div>
+				
+			</div>
+
+		<div class="article o_report_layout_retro"  t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+			<t t-call="web.address_layout"/>
+			<t t-raw="0"/>
+			
+		</div>
+
+		<div class="footer o_retro_footer">
+
+
+				<div class="row mb8">
+	
+					<div class="col-12 text-left mb4">
+						<ul class="list-inline">
+							<li t-if="company.phone" class="list-inline-item">Tel: <span t-field="company.phone"/></li>
+							<li t-if="company.email" class="list-inline-item">Mail: <span t-field="company.email"/></li>
+							<li t-if="company.website" class="list-inline-item">Web: <span t-field="company.website"/></li>
+						</ul>
+						<div t-field="company.report_footer"/>
+						<div t-if="report_type == 'pdf'">
+							Página: <span class="page"/> / <span class="topage"/>
+						</div>
+					</div>
+				</div>
+
+
+		</div>
+	</template>
+
+
+
+
+</data>
+</odoo>

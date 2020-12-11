@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<record id="report_kardex_lines_form_view" model="ir.ui.view">
+			<field name="name">report_kardex_lines_form</field>
+			<field name="model">report.kardex.lines</field>
+			<field name="arch" type="xml">
+				<form>
+					<group col="4">
+						<field name="date_begin"/>
+						<field name="date_end"/>
+						<field name="ubicacion_id"/>
+						<field name="product_id"/>
+						<field name="date_move"/>
+						<field name="document"/>
+						<field name="partner_id"/>
+						<field name="type_move"/>
+						<field name="inventory_initial"/>
+						<field name="inventory_in"/>
+						<field name="inventory_out"/>
+						<field name="inventory_final"/>
+						<field name="inventory_move_in"/>
+						<field name="inventory_move_out"/>
+						<field name="inventory_saldo"/>
+						<field name="total"/>
+					</group>
+				</form>
+			</field>
+		</record>
+
+
+		<record id="report_kardex_lines_tree_view" model="ir.ui.view">
+			<field name="name">report_kardex_lines_tree</field>
+			<field name="model">report.kardex.lines</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="date_move"/>
+					<field name="ubicacion_id"/>
+					<field name="partner_id"/>
+					<field name="document"/>
+					<field name="product_id"/>
+					<field name="type_move"/>
+					<field name="inventory_move_in"/>
+					<field name="inventory_move_out"/>
+					<field name="inventory_saldo"/>
+					<field name="standard_price"/>
+					<field name="total"/>
+	
+				</tree>
+			</field>
+		</record>
+
+
+		<record id="report_kardex_lines_search_view" model="ir.ui.view">
+			<field name="name">report.kardex.lines.search</field>
+			<field name="model">report.kardex.lines</field>
+			<field name="arch" type="xml">
+
+				<search string="Search">
+					<field name="date_move"/>
+					<field name="ubicacion_id"/>
+					<field name="partner_id"/>
+					<field name="document"/>
+					<field name="product_id"/>
+					<field name="type_move"/>
+					<field name="inventory_move_in"/>
+					<field name="inventory_move_out"/>
+					<field name="inventory_saldo"/>
+					<field name="standard_price"/>
+					<field name="total"/>
+
+					<separator/>
+
+					<filter string="Movimiento Hoy" name="today_date_move" domain="[('date_move','=', (context_today()).strftime('%%Y-%%m-%%d'))]" help="Movmientos realizados Hoy"/>
+
+					
+					<filter string="Salida" name="move_in" domain="[('type_move','=','Salida')]" help="Salida"/>
+					<filter string="Ingreso" name="move_out" domain="[('type_move','=','Ingreso')]" help="Ingreso"/>
+
+					<separator/>
+
+					<group expand="0" name="group_by" string= "Group By">
+						<filter name="product" string="Producto"  context="{'group_by' : 'product_id'}" />
+						<filter name="partner_id" string="Empresa" domain="[]" context="{'group_by' : 'partner_id'}" />
+						<filter name="type_move_inventory" string="Tipo" domain="[]" context="{'group_by' :'type_move'}" />
+					</group>
+
+				</search>
+			</field>
+		</record>
+
+	</data>
+</openerp>

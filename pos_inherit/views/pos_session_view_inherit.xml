@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	
+	<record model="ir.ui.view" id="pos_session_form_view_inherit">
+		<field name="name">Pos Session Inherit</field>
+		<field name="model">pos.session</field>
+		<field name="inherit_id" ref="point_of_sale.view_pos_session_form" />
+		<field name="arch" type="xml">
+
+
+			<xpath expr="//form/sheet/div[@class='oe_button_box']//button[1]" position="replace">
+				<button class="oe_stat_button" name="%(point_of_sale.action_pos_box_in)d"
+					type="action" icon="fa-level-down"
+					attrs="{'invisible': ['|', ('cash_control', '=', False), ('state', 'not in', ['opened', 'closing_control'])]}" context="{'pos_session_id': id}">
+					<div class="o_field_widget o_stat_info">
+						<span class="o_stat_text">Poner</span>
+						<span class="o_stat_text">Dinero</span>
+					</div>
+				</button>
+			</xpath>
+
+			<xpath expr="//form/sheet/div[@class='oe_button_box']//button[2]" position="replace">
+				<button class="oe_stat_button" name="%(point_of_sale.action_pos_box_out)d"
+					type="action" icon="fa-level-up"
+					attrs="{'invisible': ['|', ('cash_control', '=', False), ('state', 'not in', ['opened', 'closing_control'])]}" context="{'pos_session_id': id}">
+					<div class="o_field_widget o_stat_info">
+						<span class="o_stat_text">Sacar</span>
+						<span class="o_stat_text">Dinero</span>
+					</div>
+				</button>
+			</xpath>
+
+			<xpath expr="//form/sheet/field[2]/tree//field[@name='balance_start']" position="replace">
+				<field name="balance_start" groups="pos_inherit.group_view_initial_balance" sum="Total Balance Start"/>
+			</xpath>
+			
+			<xpath expr="//form/sheet/field[2]/tree//field[@name='total_entry_encoding']" position="attributes">
+					<attribute name="sum">Total Subtotal</attribute>
+			</xpath>
+
+			<xpath expr="//form/sheet/field[2]/tree//field[@name='balance_end_real']" position="attributes">
+					<attribute name="sum">Total Balance End</attribute>
+			</xpath>
+
+			<xpath expr="//form/sheet/field[2]/tree//field[@name='difference']" position="attributes">
+					<attribute name="sum">Total Diferrence</attribute>
+			</xpath>
+
+		</field>
+	</record>
+	
+</odoo>

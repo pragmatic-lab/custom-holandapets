@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="account_invoice_summary_report_view_form" model="ir.ui.view">
+		<field name="name">account.invoice_summary_report.form</field>
+		<field name="model">account.invoice_summary_report</field>
+		<field name="arch" type="xml">
+			<form>
+				<h3 class="panel-title">Comprobante de Informe Diario</h3>
+
+				<group col="4">
+					<field name="date_from"/>
+					<field name="date_to"/>
+					<field name="user_ids" widget="many2many_tags"/>
+					<!--
+					<field name="invoice_status"/>
+				-->
+					<field name="journal_ids" widget="many2many_tags"/>
+					
+					<field name="type_report" />
+					<field name="print_account" />
+					<field name="print_copy" />
+					
+				</group>
+
+		
+					<group string="Cuentas a Cargar" attrs="{'invisible': [('print_account', '=', False)]}">
+						<field name="account_ids" string="Cuentas" widget="many2many_tags"/>
+					</group>
+
+					<group string="Cuentas a Imprimir" attrs="{'invisible': [('print_account', '=', False)]}">
+						<field name="print_account_ids" string="Cuentas a Imprimir" widget="many2many_tags" attrs="{'required': [('print_account', '=', True)]}"/>
+					</group>
+
+		
+                <newline/>
+				<footer>
+					<button name="generate_pdf" string="Generar Pdf" type="object" class="btn-primary" />
+					<button name="generate_excel" string="Generar Excel" type="object" class="btn-primary" />
+					
+					<button name="generate_view_summary" string="Ver" type="object" class="btn-primary" />
+					<!--
+					<button name="generate_pdf_vendor" string="Generar Pdf Vendedor" type="object" class="btn-primary" />
+					<button name="generate_excel" string="Generar Excel" type="object" class="btn-primary" />
+					<button name="generate_excel_vendor" string="Generar Excel Vendedor" type="object" class="btn-primary" />
+					-->
+					<field name="document" readonly="1" filename='filename'/>
+					<field name="filename" readonly="1" invisible="1"/>
+				</footer>
+
+			</form>
+		</field>
+	</record>
+		
+		
+	<record id="account_invoice_summary_report_action" model="ir.actions.act_window">
+		<field name="name">Resumen de Facturas</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">account.invoice_summary_report</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+	</record>
+
+</odoo>

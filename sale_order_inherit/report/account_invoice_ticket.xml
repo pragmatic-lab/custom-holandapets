@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<template id="ticket_account_invoice_document">
+
+			<!-- Info orden de venta -->
+			<div class="pos-center-align">
+				<span name="date_invoice"> Fecha: <span t-esc="o.date_invoice_complete" t-options="{'widget': 'datetime'}"/> </span><br/>
+				<span name="name_invoice"> 
+						<t t-if="o.number">
+							Factura de Venta Nº
+							<strong><span t-field="o.number"/></strong>
+						</t>
+						<t t-else="">
+							Factura Borrador
+						</t>
+				 </span> <br/>
+				<span name="user_invoice"> Vendedor:</span> <strong><span t-esc="o.user_id.name"/></strong>
+				
+			</div>
+
+
+			<!-- Resolucion de la dian -->
+			<t t-if="o.journal_id.sequence_id.use_dian_control">
+
+				Rango Facturación: <span t-esc="o.resolution_number_from" /> Hasta <span t-esc="o.resolution_number_to" /><br />
+				Autorización DIAN Número: <span t-esc="o.resolution_number" /><br />
+				Fecha de Autorización: <span t-esc="o.resolution_date" /><br />
+				Vigencia de Autorización: <span t-esc="o.resolution_date_to" />
+			
+			</t>
+
+			
+			<!-- Informacion del partner -->
+			<t>
+
+				<br/>
+
+				<span t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')"><strong>Cliente</strong></span>
+				<span t-if="o.type == 'in_invoice'"><strong>Proveedor</strong></span><br/>
+
+				<strong><span t-field="o.partner_id.name"/></strong><br/>
+				<span t-if="o.partner_id.formatedNit">NIT / DI:<span t-field="o.partner_id.formatedNit"/></span>
+				<span t-if="o.partner_id.doctype == 1">Sin Identificación</span>
+				<span t-if="o.partner_id.doctype == 11">Birth Certificate:<span t-field="o.partner_id.xidentification"/></span>
+				<span t-if="o.partner_id.doctype == 12">T.I:<span t-field="o.partner_id.xidentification"/></span>
+				<span t-if="o.partner_id.doctype == 13">C.C:<span t-field="o.partner_id.xidentification"/></span>
+				<span t-if="o.partner_id.doctype == 21">Alien Registration Card:<span t-field="o.partner_id.xidentification"/></span>
+				<span t-if="o.partner_id.doctype == 22">Foreigner ID:<span t-field="o.partner_id.xidentification"/></span>
+				<span t-if="o.partner_id.doctype == 41">Pasaporte:<span t-field="o.partner_id.xidentification"/></span>
+				<span t-if="o.partner_id.doctype == 42">Foreign Identification Document:<span t-field="o.partner_id.xidentification"/></span>
+				<span t-if="o.partner_id.doctype == 43">No Foreign Identification</span>
+				<span t-if="o.partner_id.vat">TIN: <span t-field="o.partner_id.vat"/></span>
+				<span t-if="o.partner_id.street"><br/>Dirección: <span t-field="o.partner_id.street"/></span>
+				<span t-if="o.partner_id.street2"><br/>Otra Dirección: <span t-field="o.partner_id.street2"/></span>
+				<span t-if="o.partner_id.phone or o.partner_id.mobile">
+					<span>Teléfono: <span t-esc="o.validate_number_phone(o.partner_id)"/></span><br/>
+				</span>  
+				<span t-if="o.partner_id.neighborhood"><span>Barrio: <span t-field="o.partner_id.neighborhood"/></span><br/></span>
+				<span t-if="o.partner_id.country_id.id or o.partner_id.state_id.id or o.partner_id.xcity.id">
+					<span t-esc="o.validate_state_city(o.partner_id)"/> <br/>
+				</span>
+
+			</t>
+
+
+			<div class="page">
+				<div class="oe_structure"/>
+
+				<!-- Is there a discount on at least one line? -->
+				<t t-set="display_discount" t-value="any([l.discount for l in o.invoice_line_ids])"/>
+
+				<t t-if="o.invoice_line_ids">
+
+					<table class='receipt-orderlines' style="width: 100%; border: 2px; border: 1px solid #000;" name="invoice_line_table">
+						<thead class='receipt-orderlines' style="width: 100%; border: 2px; border: 1px solid #000;">
+							<tr>
+								<th class="text-left"><span>Descripción</span></th>
+								<th class="text-right"><span>Ctdad</span></th>
+								<th class="text-right"><span>Valor</span></th>
+							</tr>
+						</thead>
+						<tbody class='receipt-orderlines' style="width: 100%; border: 2px; border: 1px solid #000; font-size: 15px;">
+
+							<t t-set="current_subtotal" t-value="0"/>
+
+							<t t-foreach="o.invoice_line_ids" t-as="line">
+
+								<t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+								<t t-set="current_subtotal" t-value="current_subtotal + line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+
+								<tr t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
+									<t t-if="not line.display_type" name="account_invoice_line_accountable">
+										<td name="account_invoice_line_name">
+											<span t-field="line.name"/><br/>
+											<t t-if="display_discount">
+
+												<i>
+													<span name="product_discount" style="font-size: 12px; "> Con un <span t-field="line.discount" t-options="{'widget': 'float', 'precision': 0}"/> % descuento </span>
+												</i>
+												
+											</t>
+										</td>
+
+										<td class="text-center">
+											|<span t-field="line.quantity" t-options="{'widget': 'float', 'precision': 0}"/>|
+										</td>
+
+										<td class="text-right">
+											<t t-set="value_product" t-value="line.price_subtotal + line.price_tax"/>
+											<span t-esc="value_product" t-options="{'widget': 'float', 'precision': 0}"/>
+										</td>
+
+									</t>
+									<t t-if="line.display_type == 'line_section'">
+										<td colspan="90">
+											<span t-field="line.name"/>
+										</td>
+									</t>
+									<t t-if="line.display_type == 'line_note'">
+										<td colspan="90">
+											<span t-field="line.name"/>
+										</td>
+									</t>
+								</tr>
+							</t>
+						</tbody>
+					</table>
+
+				</t>
+
+				<br/>
+
+				<t t-if="request.env['account.invoice'].search_payments_invoice(o.id)">
+
+					<table class='receipt-orderlines' style="width: 100%; border: 2px; border: 1px solid #000;">
+
+						<thead class='receipt-orderlines' style="width: 100%; border: 2px; border: 1px solid #000;">
+							<tr>
+								<th class="text-left">Método de Pago</th>
+								<th class="text-left">Monto</th>
+							</tr>
+						</thead>
+
+						<tbody class='receipt-orderlines' style="width: 100%; border: 2px; border: 1px solid #000;">
+							<tr t-foreach="request.env['account.invoice'].search_payments_invoice(o.id)" t-as="record">
+
+								<t t-if="len(record) > 0">
+
+									<td><span t-esc="record.journal_id.name"/></td>
+									<td class="text-right">$<span t-esc="record.amount" t-options="{'widget': 'float', 'precision': 0}"/></td>
+
+								</t>
+
+							</tr>
+
+						</tbody>
+
+					</table>
+
+
+				</t>
+
+				<br/>
+
+				<table style="border:0px;" width="100%"> 
+					
+					<tr class="border-black o_total">
+						<td class="text-left" style="border:0px; height:2px; height=2px;" >
+							<strong>Subtotal</strong>
+						</td>
+						<td class="text-right" style="border:0px; height:2px; height=2px;">
+							$<span t-field="o.amount_untaxed" t-options="{'widget': 'float', 'precision': 0}"/>
+						</td>				
+					</tr>
+
+					<t t-if="o.tax_line_ids">
+						<t t-foreach="o.tax_line_ids" t-as="t">                                
+							
+							<t t-if="not t.tax_id.tax_group_id.not_in_invoice">
+
+								<tr>
+									<td class="text-left"><span t-field="t.name"/></td>
+									<td class="text-right">
+										$<span t-field="t.amount" t-options="{'widget': 'float', 'precision': 0}"/>
+									</td>
+								</tr>
+
+							</t>
+						</t>
+					</t>
+
+
+					<t t-if="o.discount">
+
+						<tr>
+							<td class="text-left">Descuento</td>
+							<td class="text-right">
+								$<span t-field="o.discount" t-options="{'widget': 'float', 'precision': 0}"/>
+							</td>
+						</tr>
+
+					</t>
+
+					<!--
+
+					<t t-foreach="o.amount_by_group" t-as="amount_by_group">
+						<tr style="">
+							<t t-if="len(o.tax_line_ids) == 1 and o.amount_untaxed == amount_by_group[2]">
+								<td><span t-esc="amount_by_group[0]"/></td>
+								<td class="text-right o_price_total">
+									<span t-esc="amount_by_group[3]" />
+								</td>
+							</t>
+							<t t-else="">
+								<td>
+									<span t-esc="amount_by_group[0]"/>
+									<span>&amp;nbsp;<span>on</span>
+										<t t-esc="amount_by_group[4]"/>
+									</span>
+								</td>
+								<td class="text-right o_price_total">
+									<span t-esc="amount_by_group[3]"/>
+								</td>
+							</t>
+						</tr>
+					</t>
+				-->
+
+
+					<tr class="border-black o_total">
+						<td ><strong><span style="font-size: 20px; ">Total</span></strong></td>
+						<td class="text-right" >
+							<span style="font-size: 20px; font-weight: bold;">$</span><span style="font-size: 20px; font-weight: bold;" t-field="o.amount_total" t-options="{'widget': 'float', 'precision': 0}"/>
+						</td>
+					</tr>
+
+
+				</table>
+
+
+
+
+			<br/>
+		</div>
+	</template>
+
+
+	<!-- Template para el encabezado del reporte -->
+	<template id="ticket_header_print">
+		
+		<t t-raw="o.sale_order_conf_text_id.header_text"/>
+	</template>
+
+	<!-- Template para el pie de página del reporte -->
+	<template id="ticket_footer_print">
+		<t t-raw="o.sale_order_conf_text_id.footer_text"/>
+	</template>
+
+
+	<!-- Template ticket orden -->
+	<template id="report_ticket_account_invoice">
+
+		<t t-call="web.basic_layout">
+			<t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)" />
+			<t t-call="sale_order_inherit.ticket_header_print"/>
+			<t t-call="sale_order_inherit.ticket_account_invoice_document"/>
+			<t t-call="sale_order_inherit.ticket_footer_print"/>
+		</t>
+	</template>
+
+
+	<!-- Template para el reporte completo  -->
+	<template id="report_ticket_account_invoice_document">
+		<t t-call="web.html_container">
+			<t t-foreach="docs" t-as="o">
+
+				<t t-call="sale_order_inherit.report_ticket_account_invoice"/>
+
+			</t>
+		</t>
+	</template>
+
+
+	<report
+		id="action_report_account_invoice_ticket"
+		model="account.invoice"
+		string="Ticket Venta"
+		report_type="qweb-pdf"
+		name="sale_order_inherit.report_ticket_account_invoice_document"
+		file="sale_order_inherit.report_ticket_account_invoice_document"
+	/>
+
+
+	<record id="action_report_account_invoice_ticket" model="ir.actions.report">
+		<field name="paperformat_id" ref="sale_order_inherit.paperformat_ticket_order_print"/>
+	</record>
+
+
+
+
+
+
+</odoo>
+

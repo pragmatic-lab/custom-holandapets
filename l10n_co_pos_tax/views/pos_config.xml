@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+   <record model="ir.ui.view" id="view_pos_config_form">
+      <field name="name">pos.config.form.view</field>
+      <field name="model">pos.config</field>
+      <field name="inherit_id" ref="point_of_sale.pos_config_view_form" />
+      <field name="arch" type="xml">
+            <xpath expr="//field[@name='sequence_id']" position="after">
+               <field name="sequence_refund_id" readonly="1" groups="base.group_no_one"/>
+            </xpath>
+      </field>
+    </record>
+
+     <record model="ir.ui.view" id="view_pos_pos_form">
+      <field name="model">pos.order</field>
+      <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//notebook/page[1]" position="after">
+          <page string="Company taxes">
+            <field name="company_taxes" colspan="4" nolabel="1">
+              <tree string="Company taxes">
+                <field name="name" />
+                <field name="account_id" />
+                <field name="amount" />
+                <field name="tax_id" invisible="1"/>
+              </tree>
+            </field>
+            <div class="oe_clear"/>
+          </page>
+        </xpath>
+        <xpath expr="//field[@name='lines']//tree//field[@name='price_subtotal']" position="after">
+           <field name="price_subtotal_line" invisible="1"/>
+        </xpath>
+      </field>
+    </record>
+
+
+</odoo>

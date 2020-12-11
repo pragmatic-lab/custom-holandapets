@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_taxes_collected,taxes.collected,model_taxes_collected,customer_company_taxes.group_cc_taxes_configuration,1,1,1,1
+access_taxes_collected_name,taxes.collected_name,model_taxes_collected_name,customer_company_taxes.group_cc_taxes_configuration,1,1,1,1

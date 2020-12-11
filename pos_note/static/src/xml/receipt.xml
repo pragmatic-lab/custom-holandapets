@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template_inherit" xml:space="preserve"
+	inherit_id="point_of_sale.template">
+
+	<t t-name="TicketOrderNote">
+		<t t-if="order.get_note() and widget.pos.config.print_order_note">
+            <br />
+            <div style='text-align:left'>
+                <span>Note:</span><span><pre><t t-esc="order.get_note()" /></pre></span>
+            </div>
+        </t>
+	</t>
+	
+	<t t-name="XmlTicketOrderNote">
+		<t t-if="receipt.note and widget.pos.config.print_order_note">
+			<line>
+				<left>Note: </left>
+			</line>
+			<div font='b'>
+				<div><t t-esc='receipt.note' /></div>
+			</div>
+		</t>
+	</t>
+	
+	<t t-extend="PosTicket">
+        <t t-jquery="[t-if='receipt.footer']" t-operation="before">
+        	<t t-call="TicketOrderNote" />
+        </t>
+    </t>
+    
+    <t t-extend="XmlReceipt">
+		<t t-jquery="div.before-footer" t-operation="before">
+            <t t-call="XmlTicketOrderNote" />
+        </t>
+	</t>
+	
+</templates>

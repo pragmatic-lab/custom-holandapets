@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="partner_report_move_view_form" model="ir.ui.view">
+		<field name="name">partner_report_move_view.form</field>
+		<field name="model">account.partner_report_move_view</field>
+		<field name="arch" type="xml">
+			<form>
+
+				<h3 class="panel-title">Resumen de Apuntes Contables</h3>
+
+				<group col="4" string="Contabilidad">
+					<field name="account_move_id"/>
+					<field name="account_ml_id"/>
+				</group>
+			 
+			 
+				<group col="4" string="Datos Tercero">
+					<field name="partner_id"/>
+					<field name="street"/>
+				</group>
+
+				<group col="4" string="Datos Cuenta">
+					<field name="account_id"/>
+					<field name="date"/>
+				</group>
+
+				<group col="4" string="Total">
+					<field name="credit"/>
+					<field name="debit"/>
+					<field name="balance"/>
+				</group>
+
+			</form>
+		</field>
+	</record>
+
+	<record id="partner_report_move_view_tree" model="ir.ui.view">
+		<field name="name">partner_report_move_view.tree</field>
+		<field name="model">account.partner_report_move_view</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="partner_id"/>
+				<field name="street"/>
+				<field name="account_move_id"/>
+				<field name="account_ml_id"/>
+				<field name="debit" sum="total_debit"/>
+				<field name="credit" sum="total_credit"/>
+				<field name="balance" sum="total_balance"/>
+			</tree>
+		</field>
+	</record>
+
+		
+		<record id="partner_report_move_view_search" model="ir.ui.view">
+			<field name="name">account.partner_report_move_view.search</field>
+			<field name="model">account.partner_report_move_view</field>
+			<field name="arch" type="xml">
+
+				<search string="Search">
+					<field name="partner_id"/>
+					<field name="account_id"/>
+
+					<separator/>
+
+					<group expand="0" name="group_by" string= "Group By">
+
+						<filter name="partner" string="Tercero" context="{'group_by' : 'partner_id'}" />
+						<filter name="account" string="Cuenta" context="{'group_by' : 'account_id'}" />
+						
+					</group>
+
+				</search>
+			</field>
+		</record>
+	
+
+</odoo>

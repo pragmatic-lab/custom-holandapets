@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="0">
+
+
+        <record id="group_conf_limit_credit" model="res.groups">
+            <field name="name">Configuración Limite Crédito</field>
+        </record>
+
+
+
+    </data>
+</odoo>
+
+
+
+
+

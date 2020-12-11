@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+	<template id="auth_signup_fields_inherit" inherit_id="auth_signup.fields" name="Auth Signup/ResetPassword form fields">
+		
+		<xpath expr="//div[2]/label[@for='name']" position="replace">
+			<label for="x_name1">Nick</label>
+		</xpath>
+
+		<xpath expr="//div[2]" position="after">
+
+			<div class="form-group field-name">
+				<label for="x_name1">First Name</label>
+				<input type="text" name="x_name1" t-att-value="x_name1" id="x_name1" class="form-control form-control-sm" placeholder="First Name"
+					required="required" t-att-readonly="'readonly' if only_passwords else None"
+					t-att-autofocus="'autofocus' if login and not only_passwords else None" />
+			</div>
+
+			<div class="form-group field-name">
+				<label for="x_lastname1">Lastname</label>
+				<input type="text" name="x_lastname1" t-att-value="x_lastname1" id="x_lastname1" class="form-control form-control-sm" placeholder="Lastname"
+					required="required" t-att-readonly="'readonly' if only_passwords else None"
+					t-att-autofocus="'autofocus' if login and not only_passwords else None" />
+			</div>
+				
+		</xpath>
+
+	</template>
+
+</odoo>

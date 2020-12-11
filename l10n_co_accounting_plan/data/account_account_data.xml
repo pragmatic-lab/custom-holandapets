@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<data>
+		<function model="account.account" name="load_data"/>
+	</data>
+
+	<data>
+		<function model="account.account" name="update_group_account"/>
+	</data>
+
+	<data>
+		<function model="account.account" name="update_account_account_field_group"/>
+	</data>
+
+</odoo>

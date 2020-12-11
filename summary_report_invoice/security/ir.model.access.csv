@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_invoice_summary_report,account.invoice_summary_report,model_account_invoice_summary_report,,1,1,1,1
+access_summary_payment_account_invoice,summary.payment_account_invoice,model_summary_payment_account_invoice,,1,1,1,1

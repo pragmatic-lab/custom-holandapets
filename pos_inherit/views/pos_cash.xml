@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	
+	<template id="assets" inherit_id="point_of_sale.assets">
+		<xpath expr="." position="inside">
+			<!--<script type="text/javascript" src="/pos_inherit/static/src/js/main.js"/>-->
+			<script type="text/javascript" src="/pos_inherit/static/src/js/pos_receipt.js"/>
+			<link rel="stylesheet" type="text/css"  href="/pos_inherit/static/src/css/pos.css"/>
+		</xpath>
+	</template>
+
+
+	<template id="report_pos_cash">
+		<t t-call="web.html_container">
+			<t t-foreach="docs" t-as="o">
+				<div class="page">
+					<div class="row">
+						<div  name="header_report" style="border: 3px solid gray; text-align:center;">
+							<strong><span style="font-size: 20px;">** CIERRE DE CAJA **</span></strong>
+						</div>
+
+						<br/>
+
+						<div name="company_information" style="text-align:center;">
+							<t t-if='o.config_id.company_id.partner_id.formatedNit'>
+								<div><strong>NIT: </strong><t t-esc="o.config_id.company_id.partner_id.formatedNit" /></div>
+							</t>
+							<t t-if='o.config_id.company_id.name'>
+								<div><strong><t t-esc="o.config_id.company_id.name" /></strong></div>
+							</t>
+							<t t-if='o.config_id.company_id.street'>
+								<div><t t-esc="o.config_id.company_id.street" /></div>
+							</t>
+							<t t-if='o.config_id.company_id.street2'>
+								<div><t t-esc="o.config_id.company_id.street2" /></div>
+							</t>
+							<t t-if='o.config_id.company_id.state_id'>
+								<div>
+									<t t-esc="o.config_id.company_id.state_id.name"/>
+
+									<t t-if="o.config_id.company_id.country_id">
+										<t t-esc="o.config_id.company_id.country_id.name"/>
+									</t>
+								</div>
+							</t>
+							<t t-if='o.config_id.company_id.phone'>
+								<div>Tel: <t t-esc="o.config_id.company_id.phone" /></div>
+							</t>
+						</div>
+
+						<br/>
+						 <div>
+							 <div style="float:left">
+								<span style="text-align:right;"><strong>Fecha:</strong> <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"/></span>
+								<br/>
+							 </div>
+							 <div style="float:right">
+								<span style="text-align:right;"><strong>Hora:</strong> <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%H:%M')"/></span>
+								<br/>					 	
+							 </div>
+						 </div>	
+						<br/>
+						<span>C.O. : 001 SEDE PRINCIPAL POPAYAN</span>
+						<br/>
+
+						<span><strong>Punto de Venta:</strong> <t t-esc="o.config_id.name" /></span>
+						<br/>
+						<span><strong>Sesion:</strong> <t t-esc="o.name" /></span>
+						<br/>
+						<t t-if="o.user_id.partner_id.xidentification">
+							<span><strong>CC. Cajero:</strong> <t t-esc="o.user_id.partner_id.xidentification" /> </span>
+						</t>
+						<t t-else="">
+							<span><strong>CC. Cajero:</strong> Sin identificación</span>
+						</t>
+						<br/>
+						<span><strong>Cajero:</strong>  <t t-esc="o.user_id.name" /> </span>
+						<br/>
+						<span><strong>Fecha de Apertura:</strong> <t t-esc="o.start_at" /></span>
+						<br/>
+						<span><strong>Fecha de Cierre:</strong> <t t-esc="o.stop_at" /></span>
+						<br/>
+						<br/>
+
+						<div  name="header_report" style="border: 3px solid gray; text-align:center;">
+							<strong><span style="font-size: 18px;">INGRESOS</span></strong>
+						</div>
+
+						<br/>
+						<t t-set="amount" t-value="o.return_payment_orders(o.id)"/>
+						<table class='receipt-orderlines' style="border: 2px; border-style: dashed;">
+							<colgroup>
+								<col width='70%' />
+								<col width='25%' />
+							</colgroup>
+							<tr>
+								<td>
+								
+									<t>Valor Bruto ..................................</t>
+								</td>
+								<td class="pos-right-align">
+									<t t-esc="amount['amount_base']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<t>Impuestos .....................................</t>
+								</td>
+								<td class="pos-right-align">
+									<t t-esc="amount['amount_tax']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<t>Descuentos.....................................</t>
+								</td>
+								<td class="pos-right-align">
+									<t t-esc="amount['amount_discount']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<t>Devoluciones .....................................</t>
+								</td>
+								<td class="pos-right-align">
+									<t t-esc="amount['amount_refund']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<t>Ingresos por Venta ............................</t>
+								</td>
+								<td class="pos-right-align">
+									<t t-esc="amount['amount_total']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<t><strong>TOTAL NETO .............................</strong></t>
+								</td>
+								<td class="pos-right-align">
+									<span t-esc="amount['amount_total']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+								</td>								
+							</tr>
+
+
+						</table>
+						<br/>
+						<div  name="header_report" style="border: 3px solid gray; text-align:center;">
+							<strong><span style="font-size: 18px;">CAJA</span></strong>
+						</div>
+						<br/>
+						<t t-set="total_cash" t-value="0"/>
+						<table class='receipt-orderlines' style="border: 2px; border-style: dashed;">
+							<colgroup>
+								<col width='70%' />
+								<col width='25%' />
+							</colgroup>
+							<tr t-foreach="o.statement_ids" t-as="payment">
+								<td>
+									<t t-esc="payment.journal_id.name"/>
+								</td>
+								<td class="pos-right-align">
+									<t t-esc="payment.total_entry_encoding" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+								</td>
+								<t t-set="total_cash" t-value="total_cash + payment.total_entry_encoding"/>
+							</tr>
+							<tr>
+								<td>
+									<span><strong>TOTAL CAJA:</strong></span>
+								</td>
+								<td class="pos-right-align">
+									<span t-esc='total_cash' t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+								</td>								
+							</tr>
+						</table>
+
+						<br/>
+
+						<br/>
+
+					</div>
+				</div>
+			</t>
+		</t>
+	</template>
+
+	<report
+		id="action_report_pos_cash"
+		string="Cierre de Caja"
+		model="pos.session"
+		report_type="qweb-pdf"
+		name="pos_inherit.report_pos_cash"
+		file="pos_inherit.report_pos_cash"
+	/>
+
+ 
+	<record id="action_report_pos_cash" model="ir.actions.report">
+		<field name="paperformat_id" ref="pos_inherit.paperformat_ticket_pos"/>
+	</record>
+
+</odoo>

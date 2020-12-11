@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+
+	<record id="module_category_accounting_and_finance" model="ir.module.category">
+		<field name="name">Contabilidad</field>
+		<field name="description">Personalización referente a Contabilidad</field>
+		<field name="sequence">170</field>
+	</record>
+
+</odoo>

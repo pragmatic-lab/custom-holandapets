@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+
+		<!--  Document Template Report
+					background
+					Boxed 
+					clean
+					standard
+		-->
+
+		<!-- background -->
+		<template id="external_layout_background_inherit" inherit_id="web.external_layout_background">
+			<xpath expr="//div[@class='float-left company_address']" position="replace">
+
+						<div class="float-left company_address">
+								<div>
+										<strong t-field="company.partner_id.name"/>
+								</div>
+								<span t-if="company.partner_id.formatedNit">NIT: <span t-field="company.partner_id.formatedNit"/></span>
+								<span t-field="company.partner_id" t-options='{"widget": "contact", "fields": ["address"], "no_marker": true}'/>
+						</div>
+
+			</xpath>
+		</template>
+
+		<!-- Boxed -->
+		<template id="external_layout_boxed_inherit" inherit_id="web.external_layout_boxed">
+			<xpath expr="//div[@class='col-6 text-right mb4']" position="replace">
+
+					<div class="col-6 text-right mb4">
+							<h4 class="mt0" t-field="company.report_header"/>
+							<div name="company_address" class="mb4">
+									<span t-if="company.partner_id.formatedNit">NIT: <span t-field="company.partner_id.formatedNit"/></span>
+									<span class="company_address" t-field="company.partner_id"
+											t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/>
+							</div>
+					</div>
+
+			</xpath>
+		</template>
+
+		<!-- clean -->
+		<template id="external_layout_clean_inherit" inherit_id="web.external_layout_clean">
+			<xpath expr="//div[@class='col-5 offset-1']" position="replace">
+
+                <div class="col-5 offset-1" name="company_address">
+                    <ul class="list-unstyled">
+                        <strong><li t-if="company.name"><span t-field="company.name"/></li></strong>
+                        <li t-if="company.vat"><t t-esc="company.country_id.vat_label or 'Tax ID'"/>: <span t-field="company.vat"/></li>
+                        <li t-if="company.partner_id.formatedNit">NIT: <span t-field="company.partner_id.formatedNit"/></li>
+                        <li t-if="company.phone">Tel: <span t-field="company.phone"/></li>
+                        <li t-if="company.email"><span t-field="company.email"/></li>
+                        <li t-if="company.website"><span t-field="company.website"/></li>
+                    </ul>
+                </div>
+
+			</xpath>
+		</template>
+
+		<!-- standard -->
+		<template id="external_layout_standard_inherit" inherit_id="web.external_layout_standard">
+			<xpath expr="//div[@class='col-6']" position="replace">
+
+                <div class="col-6" name="company_address">
+                    <div t-field="company.partner_id"
+                        t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
+                    />
+                    <span t-if="company.partner_id.formatedNit" style="border-bottom: 1px solid black; display:inline-block;">NIT: <span t-field="company.partner_id.formatedNit" /></span>
+                </div>
+
+			</xpath>
+		</template>
+
+		<template id="report_invoice_document_inherit" inherit_id="account.report_invoice_document">
+
+			<xpath expr="//div/h2/span[1]" position="replace">
+				<span t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">Sales Invoice N° <span t-field="o.number"/></span>
+			</xpath>
+
+			<!--
+			<xpath expr="//div[@class='col-xs-6']" position="replace"/>
+
+			<xpath expr="//div[@class='col-xs-5 col-xs-offset-1']" position="replace"/>
+ 
+			<xpath expr="//div[@class='clearfix']" position="after">
+					<div t-if="o.partner_shipping_id">
+						<strong>Shipping address:</strong>
+
+
+						<t t-if="o.partner_shipping_id.parent_id.name" >
+							<t>
+								<br/>
+								<span t-field="o.partner_shipping_id.parent_id.name"/>, <span t-field="o.partner_shipping_id.name"/>
+								<br/>
+								<span t-field="o.partner_shipping_id.street"/> <span t-field="o.partner_shipping_id.street2"/> <span t-field="o.partner_shipping_id.state_id.name"/> <span t-field="o.partner_shipping_id.xcity.name"/>
+								<br/>
+							</t>
+						</t>
+
+
+						<t t-if="not o.partner_shipping_id.parent_id.name" >
+							<t>
+								<br/>
+								<span t-field="o.partner_shipping_id.name"/> 
+								<br/>
+								<span t-field="o.partner_shipping_id.street"/> <span t-field="o.partner_shipping_id.street2"/> <span t-field="o.partner_shipping_id.state_id.name"/> <span t-field="o.partner_shipping_id.xcity.name"/> 
+								<br/>
+							</t>
+						</t>
+						<br/>
+					</div>
+			</xpath>
+-->
+			<xpath expr="//t[@t-call='web.external_layout']//t[2]" position="replace">
+
+                <t t-set="address">
+                	<!--
+                    <address t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
+                -->
+                    <div t-if="o.partner_id.vat" class="mt16"><t t-esc="o.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="o.partner_id.vat"/></div>
+
+
+						<br/>
+						<span t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')"><strong><h2>Client</h2></strong></span>
+						<span t-if="o.type == 'in_invoice'"><strong><h2>Provider</h2></strong></span>
+						<span t-field="o.partner_id.name"/>
+						<br/>
+						<span t-if="o.partner_id.formatedNit">NIT / DI:<span t-field="o.partner_id.formatedNit"/></span>
+						<span t-if="o.partner_id.doctype == 1">No identification</span>
+						<span t-if="o.partner_id.doctype == 11">Birth Certificate:<span t-field="o.partner_id.xidentification"/></span>
+						<span t-if="o.partner_id.doctype == 12">T.I:<span t-field="o.partner_id.xidentification"/></span>
+						<span t-if="o.partner_id.doctype == 13">C.C:<span t-field="o.partner_id.xidentification"/></span>
+						<span t-if="o.partner_id.doctype == 21">Alien Registration Card:<span t-field="o.partner_id.xidentification"/></span>
+						<span t-if="o.partner_id.doctype == 22">Foreigner ID:<span t-field="o.partner_id.xidentification"/></span>
+						<span t-if="o.partner_id.doctype == 41">Passport:<span t-field="o.partner_id.xidentification"/></span>
+						<span t-if="o.partner_id.doctype == 42">Foreign Identification Document:<span t-field="o.partner_id.xidentification"/></span>
+						<span t-if="o.partner_id.doctype == 43">No Foreign Identification</span>
+						<span t-if="o.partner_id.vat">TIN: <span t-field="o.partner_id.vat"/></span>
+						<span t-if="o.partner_id.street"><br/><span t-field="o.partner_id.street"/></span>
+						<span t-if="o.partner_id.street2"><br/><span t-field="o.partner_id.street2"/></span>
+						<span t-if="o.partner_id.country_id.id or o.partner_id.state_id.id or o.partner_id.xcity.id"><br/>
+							<span t-esc="o.validate_state_city(o.partner_id)"/>	
+						</span>
+
+
+						
+						
+						<span t-if="o.partner_id.phone or o.partner_id.mobile"><br/>
+							<span t-esc="o.validate_number_phone(o.partner_id)"/>
+						</span>
+
+						<!--
+													<span t-if="o.partner_id.phone || o.partner_id.mobile"><br/>
+							<span t-field="o.partner_id.phone"/>
+							<span t-if="o.partner_id.mobile"> - <span t-field="o.partner_id.mobile"/></span>
+						</span>
+						-->
+							
+					
+                </t>
+
+
+
+			</xpath>
+
+						
+			<xpath expr="//div/h2/span[5]" position="replace">
+				<span t-if="o.type == 'out_refund'">Refund</span>
+			</xpath>
+			<xpath expr="//div/h2/span[6]" position="replace">
+				<span t-if="o.type == 'in_refund'">Vendor Refund</span>
+			</xpath>
+			<xpath expr="//div/h2/span[7]" position="replace">
+				<span t-if="o.type == 'in_invoice'">Vendor Bill</span>
+			</xpath>
+			
+			<xpath expr="//div[@class='row mt32 mb32']" position="before">
+				<t t-if="o.journal_id.sequence_id.use_dian_control">
+
+						 <div class="row mt32 mb32" style="font-size:12px; margin-top:10px! important;" name="authorization_dian">
+								 <div style="color: #9a9a9a; margin-left: 17px;" >
+										 Autorización DIAN número:
+										 <span t-field="o.resolution_number" /> <br />
+				 Fecha de Autorización: <span t-field="o.resolution_date" />
+				 <t t-if="o.resolution_date_to"> | Vigencia de Autorización: <span t-field="o.resolution_date_to" /> |</t> 
+										 Rango de Facturación: <span t-field="o.resolution_number_from" /> - <span t-field="o.resolution_number_to" />
+								</div>
+
+						</div>
+
+				</t>
+			</xpath>
+
+
+
+	
+				<xpath expr="//div[@class='clearfix']" position="replace">
+
+                    <div class="clearfix">
+                        <div id="total" class="row">
+                            <div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto">
+                                <table class="table table-sm">
+                                    <tr class="border-black o_subtotal" style="">
+                                        <td><strong>Subtotal</strong></td>
+                                        <td class="text-right">
+                                            <span t-field="o.amount_untaxed" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                        </td>
+                                    </tr>
+                                    <t t-foreach="o.amount_by_group" t-as="amount_by_group">
+                                        <tr style="">
+                                            <t t-if="len(o.tax_line_ids) == 1 and o.amount_untaxed == amount_by_group[2]">
+                                                <td><span t-esc="amount_by_group[0]"/></td>
+                                                <td class="text-right o_price_total">
+                                                    <span t-esc="amount_by_group[3]" />
+                                                </td>
+                                            </t>
+                                            <t t-else="">
+                                                <td>
+                                                    <span t-esc="amount_by_group[0]"/>
+                                                    <span>&amp;nbsp;<span>on</span>
+                                                        <t t-esc="amount_by_group[4]"/>
+                                                    </span>
+                                                </td>
+                                                <td class="text-right o_price_total">
+                                                    <span t-esc="amount_by_group[3]"/>
+                                                </td>
+                                            </t>
+                                        </tr>
+                                    </t>
+                                    <tr class="border-black o_total">
+                                        <td><strong>Total</strong></td>
+                                        <td class="text-right">
+                                            <span t-field="o.amount_total" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="row" t-if="o.tax_line_ids and o.at_least_one_tax_group_enabled()">
+								<div class="col-xs-6">
+										<table class="table table-condensed">
+												<thead>
+														<tr>
+																<th>Tax</th>
+																<th class="text-right">Base</th>
+																<th class="text-right">Amount</th>
+														</tr>
+												</thead>
+												<tbody>
+														<tr t-foreach="o.tax_line_ids" t-as="t">                                
+
+															<t t-if="not t.tax_id.tax_group_id.not_in_invoice">
+																<td><span t-field="t.name"/></td>
+																<td class="text-right">
+																		<span t-field="t.base"
+																				t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+																</td>
+																<td class="text-right">
+																		<span t-field="t.amount"
+																				t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+																</td>
+														</t>
+														</tr>
+												</tbody>
+										</table>
+								</div>
+						</div>
+                    </div>
+
+				</xpath>
+		</template>
+		
+</data>
+</odoo>

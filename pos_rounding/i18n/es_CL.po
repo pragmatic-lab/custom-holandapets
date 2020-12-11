@@ -1,0 +1,126 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* pos_rounding
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-12-08 02:13+0000\n"
+"PO-Revision-Date: 2018-12-07 23:13-0300\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.1.1\n"
+"Last-Translator: Flectra Chile SpA <soporte@flectrachile.cl>\n"
+"Language: es_CL\n"
+
+#. module: pos_rounding
+#: model:ir.model.fields,field_description:pos_rounding.field_pos_config__rounding_journal_id
+#, fuzzy
+msgid "Diario de redondeo"
+msgstr "Diario de redondeo"
+
+#. module: pos_rounding
+#: selection:pos.config,rounding_option:0 selection:pos.order,rounding_option:0
+#, fuzzy
+msgid "Digitos"
+msgstr "Digitos"
+
+#. module: pos_rounding
+#: model_terms:ir.ui.view,arch_db:pos_rounding.pos_config_form_view
+#, fuzzy
+msgid ""
+"Elija el diario con el que se pagaran los pedidos\n"
+"\t\t\t\t\t\t\t\tque apliquen redondeo"
+msgstr "Elija el diario con el que se los pedidos que apliquen redondear"
+
+#. module: pos_rounding
+#: model_terms:ir.ui.view,arch_db:pos_rounding.pos_config_form_view
+#, fuzzy
+msgid "Elija la forma de calcular el redondeo"
+msgstr "Elija la forma de calcular el redondeo"
+
+#. module: pos_rounding
+#: model:ir.model,name:pos_rounding.model_account_journal
+msgid "Journal"
+msgstr "Diario"
+
+#. module: pos_rounding
+#: selection:account.journal,use_in_pos_for:0
+msgid "Ninguno"
+msgstr "Ninguno"
+
+#. module: pos_rounding
+#: model:ir.model.fields,field_description:pos_rounding.field_pos_config__rounding_option
+#: model:ir.model.fields,field_description:pos_rounding.field_pos_order__rounding_option
+#, fuzzy
+msgid "Opcion de redondeo"
+msgstr "Opcion de redondeo"
+
+#. module: pos_rounding
+#: model_terms:ir.ui.view,arch_db:pos_rounding.pos_config_form_view
+#, fuzzy
+msgid "Permite Aplicar un redonde al Pedido"
+msgstr "Permitir aplicar un redonde al pedido"
+
+#. module: pos_rounding
+#: model:ir.model.fields,field_description:pos_rounding.field_pos_config__enable_rounding
+#, fuzzy
+msgid "Permitir Redondeo?"
+msgstr "Permitir redondeo?"
+
+#. module: pos_rounding
+#: model:ir.model,name:pos_rounding.model_pos_config
+msgid "Point of Sale Configuration"
+msgstr "Configuración del TPV"
+
+#. module: pos_rounding
+#: model:ir.model,name:pos_rounding.model_pos_order
+msgid "Point of Sale Orders"
+msgstr "Órdenes del Punto de Venta"
+
+#. module: pos_rounding
+#: selection:pos.config,rounding_option:0 selection:pos.order,rounding_option:0
+#, fuzzy
+msgid "Precision"
+msgstr "Precisión"
+
+#. module: pos_rounding
+#: model:ir.model.fields,field_description:pos_rounding.field_pos_config__rounding_precision
+#, fuzzy
+msgid "Precision de redondeo"
+msgstr "Precisión de redondeo"
+
+#. module: pos_rounding
+#. openerp-web
+#: code:addons/pos_rounding/static/src/xml/pos.xml:15
+#, fuzzy, python-format
+msgid "Redondear?"
+msgstr "Redondear?"
+
+#. module: pos_rounding
+#: selection:account.journal,use_in_pos_for:0
+#: model:ir.model.fields,field_description:pos_rounding.field_pos_order__rounding
+msgid "Redondeo"
+msgstr "Redondeo"
+
+#. module: pos_rounding
+#. openerp-web
+#: code:addons/pos_rounding/static/src/xml/pos.xml:39
+#, fuzzy, python-format
+msgid "Redondeo:"
+msgstr "Redondeo"
+
+#. module: pos_rounding
+#: model:ir.model.fields,field_description:pos_rounding.field_pos_order__is_rounding
+#, fuzzy
+msgid "Tiene Redondeo?"
+msgstr "Tiene que redondear?"
+
+#. module: pos_rounding
+#: model:ir.model.fields,field_description:pos_rounding.field_account_journal__use_in_pos_for
+msgid "Usar Diario para"
+msgstr "Usar diario para"

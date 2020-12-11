@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="hierarchy_report_print_view_form" model="ir.ui.view">
+		<field name="name">hierarchy.report_print.form</field>
+		<field name="model">hierarchy.report_print</field>
+		<field name="arch" type="xml">
+			<form>
+				<h3 class="panel-title">Impresión por Nivel de Cuentas</h3>
+
+				<group string="Datos Principales" col="4">
+					<field name="date_from"/>
+					<field name="date_to"/>
+				</group>
+
+				<group string="Nivel de Cuenta" col="2">
+					
+					<field name="account_level" widget="radio" options="{'horizontal': true}"/>
+					
+						<field name="generation"/>
+						<field name="show_lines"/>
+					
+				</group>
+		
+				<group string="Tercero">
+					<field name="partner_id" />
+				</group>
+		
+                <newline/>
+				<footer>
+					<button name="generate_pdf" string="Generar Pdf" type="object" class="btn-primary" />
+					<button name="generate_excel" string="Generar Excel" type="object" class="btn-primary" /> 
+					<field name="document" readonly="1" filename='filename'/>
+					<field name="filename" readonly="1" invisible="1"/>
+
+				</footer>
+
+			</form>
+		</field>
+	</record>
+		
+		
+	<record id="hierarchy_report_print_action" model="ir.actions.act_window">
+		<field name="name">Impresión de Nivel de Cuentas</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">hierarchy.report_print</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+	</record>
+
+</odoo>

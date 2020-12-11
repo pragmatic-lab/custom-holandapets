@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+	<record id="module_category_warehouse_management" model="ir.module.category">
+		<field name="name">Inventario</field>
+		<field name="description">Personalización referente a Inventario</field>
+		<field name="sequence">140</field>
+	</record>
+
+</odoo>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="commission_vendor_conf_view_form" model="ir.ui.view">
+		<field name="name">commission.vendor.conf.form</field>
+		<field name="model">commission.vendor.conf</field>
+		<field name="arch" type="xml">
+			<form>
+
+				<h3 class="panel-title">Configuración</h3>
+
+				<group col="4">
+					<field name="day_begin"/>
+					<field name="day_end"/>
+				</group>
+
+				<group>
+					<field name="value_commission"/>
+				</group>
+
+			</form>
+		</field>
+	</record>
+
+	<record id="commission_vendor_conf_view_tree" model="ir.ui.view">
+		<field name="name">commission.vendor.conf.tree</field>
+		<field name="model">commission.vendor.conf</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="day_begin"/>
+				<field name="day_end"/>
+				<field name="value_commission"/>
+			</tree>
+		</field>
+	</record>
+
+		
+</odoo>

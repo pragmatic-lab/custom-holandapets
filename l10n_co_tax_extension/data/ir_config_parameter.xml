@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+ 
+
+    <data noupdate="1">
+
+        <record model="ir.config_parameter" id="ir_config_amount_day_without_iva">
+            <field name="key">base.amount.day.iva</field>
+            <field name="value">2848560</field>
+        </record>
+
+        <record model="ir.config_parameter" id="ir_config_active_day_without_iva">
+            <field name="key">active.day.iva</field>
+            <field name="value">1</field>
+        </record>
+
+    </data>
+</odoo>

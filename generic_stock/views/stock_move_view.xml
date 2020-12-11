@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<record model="ir.ui.view" id="stock_move_receptions_tree_view">
+		<field name="name">stock.move.receptions.tree</field>
+		<field name="model">stock.move</field>
+		<field name="inherit_id" ref="stock.view_move_tree_receipt_picking" />
+		<field name="arch" type="xml">
+			<xpath expr="/tree" position="attributes">
+				<attribute name="create">0</attribute>
+				<attribute name="delete">0</attribute>
+			</xpath>
+			<xpath expr="//field[@name='product_uom']" position="after">
+				<field name="price_uom_unit" groups="stock.group_stock_manager" />
+				<field name="price_subtotal" sum="Costo Total"
+					groups="stock.group_stock_manager" />
+			</xpath>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="stock_move_picking_subtotal_tree_view">
+		<field name="name">stock.move.picking.subtotal.tree</field>
+		<field name="model">stock.move</field>
+		<field name="inherit_id" ref="stock.view_move_picking_tree" />
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='product_uom']" position="after">
+				<field name="price_uom_unit" groups="stock.group_stock_manager" />
+				<field name="price_subtotal" sum="Costo Total"
+					groups="stock.group_stock_manager" />
+			</xpath>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="stock_move_picking_subtotal_form_view">
+		<field name="name">stock.move.picking.subtotal.form</field>
+		<field name="model">stock.move</field>
+		<field name="priority" eval="10" />
+		<field name="inherit_id" ref="stock.view_move_picking_form" />
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='date_expected']" position="after">
+				<field name="date" readonly="1" />
+			</xpath>
+			<xpath expr="//field[@name='product_tmpl_id']" position="after">
+				<field name="price_unit" invisible="1"
+					groups="stock.group_stock_manager" />
+				<field name="price_uom_unit" groups="stock.group_stock_manager" />
+				<field name="price_subtotal" sum="Costo Total"
+					groups="stock.group_stock_manager" />
+			</xpath>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="stock_move_subtotal_tree_view">
+		<field name="name">stock.move.subtotal.tree</field>
+		<field name="model">stock.move</field>
+		<field name="inherit_id" ref="stock.view_move_tree" />
+		<field name="arch" type="xml">
+			<xpath expr="/tree" position="attributes">
+				<attribute name="delete">0</attribute>
+			</xpath>
+			<xpath expr="//field[@name='product_uom']" position="after">
+				<field name="price_uom_unit" groups="stock.group_stock_manager" />
+				<field name="price_subtotal" sum="Costo Total"
+					groups="stock.group_stock_manager" />
+			</xpath>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="stock_move_subtotal_form_view">
+		<field name="name">stock.move.subtotal.form</field>
+		<field name="model">stock.move</field>
+		<field name="priority" eval="10" />
+		<field name="inherit_id" ref="stock.view_move_form" />
+		<field name="arch" type="xml">
+			<xpath expr="/form" position="attributes">
+				<attribute name="delete">0</attribute>
+			</xpath>
+			<xpath expr="//field[@name='name']" position="after">
+				<field name="price_unit" invisible="1"
+					groups="stock.group_stock_manager" />
+				<field name="price_uom_unit" groups="stock.group_stock_manager" />
+				<field name="price_subtotal" sum="Costo Total"
+					groups="stock.group_stock_manager" />
+			</xpath>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="stock_move_search_view">
+		<field name="name">stock.move.search</field>
+		<field name="model">stock.move</field>
+		<field name="inherit_id" ref="stock.view_move_search" />
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='date']" position="attributes">
+				<attribute name="widget">date</attribute>
+				<attribute name="groups">stock.group_stock_user</attribute>
+			</xpath>
+			<xpath expr="//filter[@name='ready']" position="before">
+				<xpath expr="//filter[@name='today']" position="move" />
+				<separator />
+			</xpath>
+		</field>
+	</record>
+
+	<record id="stock_move_pivot_view" model="ir.ui.view">
+		<field name="name">stock.move.pivot</field>
+		<field name="model">stock.move</field>
+		<field name="inherit_id" ref="stock.view_move_pivot" />
+		<field name="arch" type="xml">
+			<field name="product_id" position="replace" />
+		</field>
+	</record>
+
+	<record id="stock_move_graph_view" model="ir.ui.view">
+		<field name="name">stock.move.graph</field>
+		<field name="model">stock.move</field>
+		<field name="inherit_id" ref="stock.view_move_graph" />
+		<field name="arch" type="xml">
+			<field name="product_id" position="replace" />
+		</field>
+	</record>
+
+</odoo>

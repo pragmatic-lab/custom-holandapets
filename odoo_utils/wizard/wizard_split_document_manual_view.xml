@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record id="wizard_split_document_manual_form_view" model="ir.ui.view">
+		<field name="name">wizard.split.document.manual.form</field>
+		<field name="model">wizard.split.document.manual</field>
+		<field name="arch" type="xml">
+			<form>
+				<h2 colspan="4">El Documento seleccionado tiene muchos items, por lo
+					que se dividira en varios documentos.
+				</h2>
+				<h2 colspan="4">Si esta de acuerdo de clic en aceptar, caso
+					contrario modifique el documento manualmente.
+				</h2>
+				<group>
+					<separator string="Detalle de documento" colspan="2" />
+					<group>
+						<field name="document_number" />
+						<field name="model_name" invisible="1" />
+					</group>
+					<group>
+						<field name="document_lines" />
+					</group>
+				</group>
+				<footer>
+					<div class="oe_left">
+						<button name="action_process" string="Aceptar" type="object"
+							class="oe_highlight" />
+						<button string="Cerrar" special="cancel" type="object"
+							class="oe_link" />
+					</div>
+				</footer>
+			</form>
+		</field>
+	</record>
+
+</odoo>

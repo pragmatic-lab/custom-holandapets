@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+
+
+    <t t-name="PaymentInfoWidget">
+        <div class='modal-dialog'>
+            <div class='popup popup-paymentrefinfo'>
+                <p class='title'>Please enter Payment Reference</p>
+                <div class='paymentrefinfo-detail'>
+                    <span class='label' style='color:black'>Payment Reference</span>
+                    <input class='detail' name='payment_ref' t-att-value='widget.options.payment_ref' placeholder='Payment Ref'></input>
+                </div>
+                <div class='footer'>
+                    <div class='button confirm'>
+                        Confirm 
+                    </div>
+                    <div class='button cancel'>
+                        Cancel 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+    
+    <t t-extend="PaymentScreen-Paymentlines">
+        <t t-jquery=".col-name" t-operation="append">
+            <t t-if="line.cashregister.journal.pos_payment_ref">
+                <span class='payment-info-button' t-att-data-cid='line.cid'><i class='fa fa-bank' /></span>
+            </t>
+        </t>
+    </t>
+</templates>

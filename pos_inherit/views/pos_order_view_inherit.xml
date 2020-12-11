@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	
+	<record model="ir.ui.view" id="pos_order_form_view_inherit">
+		<field name="name">Pos Order Inherit</field>
+		<field name="model">pos.order</field>
+		<field name="inherit_id" ref="point_of_sale.view_pos_pos_form" />
+		<field name="arch" type="xml">
+
+
+			<xpath expr="//field[@name='statement_ids']/tree//field[3]" position="after">
+				<!--
+					attrs="{'invisible':[('state', 'in', ['done', 'invoiced'])]}"
+				-->
+				<button name="button_go_change_payment" string="Pago" type="object"  class="oe_link" icon="fa-credit-card"/>
+			</xpath>
+
+
+		</field>
+	</record>
+	
+</odoo>

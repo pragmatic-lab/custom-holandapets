@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+		<record id="sale_order_form_view_inherit" model="ir.ui.view">
+			<field name="name">sale.order.inherit</field>
+			<field name="model">sale.order</field>
+			<field name="inherit_id" ref="sale.view_order_form"/>
+			<field name="arch" type="xml">
+
+				
+				<xpath expr="//form/header//button[5]" position="after">
+					<button name="button_quick_create_invoice_complete" id="button_quick_create_invoice_complete" string="Factura Rápida" class="btn-primary" type="object" attrs="{'invisible': [('state', 'not in', ['draft'])]}" groups="sale_order_inherit.group_create_invoice_quick_configuration"/>
+					<button name="button_quick_create_invoice" id="button_quick_create_invoice" string="Confirmar Factura" class="btn-primary" type="object" attrs="{'invisible': [('state', 'not in', ['draft'])]}" groups="sale_order_inherit.group_create_invoice_quick_configuration"/>
+				</xpath>
+
+
+
+				<xpath expr="//field[@name='order_line']/tree" position="attributes">
+					<attribute name="editable">bottom</attribute>
+				</xpath>
+
+				<xpath expr="//field[@name='validity_date']" position="after">
+					<field name="date_order"/>
+				</xpath>
+
+				<xpath expr="//field[@name='partner_shipping_id']" position="after">
+					<field name="user_id"/>
+					<field name="sale_order_conf_text_id" invisible="1"/>
+					<field name="warehouse_id"/>
+				</xpath>
+
+				<xpath expr="//form/sheet/notebook/page[1]/field[1]/form/group/group[1]//field[11]" position="after">
+					<field name="warehouse_quantity"/>
+				</xpath>
+
+				<xpath expr="//form/sheet/notebook/page[1]/field[1]/tree//field[7]" position="after">
+					<field name="warehouse_quantity"/>
+				</xpath>
+
+			</field>
+		</record>
+
+</odoo>

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<record model="ir.ui.view" id="stock_picking_internal_form_view">
+		<field name="name">stock.picking.form</field>
+		<field name="model">stock.picking</field>
+		<field name="inherit_id" ref="stock.view_picking_form" />
+		<field name="arch" type="xml">
+			<xpath expr="//header" position="after">
+				<div class="alert alert-danger" role="alert" style="margin-bottom:0px;"
+					attrs="{'invisible': [('message_moves_future','=',False)]}">
+					<field name="message_moves_future" />
+				</div>
+			</xpath>
+			<xpath expr="//button[@name='action_confirm']" position="attributes">
+				<attribute name="groups">stock.group_stock_user</attribute>
+			</xpath>
+			<xpath expr="//button[@name='action_assign']" position="attributes">
+				<attribute name="groups">stock.group_stock_user</attribute>
+			</xpath>
+			<xpath expr="//button[@name='%(stock.action_report_delivery)d']"
+				position="attributes">
+				<attribute name="groups">stock.group_stock_user</attribute>
+			</xpath>
+			<xpath expr="//button[@name='%(stock.act_stock_return_picking)d']"
+				position="attributes">
+				<attribute name="groups">stock.group_stock_user</attribute>
+			</xpath>
+			<button name="action_cancel" position="after">
+				<button name="action_cancel_backorder" string="Cancelar Recepción anterior"
+					attrs="{'invisible': ['|','|',('state','in',('cancel','done')),('backorder_id','=',False),('picking_type_code','!=','incoming')]}"
+					type="object"
+					confirm="Esta seguro de cancelar la recepcion anterior?. Esta operacion no puede revertirse"
+					groups="stock.group_stock_user,stock.group_stock_manager,base.group_system" />
+			</button>
+			<button name="action_cancel" position="attributes">
+				<attribute name="confirm">Esta seguro de cancelar este registro?.Ésta operación no puede revertirse</attribute>
+				<attribute name="groups">stock.group_stock_user</attribute>
+			</button>
+			<button name="action_cancel" position="after">
+				<button name="action_cancel" id="button_cancel_done" string="Cancelar"
+					states="done" type="object" confirm="Esta seguro de cancelar este registro?"
+					groups="generic_stock.group_cancel_picking_done" />
+			</button>
+			<xpath expr="//button[@name='do_unreserve']" position="attributes">
+				<attribute name="groups">stock.group_stock_user</attribute>
+			</xpath>
+			<xpath expr="//button[@name='button_scrap']" position="attributes">
+				<attribute name="groups">stock.group_stock_user</attribute>
+			</xpath>
+			<xpath expr="//field[@name='partner_id']" position="attributes">
+				<attribute name="options">{'no_quick_create': True}</attribute>
+			</xpath>
+			<xpath expr="//field[@name='location_id']" position="attributes">
+				<attribute name="options">{'no_quick_create': True}</attribute>
+			</xpath>
+			<xpath expr="//field[@name='location_dest_id']" position="attributes">
+				<attribute name="options">{'no_quick_create': True}</attribute>
+			</xpath>
+			<xpath expr="//field[@name='scheduled_date']" position="attributes">
+				<attribute name="attrs">{'readonly': ['|', ('id', '=', False), ('state', 'in', ('done', 'cancel'))], 'required': [('id', '!=', False)]}</attribute>
+			</xpath>
+			<xpath expr="//field[@name='picking_type_id']" position="attributes">
+				<attribute name="options">{'no_quick_create': True}</attribute>
+			</xpath>
+			<xpath
+				expr="//field[@name='move_line_ids_without_package']/tree//field[@name='product_id']"
+				position="attributes">
+				<attribute name="options">{'no_quick_create': True}</attribute>
+			</xpath>
+			<xpath
+				expr="//field[@name='move_line_ids_without_package']/tree//field[@name='product_uom_id']"
+				position="attributes">
+				<attribute name="options">{'no_quick_create': True}</attribute>
+			</xpath>
+			<xpath
+				expr="//field[@name='move_line_ids_without_package']/tree//field[@name='package_id']"
+				position="attributes">
+				<attribute name="options">{'no_quick_create': True}</attribute>
+			</xpath>
+			<xpath
+				expr="//field[@name='move_line_ids_without_package']/tree//field[@name='location_id']"
+				position="attributes">
+				<attribute name="options">{'no_quick_create': True}</attribute>
+			</xpath>
+			<xpath
+				expr="//field[@name='move_line_ids_without_package']/tree//field[@name='location_dest_id']"
+				position="attributes">
+				<attribute name="options">{'no_quick_create': True}</attribute>
+			</xpath>
+			<xpath
+				expr="//field[@name='move_line_ids_without_package']/tree//field[@name='result_package_id']"
+				position="attributes">
+				<attribute name="options">{'no_quick_create': True}</attribute>
+			</xpath>
+			<xpath
+				expr="//field[@name='move_line_ids_without_package']/tree//field[@name='owner_id']"
+				position="attributes">
+				<attribute name="options">{'no_quick_create': True}</attribute>
+			</xpath>
+			<xpath
+				expr="//field[@name='move_line_ids_without_package']/tree//field[@name='lot_id']"
+				position="attributes">
+				<attribute name="options">{'no_quick_create': True}</attribute>
+			</xpath>
+			<xpath
+				expr="//field[@name='move_ids_without_package']/tree//field[@name='product_id']"
+				position="attributes">
+				<attribute name="options">{'no_quick_create': True}</attribute>
+			</xpath>
+			<xpath
+				expr="//field[@name='move_ids_without_package']/tree//field[@name='product_id']"
+				position="after">
+				<field name="price_unit" invisible="1"
+					groups="stock.group_stock_manager" />
+				<field name="price_uom_unit" groups="stock.group_stock_manager" />
+				<field name="price_subtotal" sum="Costo Total"
+					groups="stock.group_stock_manager" />
+			</xpath>
+			<xpath expr="//field[@name='scheduled_date']" position="after">
+				<label for="date_movement" groups="generic_stock.group_set_date_movement_picking"
+					style="font-size: 14px; color: red;"></label>
+				<field name="date_movement" groups="generic_stock.group_set_date_movement_picking"
+					options="{'datepicker': {'warn_future': true}}" style="font-size: 14px; color: red;"
+					nolabel="1" />
+			</xpath>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="stock_picking_search_view">
+		<field name="name">stock.picking.search</field>
+		<field name="model">stock.picking</field>
+		<field name="inherit_id" ref="stock.view_picking_internal_search" />
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='group_id']" position="after">
+				<field name="scheduled_date" widget="date" />
+				<field name="date_done" string="Fecha Efectiva" widget="date" />
+			</xpath>
+			<filter name="draft" position="before">
+				<filter name="this_month" string="Fecha Prevista" date="scheduled_date" />
+				<filter name="this_month" string="Fecha Efectiva" date="date_done" />
+				<separator />
+			</filter>
+			<filter name="expected_date" position="after">
+				<filter string="Fecha Efectiva" name="group_by_date_done" context="{'group_by': 'date_done'}"/>
+			</filter>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="stock_picking_tree_view">
+		<field name="name">stock.picking.tree</field>
+		<field name="model">stock.picking</field>
+		<field name="inherit_id" ref="stock.vpicktree" />
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='date']" position="attributes">
+				<attribute name="invisible">0</attribute>
+			</xpath>
+			<field name="scheduled_date" position="after">
+				<field name="date_done" string="Fecha Efectiva" />
+			</field>
+			<xpath expr="//field[@name='picking_type_id']" position="attributes">
+				<attribute name="invisible">0</attribute>
+				<attribute name="groups">stock.group_stock_multi_warehouses</attribute>
+			</xpath>
+		</field>
+	</record>
+
+</odoo>

@@ -1,0 +1,15 @@
+.order-note {
+    margin: 10px;
+}
+
+.order-note-title {
+	padding: 3px;
+    color: #fff;
+    border-radius: .25em;
+    background-color: #5cb85c;
+}
+
+.order-note-content {
+	font-size: 10px;
+	line-height: 20px;
+}

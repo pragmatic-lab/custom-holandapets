@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<record model="ir.ui.view" id="wizard_messages_form_view">
+		<field name="name">wizard.messages.form</field>
+		<field name="model">wizard.messages</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<field name="message" />
+				</sheet>
+				<footer>
+					<div class="oe_left">
+						<button string="Cerrar" special="cancel" type="object"
+							class="oe_link" />
+					</div>
+				</footer>
+			</form>
+		</field>
+	</record>
+
+</odoo>

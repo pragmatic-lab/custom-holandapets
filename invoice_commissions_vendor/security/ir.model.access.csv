@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_commission_vendor_conf,commission.vendor.conf,model_commission_vendor_conf,,1,1,1,1
+access_commission_vendor,commission.vendor,model_commission_vendor,,1,1,1,1
+access_commission_vendor_conf_master,commission.vendor.conf.master,model_commission_vendor_conf_master,,1,1,1,1
+

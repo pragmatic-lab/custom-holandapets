@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<record model="ir.ui.view" id="stock_move_line_search_view">
+		<field name="name">stock.move.line.search</field>
+		<field name="model">stock.move.line</field>
+		<field name="inherit_id" ref="stock.stock_move_line_view_search" />
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='product_id']" position="after">
+				<field name="lot_id" groups="stock.group_production_lot" />
+			</xpath>
+			<xpath expr="//field[@name='location_dest_id']" position="after">
+				<field name="date" widget="date" />
+			</xpath>
+			<xpath expr="//filter[@name='todo']" position="before">
+				<filter name="this_month" string="Fecha" date="date" />
+				<separator />
+			</xpath>
+			<filter name="groupby_product_id" position="after">
+				<filter name="group_by_lot" string="Lote de Producción"
+					context="{'group_by': 'lot_id'}" groups="stock.group_production_lot" />
+				<filter name="group_by_location_dest" string="Para"
+					context="{'group_by': 'location_dest_id'}" groups="stock.group_stock_multi_locations" />
+			</filter>
+		</field>
+	</record>
+
+	<record id="stock_move_line_tree_view" model="ir.ui.view">
+		<field name="name">stock.move.line.tree</field>
+		<field name="model">stock.move.line</field>
+		<field name="inherit_id" ref="stock.view_move_line_tree" />
+		<field name="arch" type="xml">
+			<xpath expr="/tree" position="attributes">
+				<attribute name="delete">0</attribute>
+			</xpath>
+			<field name="product_uom_id" position="after">
+				<field name="lot_id" groups="stock.group_production_lot" />
+			</field>
+		</field>
+	</record>
+	
+	<record id="stock_move_line_form_view" model="ir.ui.view">
+		<field name="name">stock.move.line.form</field>
+		<field name="model">stock.move.line</field>
+		<field name="inherit_id" ref="stock.view_move_line_form" />
+		<field name="arch" type="xml">
+			<xpath expr="/form" position="attributes">
+				<attribute name="delete">0</attribute>
+			</xpath>
+		</field>
+	</record>
+	
+	<!-- reemplazar accion para no agrupar por producto, es muy lenta la vista, mejor agrupar por bodega -->
+	
+	<record id="stock.stock_move_line_action" model="ir.actions.act_window">
+        <field name="context">{'search_default_done': 1, 'search_default_group_by_location_dest': 1}</field>
+	</record>
+
+</odoo>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- List Due Customer Invoices -->
+    <record id="wizard_account_invoice_due_customer_list_form" model="ir.ui.view">
+        <field name="name">wizard.account.invoice.due.customer.list.form</field>
+        <field name="model">account.invoice.due.list</field>
+        <field name="arch" type="xml">
+            <form string="Due Customer Invoices">
+                <separator string="List Due Customer Invoices"/>
+                <label for="date" string="This will list all open customer invoices that are on or before the Due Date selected"/>
+                <group>
+                    <field name="date"/>
+                    <field name="company_id" invisible="1"/>
+                </group>
+                <footer>
+                    <button name="list_due_invoices" string="Okay" type="object" class="btn-primary"/>
+                    <button special="cancel" string="Cancel" class="btn-default"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_account_invoice_due_customer_list" model="ir.actions.act_window">
+        <field name="name">Due Customer Invoices</field>
+        <field name="res_model">account.invoice.due.list</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="wizard_account_invoice_due_customer_list_form"/>
+        <field name="target">new</field>
+        <field name="context">{'invoice_type': 'out_invoice'}</field>
+    </record>
+
+    <menuitem
+        id="menu_account_invoice_due_customer_list"
+        action="action_account_invoice_due_customer_list"
+        parent="account.menu_finance_receivables"
+        sequence="10"/>
+
+
+    <!-- List Due Vendor Invoices -->
+    <record id="wizard_account_invoice_due_vendor_list_form" model="ir.ui.view">
+        <field name="name">wizard.account.invoice.due.vendor.list.form</field>
+        <field name="model">account.invoice.due.list</field>
+        <field name="arch" type="xml">
+            <form string="List Due Vendor Invoices">
+                <separator string="List Due Vendor Invoices"/>
+                <label for="date" string="This will list all open vendor invoices that are on or before the Due Date selected"/>
+                <group>
+                    <field name="date"/>
+                    <field name="company_id" invisible="1"/>
+                </group>
+                <footer>
+                    <button name="list_due_invoices" string="Okay" type="object" class="btn-primary"/>
+                    <button special="cancel" string="Cancel" class="btn-default"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_account_invoice_due_vendor_list" model="ir.actions.act_window">
+        <field name="name">Due Vendor Bills</field>
+        <field name="res_model">account.invoice.due.list</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="wizard_account_invoice_due_vendor_list_form"/>
+        <field name="target">new</field>
+        <field name="context">{'invoice_type': 'in_invoice'}</field>
+    </record>
+
+    <menuitem
+        id="menu_account_invoice_due_vendor_list"
+        action="action_account_invoice_due_vendor_list"
+        parent="account.menu_finance_payables"
+        sequence="10"/>
+
+</odoo>

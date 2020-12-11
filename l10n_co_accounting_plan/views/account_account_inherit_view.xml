@@ -1,0 +1,55 @@
+<odoo>
+		<!-- Accounts -->
+		<record model="ir.ui.view" id="view_account_form_inherit">
+				<field name="name">account.account.form.inherit</field>
+				<field name="inherit_id" ref="account.view_account_form"/>
+				<field name="model">account.account</field>
+				<field name="type">form</field>
+				<field name="arch" type="xml">
+
+					<xpath expr="//group" position="after">
+
+						<field name="parent_id" string="Cuenta Padre"/>
+							<h4>Hijos</h4>
+
+							<field name="child_ids" nolabel="1">
+								<tree>
+									<field name="code"/>
+									<field name="name"/>
+									<field name="user_type_id"/>
+								</tree>
+						</field>				
+
+					</xpath>
+
+				</field>
+		</record>
+
+
+	<record id="account_tree_hierarchy_lucky" model="ir.ui.view">
+		<field name="name">account.account.tree.hierarchy.lucky</field>
+		<field name="model">account.account</field>
+		<field name="field_parent">child_ids</field>
+		<field name="arch" type="xml">
+			<tree string="Chart of accounts" toolbar="1" >
+				<field name="code" context="{'form_view_ref': 'account.view_account_form'}"/>
+				<field name="name"/>
+				<field name="user_type_id"/>
+				<field name="currency_id" options="{'no_create': True}" groups="base.group_multi_currency"/>
+				<field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="action_account_hierarchy_lucky" model="ir.actions.act_window">
+		<field name="name">Chart of Accounts Hierarchy</field>
+		<field name="res_model">account.account</field>
+		<field name="view_type">tree</field>
+		<field name="domain">[('parent_id','=',False)]</field>
+		<field name="view_id" ref="account_tree_hierarchy_lucky"/>
+	</record>
+
+	<menuitem action="action_account_hierarchy_lucky"
+				id="menu_action_account_hierarchy_lucky"
+				parent="account.menu_finance_entries" sequence="21"/>
+</odoo>

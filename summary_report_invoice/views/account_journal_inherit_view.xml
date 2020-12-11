@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+<data>
+		<record model="ir.ui.view" id="account_journal_view_form_inherit">
+			<field name="name">account.journal.form</field>
+			<field name="model">account.journal</field>
+			<field name="inherit_id" ref="account.view_account_journal_form" />
+			<field name="arch" type="xml">
+
+				<xpath expr="//field[@name='type']" position="after">
+					<field name="type_journal_name" widget="radio" options="{'horizontal': true}"/>
+					<field name="show_report_summary"/>
+					
+				</xpath>
+				
+			</field>
+		</record>
+
+
+
+</data>
+
+</odoo>

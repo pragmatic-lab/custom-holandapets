@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" inherit_id="point_of_sale.template">
+
+	<t t-extend="PaymentScreen-Paymentlines">
+		<t t-jquery=".total" t-operation="replace">
+			<div class='total'>
+				<t t-esc="widget.format_currency(order.getNetTotalTaxIncluded())" />
+			</div>
+		</t>
+	</t>
+
+	<t t-extend="PaymentScreenWidget">
+		<t t-jquery="div.top-content span.next" t-operation="before">
+			<t t-if="widget.pos.config.enable_rounding">
+				<span class='button rounding rounding_btn' style="right:0px;margin-right: 300px;cursor:pointer;">
+					Redondear?
+					<i
+						t-att-class="widget.pos.get_order() and widget.pos.get_order().get_rounding_status() ? 'fa fa-toggle-on' : 'fa fa-toggle-off'"
+						id="pos-rounding" aria-hidden="true" style="color: #838271"></i>
+				</span>
+			</t>
+		</t>
+	</t>
+
+	<t t-extend="PosTicket">
+		<t t-jquery="table.receipt-total" t-operation="append">
+			<t t-if="widget.pos.config.enable_rounding">
+				<t t-if="order.get_rounding()">
+					<tr>
+						<t t-if="widget.pos.config.rounding_journal_id">
+							<td>
+								<strong>
+									<t t-esc="widget.pos.config.rounding_journal_id[1]" />
+								</strong>
+							</td>
+						</t>
+						<t t-if="!widget.pos.config.rounding_journal_id">
+							<td>
+								<strong>Redondeo:</strong>
+							</td>
+						</t>
+						<td class="pos-right-align">
+							<t t-esc="widget.format_currency(order.get_rounding())" />
+						</td>
+					</tr>
+				</t>
+			</t>
+		</t>
+	</t>
+
+</templates>

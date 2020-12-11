@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record model="ir.ui.view" id="report_pos_payment_graph_view">
+		<field name="name">report.pos.payment.graph</field>
+		<field name="model">report.pos.payment</field>
+		<field name="arch" type="xml">
+			<graph>
+				<field name="journal_id" />
+				<field name="amount_total" type="measure" />
+			</graph>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="report_pos_payment_pivot_view">
+		<field name="name">report.pos.payment.pivot</field>
+		<field name="model">report.pos.payment</field>
+		<field name="arch" type="xml">
+			<pivot>
+				<field name="journal_id" type="row" />
+				<field name="date" interval="month" type="col" />
+				<field name="amount_total" type="measure" />
+			</pivot>
+		</field>
+	</record>
+
+	<record id="report_pos_payment_tree_view" model="ir.ui.view">
+		<field name="name">report.pos.payment.tree</field>
+		<field name="model">report.pos.payment</field>
+		<field name="arch" type="xml">
+			<tree create="0" delete="0" edit="0">
+				<field name="date" />
+				<field name="order_id" />
+				<field name="journal_id" />
+				<field name="amount_total" sum="Total" />
+				<field name="config_id" />
+				<field name="state" />
+			</tree>
+		</field>
+	</record>
+
+	<record id="report_pos_payment_form_view" model="ir.ui.view">
+		<field name="name">report.pos.payment.form</field>
+		<field name="model">report.pos.payment</field>
+		<field name="arch" type="xml">
+			<form create="0" delete="0" edit="0">
+				<header>
+					<field name="state" widget="statusbar" />
+				</header>
+				<sheet>
+					<group>
+						<group>
+							<field name="journal_id" />
+							<field name="order_id" />
+							<field name="amount_total" sum="Total" />
+						</group>
+						<group>
+							<field name="date" />
+							<field name="config_id" />
+						</group>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="report_pos_payment_search_view">
+		<field name="name">report.pos.payment.search</field>
+		<field name="model">report.pos.payment</field>
+		<field name="arch" type="xml">
+			<search string="Pagos del TPV">
+				<field name="create_uid" />
+				<field name="date" />
+				<field name="partner_id" />
+				<field name="commercial_partner_id" />
+				<field name="commercial_parent_id" />
+				<field name="payment_term_id" />
+				<field name="order_id" />
+				<field name="session_id" />
+				<field name="company_id" groups="base.group_multi_company" />
+				<field name="journal_id" string="Medios de Pagos" />
+				<field name="journal_type" />
+				<field name="state" />
+				<group name="filter_by" string="Filtros">
+					<filter name="this_month" string="Fecha" date="date" />
+					<separator />
+					<filter name="filter_by_draft" string="Borrador" domain="[('state','=','draft')]" />
+					<filter name="filter_by_open" string="Abierta" domain="[('state','=','open')]" />
+					<filter name="filter_by_confirmed" string="Cerrado" domain="[('state','=','confirm')]" />
+				</group>
+				<group name="group_by" string="Agrupar por">
+					<filter name="group_by_create_uid" string="Responsable"
+						context="{'group_by': 'create_uid'}" />
+					<filter name="group_by_config_id" string="Punto de Venta"
+						context="{'group_by': 'config_id'}" />
+					<filter name="group_by_journal_id" string="Medios de Pagos"
+						context="{'group_by': 'journal_id'}" />
+					<filter name="group_by_journal_type" string="Tipo de Pago"
+						context="{'group_by': 'journal_type'}" />
+					<filter name="group_by_state" string="Estado" context="{'group_by': 'state'}" />
+					<filter name="group_by_company_id" string="Compañia"
+						context="{'group_by': 'company_id'}" groups="base.group_multi_company" />
+					<separator />
+					<filter name="group_by_date" string="Fecha" context="{'group_by': 'date'}" />
+				</group>
+			</search>
+		</field>
+	</record>
+
+	<record model="ir.actions.act_window" id="action_report_pos_payment_graph_view">
+		<field name="name">Pagos del TPV</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">report.pos.payment</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">pivot,graph</field>
+		<field name="context">{'search_default_this_month': 1}</field>
+		<field name="view_id" ref="report_pos_payment_pivot_view" />
+		<field name="search_view_id" ref="report_pos_payment_search_view" />
+	</record>
+
+	<menuitem id="report_pos_payment_menu" parent="point_of_sale.menu_point_rep"
+		action="action_report_pos_payment_graph_view" sequence="6" />
+
+</odoo>

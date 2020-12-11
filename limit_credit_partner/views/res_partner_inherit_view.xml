@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+		<!-- Extending Partner Form View -->
+		<record id="res_partner_form_inherit" model="ir.ui.view">
+			<field name="inherit_id" ref="base.view_partner_form" />
+			<field name="model">res.partner</field>
+			<field name="arch" type="xml">
+
+
+
+
+<!--
+					<div name="button_box" position="before">
+
+
+					<div class="oe_button_box" name="limit_credit_div">
+						<div class="alert alert-success" role="alert" style="margin-bottom:0px;" attrs="{'invisible': [('limit_credit','=', False)]}">
+							<p align="right">Crédito disponible <strong> <field name="avaliable_credit" nolabel="1"/> </strong></p>
+						</div>
+
+
+
+						<div class="alert alert-info" role="alert" style="margin-bottom:0px;" attrs="{'invisible': [('limit_credit','=', False)]}">
+							<p align="right">Débito actualmente <strong> <field name="avaliable_debit"/> </strong></p>
+						</div>
+					</div>
+
+										
+				</div>
+	-->
+				<button name="toggle_active" position="after">
+					<div class="oe_button_box" name="limit_credit_div">
+						<br/>
+						<div class="alert alert-success" role="alert" style="margin-bottom:0px;" attrs="{'invisible': [('limit_credit','=', False)]}">
+							<p align="right">Crédito disponible <strong> <field name="avaliable_credit" nolabel="1"/> </strong></p>
+						</div>
+
+
+
+						<div class="alert alert-info" role="alert" style="margin-bottom:0px;" attrs="{'invisible': [('limit_credit','=', False)]}">
+							<p align="right">Débito actualmente <strong> <field name="avaliable_debit"/> </strong></p>
+						</div>
+					</div>
+
+					
+                </button>
+
+				<xpath expr="//field[@name='property_account_payable_id']" position="after">
+
+					<field name="verificate_credit"/>
+		
+					<field name="block_credit"/>                            
+
+					<field name="limit_credit" attrs="{'required': [('verificate_credit', '=', True)], 'invisible': [('verificate_credit', '=', False)]}"/>
+
+				</xpath>
+
+			</field>
+		</record>
+
+
+</odoo>

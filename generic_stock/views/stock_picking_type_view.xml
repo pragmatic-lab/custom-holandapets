@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record model="ir.ui.view" id="stock_picking_type_search_view">
+		<field name="name">stock.picking.type.search</field>
+		<field name="model">stock.picking.type</field>
+		<field name="inherit_id" ref="stock.view_pickingtype_filter" />
+		<field name="arch" type="xml">
+			<field name="warehouse_id" position="after">
+				<group name="filter_by" string="Filtros">
+					<filter name="filter_by_in" string="Entradas"
+						domain="[('code','=','incoming')]" />
+					<filter name="filter_by_internal" string="Internos"
+						domain="[('code','=','internal')]" />
+					<filter name="filter_by_out" string="Salidas"
+						domain="[('code','=','outgoing')]" />
+					<separator />
+				</group>
+			</field>
+		</field>
+	</record>
+
+	<record id="stock_picking_type_form_view" model="ir.ui.view">
+		<field name="name">stock.picking.type.form</field>
+		<field name="model">stock.picking.type</field>
+		<field name="inherit_id" ref="stock.view_picking_type_form" />
+		<field name="arch" type="xml">
+			<button name="toggle_active" position="attributes">
+				<attribute name="groups">stock.group_stock_manager</attribute>
+			</button>
+		</field>
+	</record>
+
+</odoo>

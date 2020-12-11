@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<record id="wizard_correct_record_form_view" model="ir.ui.view">
+		<field name="name">wizard.correct.record.form</field>
+		<field name="model">wizard.correct.record</field>
+		<field name="arch" type="xml">
+			<form string="Coregir Registros">
+				<group>
+					<group>
+						<field name="record_option" required="1" />
+						<field name="journal_dest_id"
+							attrs="{'invisible': [('record_option','!=','journal')], 'required': [('record_option','=','journal')]}"
+							options="{'no_quick_create': True}" context="{'show_full_name': True}" />
+					</group>
+					<group>
+						<field name="delete_record" />
+						<field name="journal_origin_ids"
+							attrs="{'invisible': [('record_option','!=','journal')], 'required': [('record_option','=','journal')]}"
+							widget="many2many_tags" options="{'no_create': True}" context="{'show_full_name': True}"
+							domain="[('id','!=',journal_dest_id)]" />
+					</group>
+				</group>
+				<footer>
+					<div class="oe_left">
+						<button string="Procesar" name="action_process" type="object"
+							class="oe_highlight" />
+						<button string="Cerrar" special="cancel" type="object"
+							class="oe_link" />
+					</div>
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_wizard_correct_record_tree_view" model="ir.actions.act_window">
+		<field name="name">Corregir Registros</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">wizard.correct.record</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="target">new</field>
+		<field name="view_id" ref="wizard_correct_record_form_view" />
+	</record>
+
+	<menuitem id="wizard_correct_record_menu" name="Corregir Registros"
+		sequence="5" parent="base.next_id_6" action="action_wizard_correct_record_tree_view" />
+
+</odoo>

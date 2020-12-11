@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="paperformat_ticket_pos" model="report.paperformat">
+		<field name="name">Ticket Pos</field>
+		<field name="default" eval="True" />
+		<field name="format">custom</field>
+		<field name="page_height">250</field>
+		<field name="page_width">90</field>
+		<field name="orientation">Portrait</field>
+		<field name="margin_top">1</field>
+		<field name="margin_bottom">1</field>
+		<field name="margin_left">0.01</field>
+		<field name="margin_right">0.01</field>
+		<field name="header_line" eval="False" />
+		<field name="header_spacing">20</field>
+		<field name="dpi">90</field>
+	</record>
+
+	<record id="paperformat_ticket_pos_cash" model="report.paperformat">
+		<field name="name">Ticket Pos Cash</field>
+		<field name="default" eval="True" />
+		<field name="format">custom</field>
+		<field name="page_height">450</field>
+		<field name="page_width">85</field>
+		<field name="orientation">Portrait</field>
+		<field name="margin_top">1</field>
+		<field name="margin_bottom">1</field>
+		<field name="margin_left">0.01</field>
+		<field name="margin_right">0.01</field>
+		<field name="header_line" eval="False" />
+		<field name="header_spacing">20</field>
+		<field name="dpi">90</field>
+	</record>
+
+	<record id="pos_cash_box_in" model="ir.sequence">
+		<field name="name">N° de Ingreso de Dinero</field>
+		<field name="code">pos.cash.in</field>
+		<field name="prefix">INGRESO-%(month)s-%(y)s-</field>
+		<field name="padding">5</field>
+		<field name="active">TRUE</field>
+		<field eval="1" name="number_next"/>
+		<field eval="1" name="number_increment"/>
+		<field name="implementation">standard</field>
+	</record>
+
+	<record id="pos_cash_box_out" model="ir.sequence">
+		<field name="name">N° de Egreso Dinero</field>
+		<field name="code">pos.cash.out</field>
+		<field name="prefix">EGRESO-%(month)s-%(y)s-</field>
+		<field name="padding">5</field>
+		<field name="active">TRUE</field>
+		<field eval="1" name="number_next"/>
+		<field eval="1" name="number_increment"/>
+		<field name="implementation">standard</field>
+	</record>
+
+
+</odoo>

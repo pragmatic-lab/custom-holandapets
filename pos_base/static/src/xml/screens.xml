@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+	<t t-extend="OrderSelectorWidget">
+       <t t-jquery="t[t-foreach='widget.pos.get_order_list()']" t-operation="replace">
+            <t t-foreach="widget.pos.get_order_list()" t-as="order">
+                <t t-if='order === widget.pos.get_order()'>
+                    <span class="order-button select-order selected" t-att-data-uid="order.uid">
+                        <span class='order-sequence'>
+                            <t t-esc='order.sequence_number' />
+                        </span>
+                        <span class='order-client' t-esc='order.get_client_name()' />
+                        <t t-esc="moment(order.creation_date).format('hh:mm')"/>
+                    </span>
+                </t>
+                <t t-if='order !== widget.pos.get_order()'>
+                    <span class="order-button select-order" t-att-data-uid="order.uid">
+                        <span class='order-sequence'>
+                            <t t-esc='order.sequence_number' />
+                        </span>
+                        <span class='order-client' t-esc='order.get_client_name()' />
+                    </span>
+                </t>
+            </t>
+        </t>
+    </t>
+    
+
+    <t t-extend="ProductScreenWidget">
+        <t t-jquery=".leftpane" t-operation="before">
+            <div class="buttons_pane order-scroller touch-scrollable">
+            </div>
+        </t>
+    </t>
+</templates>

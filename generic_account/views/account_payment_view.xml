@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<record id="account_payment_form_view" model="ir.ui.view">
+		<field name="name">account.payment.form</field>
+		<field name="model">account.payment</field>
+		<field name="inherit_id" ref="account.view_account_payment_form" />
+		<field name="arch" type="xml">
+			<field name="journal_id" position="attributes">
+				<attribute name="widget"></attribute>
+				<attribute name="options">{'no_create': True, 'no_open': True}</attribute>
+			</field>
+			<field name="destination_journal_id" position="attributes">
+				<attribute name="widget"></attribute>
+				<attribute name="options">{'no_create': True, 'no_open': True}</attribute>
+			</field>
+		</field>
+	</record>
+
+	<record id="account_payment_search_view" model="ir.ui.view">
+		<field name="name">account.payment.search</field>
+		<field name="model">account.payment</field>
+		<field name="inherit_id" ref="account.view_account_payment_search" />
+		<field name="arch" type="xml">
+			<field name="journal_id" position="after">
+				<field name="payment_date" />
+			</field>
+			<filter name="outbound_filter" position="before">
+				<filter name="this_month" string="Fecha" date="payment_date" />
+				<separator />
+			</filter>
+			<filter name="state" position="after">
+				<filter name="group_by_date" string="Fecha de Pago" context="{'group_by': 'payment_date'}" />
+			</filter>
+		</field>
+	</record>
+
+</odoo>

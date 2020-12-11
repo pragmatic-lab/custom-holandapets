@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record id="action_account_entries_payment_partner" model="ir.actions.act_window">
+			<field name="name">Conciliacion de Facturas</field>
+			<field name="res_model">account.entries_payment_partner</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="target">current</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">
+				 
+				</p>
+			</field>
+		</record>
+
+		<record id="account_entries_payment_partner_view_form" model="ir.ui.view">
+			<field name="name">account.entries_payment_partner.form</field>
+			<field name="model">account.entries_payment_partner</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+
+						<group>
+							<field name="html_info" widget="html" nolabel="1"/>
+						</group>
+
+						<group col='4'>
+							<field name="journal_id"/>
+							<field name="partner_type"/>
+							<field name="move_id"/>
+							<field name="payment_partner_id"/>
+							
+						</group>
+
+
+						<group col='4'>
+							<group string="Valor Crédito">
+								<h3>$<field name="amount" nolabel="1" style="width: 50%%"/></h3>
+							</group>
+
+							<group string="Saldo Actual">
+								<h3>$<field name="amount_current" nolabel="1" style="width: 50%%"/></h3>
+							</group>
+						</group>
+
+						<notebook attrs="{'invisible': [('payment_partner_id', '=', False)]}" >
+							<page name="configuration" string="Configuración de los Pagos" >
+								
+								<group>
+									<group string="Facturas del Tercero" >
+										
+									</group>
+									<group>
+										<button name="load_register_payments_ids" string="Cargar Pagos" type="object" class="btn-primary" />
+
+									</group>
+								</group>
+
+								<field name="partner_register_ids" nolabel="1" context="{'partner_id': payment_partner_id}">
+									<tree editable="top" create="false" edit="false">
+										<field name="invoice_id"/>
+										<field name="partner_id"/>
+										<field name="amount_total" sum="Total"/>
+										<field name="amount_payment" sum="Total Payment"/>
+										<field name="residual" sum="Total Residual"/>
+										<field name="amount" sum="Total Residual"/>
+										<field name="acount_ml_amount_id" options="{'no_create': True}" total="Total Amount"/>
+									</tree>
+								</field>
+
+							</page>
+
+							<page name="configuration_payments" string="Creditos">
+								<group>
+
+									<group string="Pagos a Realizar" >
+					
+									</group>
+									<group>
+										
+										<button name="payment_quick_invoice" string="Realizar Pagos" type="object" class="btn-primary" />
+									
+									</group>
+
+								</group>
+
+
+								<field name="register_payments_ids" nolabel="1" >
+									<tree create="false" edit="false" editable="bottom">
+										<field name="invoice_id"/>
+										<field name="partner_id"/>
+										<field name="amount_total" sum="Total"/>
+										<field name="amount_payment" sum="Total Payment"/>
+										<field name="residual" sum="Total Residual"/>
+										<field name="amount" sum="Total Residual"/>
+										<field name="acount_ml_amount_id" sum="Total Amount" options="{'no_create': True}"/>
+										<field name="state" widget="boolean_toggle"/>
+									</tree>
+								</field>
+						
+
+												
+							</page>
+						</notebook>
+
+
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+
+
+		<record id="account_payment_partner_register_view_form" model="ir.ui.view">
+			<field name="name">account.payment_partner_register.form</field>
+			<field name="model">account.payment_partner_register</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+
+
+						<group col='4'>
+							<field name="account_payment_id"/>
+							<field name="register_payment_id"/>
+							<field name="account_entries_payment_id"/>
+							<field name="register_entries_payment_id"/>
+							
+
+														<field name="invoice_id"/>
+							<field name="partner_id"/>
+							<field name="amount_total"/>
+							<field name="residual"/>
+
+
+														<field name="amount_payment"/>
+							<field name="amount"/>
+							<field name="state"/>
+		  
+						</group>
+
+
+
+					</sheet>
+				</form>
+			</field>
+		</record>
+	</data>
+</odoo>

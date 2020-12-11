@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+	<template id="report_certification_base_document">
+		<t t-call="web.html_container">
+			<t t-call="web.external_layout">
+
+				<div class="page">
+					
+					<t t-set="date_begin" t-value="form['used_context']['date_begin']"/>
+					<t t-set="date_end" t-value="form['used_context']['date_end']"/>
+					<t t-set="name_report" t-value="form['used_context']['name_report']"/>
+					<t t-set="columns" t-value="form['used_context']['columns']"/>
+					<t t-set="lines" t-value="form['used_context']['lines']"/>
+					<t t-set="data_company" t-value="form['used_context']['data_company']"/>
+					<t t-set="begin_month" t-value="form['used_context']['begin_month']"/>
+					<t t-set="end_month" t-value="form['used_context']['end_month']"/>
+					
+					<t t-if="lines">
+					
+						<t t-foreach="lines" t-as="line">
+
+							<t t-if="line['unfoldable']">
+
+								<center>
+
+									<h3>
+										<span t-esc="data_company['name']"/>
+									</h3>
+
+									<h5>
+										<span t-esc="data_company['nit']"/>
+									</h5>								
+
+									<h3>
+										<span t-esc="name_report"/>
+									</h3>
+
+									<h6>
+										<span style="font-size: 14"> POR EL AÑO GRAVABLE DE <span style="font-size: 14" t-esc="date_end[:4]"/></span>
+									</h6>
+								</center>
+
+								<br/>
+								<br/>
+		
+								<span style="font-size:19px;">Cerificamos que <strong><span t-esc="line['name']"/></strong> efectuó <span/> durante el periodo de <strong><span t-esc="begin_month.title()"/></strong> hasta <strong><span t-esc="end_month.title()"/></strong></span><br/>
+
+								<br/>
+
+								<p>
+									<span style="font-size:16px;"> <strong>Nombre / Razón Solical:</strong> <span t-esc="line['name']"/></span><br/>
+								
+									<span style="font-size:16px;"><strong>Identificación / Nit:</strong> <span t-esc="line['partner_vat']"/></span><br/>
+								
+									<span style="font-size:16px;"><strong>Dirección:</strong> <span t-esc="line['partner_street']"/></span><br/>
+								
+									<span style="font-size:16px;"><strong>Teléfono:</strong> <span t-esc="line['partner_phone']"/></span>
+								</p>
+
+								<span style="font-size:19px;">Dicha retención por los siguientes conceptos: </span>
+								
+								<table class="table table-sm o_main_table">
+									<thead>
+										<tr>
+											<t t-foreach="columns" t-as="column">
+												<t t-if="column['name'] != 'Nombre'">
+													<th style="font-size:15px;">
+														<strong>
+															<span style="font-size:15px;" t-esc="column['name']"/>
+														</strong>
+													</th>
+												</t>
+											</t>
+										</tr>
+									</thead>
+									<tbody>
+										<tr t-foreach="lines" t-as="data">
+											<t t-if="not data['unfoldable']">
+												<t t-if="data['partner_id'] == line['partner_id']">
+
+													<t t-if="data['columns']">
+														<t t-foreach="data['columns']" t-as="column">
+															<td style="font-size:14px;">
+																<t t-if="column['name']">
+																	<span style="font-size:14px;" t-esc="column['name']"/>
+																</t>
+															</td>
+														</t>
+													</t>
+												</t>
+											</t>
+										</tr> 
+									</tbody>
+								</table>
+
+								<span style="font-size:19px;">Dicha suma fue consignada en la administración de impuestos de la ciudad de <span/></span>
+
+								<br/>
+								<br/>
+
+								<span style="font-size:19px;">Domicilio del retenedor: <span t-esc="line['partner_street']"/></span>
+								<br/>
+								<br/>
+
+								<div class="row mt8">
+
+									<div class="col-6">
+									</div>
+									<div class="col-6" style="border-top: 2px solid black; margin:5px;">
+										<span style="font-size:14px;">Este documento no requiere para su validez firma autogra de acuerdo con el <strong>Art. 10</strong> decreto 836 de 1991</span>
+									</div>
+								</div>
+
+								<div class="last-page">
+									<p style="page-break-after:always;"/>
+								</div>
+
+							</t>
+						</t>
+					</t> 
+				</div>
+
+			</t>
+		</t>
+	</template>
+
+	<report
+		id="action_report_certification_base_document"
+		string="Certification Report"
+		model="report.certification_base"
+		report_type="qweb-pdf"
+		name="l10n_co_reports.report_certification_base_document"
+		file="l10n_co_reports.report_certification_base_document"
+		groups="account.group_account_user"
+		/>
+
+	<record id="action_report_certification_base_document" model="ir.actions.report">
+		<field name="paperformat_id" ref="base.paperformat_euro"/>
+	</record>
+
+</odoo>

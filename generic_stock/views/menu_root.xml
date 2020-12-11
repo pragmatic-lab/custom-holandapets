@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<!-- reemplazar menu para cambiar los grupos para menus de informes -->
+	<record id="stock.menu_warehouse_report" model="ir.ui.menu">
+		<field name="groups_id"
+			eval="[(3, ref('stock.group_stock_manager')), 
+						(4, ref('generic_stock.group_stock_report'))]" />
+	</record>
+
+	<!-- reemplazar menu para cambiar los grupos para menus de configuracion -->
+	<record id="stock.menu_stock_config_settings" model="ir.ui.menu">
+		<field name="groups_id"
+			eval="[(3, ref('stock.group_stock_manager')), 
+						(4, ref('generic_stock.group_stock_config'))]" />
+	</record>
+
+	<!-- reemplazar menu para cambiar los grupos para menu de Operaciones -->
+	<record id="stock.menu_stock_warehouse_mgmt" model="ir.ui.menu">
+		<field name="groups_id" eval="[(4, ref('stock.group_stock_user'))]" />
+	</record>
+	
+	<!-- reemplazar menu para cambiar los grupos para menu de Operaciones -->
+	<record id="stock.menu_stock_inventory_control" model="ir.ui.menu">
+		<field name="groups_id" eval="[(4, ref('stock.group_stock_user'))]" />
+	</record>
+	
+	<!-- reemplazar menu para cambiar los grupos para menu de Reglas de reabastecimiento -->
+	<record id="stock.menu_reordering_rules_config" model="ir.ui.menu">
+		<field name="groups_id" eval="[(4, ref('stock.group_stock_manager'))]" />
+	</record>
+
+	<!-- reemplazar menu para cambiar los grupos para menu de Desecho -->
+	<record id="stock.menu_stock_scrap" model="ir.ui.menu">
+		<field name="groups_id" eval="[(4, ref('stock.group_stock_manager'))]" />
+	</record>
+
+	<!-- reemplazar menu para cambiar los grupos para menu de Informe/Inventario -->
+	<record id="stock.menu_valuation" model="ir.ui.menu">
+		<field name="groups_id" eval="[(4, ref('generic_stock.group_stock_report'))]" />
+	</record>
+
+	<!-- reemplazar menu para cambiar los grupos para menu de Informe/Movimiento 
+		de existencias -->
+	<record id="stock.stock_move_menu" model="ir.ui.menu">
+		<field name="groups_id" eval="[(4, ref('generic_stock.group_stock_report'))]" />
+	</record>
+	
+	<!-- reemplazar menu para cambiar los grupos para menu de Informe/Movimiento 
+		de productos -->
+	<record id="stock.stock_move_line_menu" model="ir.ui.menu">
+		<field name="groups_id" eval="[(4, ref('generic_stock.group_stock_report'))]" />
+	</record>
+
+</odoo>

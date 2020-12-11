@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record id="wizard_account_invoice_change_form_view" model="ir.ui.view">
+		<field name="name">wizard.account.invoice.change.form</field>
+		<field name="model">wizard.account.invoice.change</field>
+		<field name="arch" type="xml">
+			<form string="Asistente para cambio de contabilidad de Facturas">
+				<group>
+					<group>
+						<field name="date_invoice" required="1"
+							options="{'datepicker': {'warn_future': true}}" />
+						<field name="journal_id" readonly="1" force_save="1" />
+					</group>
+					<group>
+						<field name="account_id" required="1"
+							domain="[('internal_type', '=', account_type)]" options="{'no_create': True}" />
+						<field name="company_id" readonly="1" force_save="1" groups="base.group_multi_company"/>
+						<field name="document_type" invisible="1" />
+						<field name="account_type" invisible="1" />
+					</group>
+				</group>
+				<notebook colspan="2">
+					<page string="Detalle">
+						<field name="line_ids">
+							<tree create="false" delete="false" editable="bottom">
+								<field name="product_id" options="{'no_quick_create': True}" />
+								<field name="description" />
+								<field name="account_id"
+									domain="[('deprecated', '=', False), ('company_id', '=', parent.company_id)]"
+									options="{'no_quick_create': True}" />
+								<field name="account_analytic_id" groups="analytic.group_analytic_accounting"
+									domain="[('company_id', '=', parent.company_id)]" options="{'no_quick_create': True}" />
+								<field name="analytic_tag_ids" groups="analytic.group_analytic_accounting"
+									widget="many2many_tags" options="{'color_field': 'color', 'no_create': True}" />
+								<field name="quantity" />
+								<field name="price_unit" />
+								<field name="discount" groups="sale.group_discount_per_so_line"
+									readonly="1" />
+								<field name="taxes_ids" widget="many2many_tags"
+									domain="[('company_id', '=', parent.company_id)]"
+									context="{'type': parent.document_type, 'tax_date': parent.date_invoice}"
+									options="{'no_quick_create': True}" />
+								<field name="price_subtotal" sum="Subtotal" />
+								<field name="invoice_line_id" invisible="1" />
+							</tree>
+						</field>
+					</page>
+				</notebook>
+				<footer>
+					<div class="oe_left">
+						<button string='Procesar Cambio' name="action_change_move"
+							type="object" confirm="Esta seguro de proceder" class="oe_highlight" />
+						<button string="Cerrar" special="cancel" type="object"
+							class="oe_link" />
+					</div>
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_wizard_account_invoice_change_view" model="ir.actions.act_window">
+		<field name="name">Cambiar Asiento contable</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">wizard.account.invoice.change</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="target">new</field>
+		<field name="view_id" ref="wizard_account_invoice_change_form_view" />
+	</record>
+</odoo>

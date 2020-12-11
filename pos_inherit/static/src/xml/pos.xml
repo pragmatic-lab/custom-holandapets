@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve" noupdate="1">
+
+<!--
+	<t t-extend="ClientDetails">
+		<t t-jquery=".client-details-right:eq(-1)" t-operation="append">
+			<div class='client-detail'>
+				<span class='label'>Barrio</span>
+				<span class='detail'><t t-att-value='partner.neighborhood'/></span>
+			</div>
+		</t>
+	</t>
+-->
+	<t t-extend="ClientDetails">
+		<t t-jquery=".client-details-right div:eq(-2)" t-operation="before">
+			<div class='client-detail'>
+				<span class='label'>Celular</span>
+				<t t-if='partner.mobile'>
+					<span class='detail'><t t-esc='partner.mobile' /></span>
+				</t>
+				<t t-if='!partner.mobile'>
+					<span class='detail empty'>N/A</span>
+				</t>
+			</div>
+		</t>
+	</t>
+
+
+	<t t-extend="ClientDetailsEdit">
+
+		<t t-jquery=".client-details-right div:eq(-1)" t-operation="append">
+			<div class='client-detail'>
+				<span class='label'>Barrio</span>
+				<input class='detail' name='neighborhood' t-att-value='partner.neighborhood' placeholder='Barrio' required="required"></input>
+			</div>
+		</t>
+
+	</t>
+
+	<t t-extend="Orderline">
+
+		<t t-jquery=".price" t-operation="replace">
+			<span class="price">
+				<t t-esc="widget.format_currency(line.get_display_price(),'Product Price')"/>
+			</span>
+		</t>
+		
+		<t t-jquery=".info-list" t-operation="replace">
+			<ul class="info-list">
+				<t t-if="line.get_quantity_str() !== '1' || line.selected ">
+					<li class="info">
+						<em>
+							<t t-esc="line.get_quantity()" />
+						</em>
+						<t t-esc="line.get_unit().name" />
+						at
+						<t t-esc="widget.format_currency(line.get_unit_display_price(),'Product Price')" />
+						/
+						<t t-esc="line.get_unit().name" />
+					</li>
+				</t>
+				<t t-if="line.get_discount_str() !== '0'">
+					<li class="info">
+						With a
+						<em>
+							<t t-esc="line.get_discount_str()" />%
+						</em>
+						discount
+					</li>
+				</t>
+			</ul>
+
+		</t>
+	</t>
+ 
+	<t t-extend="PaymentScreen-Paymentlines">
+
+		<t t-jquery="t[t-if='paymentlines.length']" t-operation="replace">
+
+		<t t-if="paymentlines.length">
+			<table class='paymentlines'>
+				<colgroup>
+					<col class='due' />
+					<col class='tendered' />
+					<col class='change' />
+					<col class='method' />
+					<col class='controls' />
+				</colgroup>
+				<thead>
+					<tr class='label'>
+						<th>Due</th>
+						<th>Tendered</th>
+						<th>Change</th>
+						<th>Monto</th>
+						<th>Impuesto</th>
+						<th>Ref.</th>
+						<th>Method</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<t t-foreach='paymentlines' t-as='line'>
+						<t t-if='line.selected'>
+							<tr class='paymentline selected'>
+								<td class='col-due'> <t t-esc='widget.format_currency_no_symbol(order.get_due(line))' /> </td>
+								<td class='col-tendered edit'>
+									<t t-esc='widget.inputbuffer' />
+								</td>
+								<t t-if='order.get_change(line)'>
+									<td class='col-change highlight' >
+										<t t-esc='widget.format_currency_no_symbol(order.get_change(line))' />
+									</td>
+								</t>
+								<t t-if='!order.get_change(line)'>
+									<td class='col-change' ></td>
+								</t>
+
+								<td class='col-due'> 
+
+								</td>
+								<td class='col-due'> 
+
+								</td>
+								<td class='col-due'> 
+									<t t-if="line.cashregister.journal.pos_payment_ref">
+										<span class='payment-info-button' t-att-data-cid='line.cid'><i class='fa fa-bank' /></span>
+									</t>
+								</td>
+
+
+
+								<td class='col-name' > <t t-esc='line.name' /> </td>
+								<td class='delete-button' t-att-data-cid='line.cid' aria-label="Delete" title="Delete"> <i class='fa fa-times-circle' /> </td>
+							</tr>
+						</t>
+						<t t-if='!line.selected'>
+							<tr class='paymentline' t-att-data-cid='line.cid'>
+								<td class='col-due'> <t t-esc='widget.format_currency_no_symbol(order.get_due(line))' /> </td>
+								<td class='col-tendered'> <t t-esc='widget.format_currency_no_symbol(line.get_amount())' /> </td>
+								<td class='col-change'>
+									<t t-if='order.get_change(line)'>
+										<t t-esc='widget.format_currency_no_symbol(order.get_change(line))' />
+									 </t>
+								</td>
+
+								<t t-set="total" t-value="order.get_total_with_tax()"/>
+								<t t-set="amount" t-value="order.get_total_without_tax()"/>
+								<t t-set="amount_taxes" t-value="total - amount"/>
+								<t t-set="amount_read" t-value="line.get_amount()"/>
+								<t t-set="amount_total" t-value="(amount_read * amount_taxes)/total"/>
+								<t t-set="value_total" t-value="amount_read - amount_total"/>
+
+								<td class='col-due'>
+									<t t-esc='widget.format_currency_no_symbol(value_total)' />
+								</td>
+								<td class='col-due'> 
+									<t t-esc='widget.format_currency_no_symbol(amount_total)' />
+								</td>
+								<td class='col-due'> 
+									<t t-if="line.cashregister.journal.pos_payment_ref">
+										<span class='payment-info-button' t-att-data-cid='line.cid'><i class='fa fa-bank' /></span>
+									</t>								
+								</td>
+								
+								<td class='col-name'> <t t-esc='line.name' /> </td>
+								<td class='delete-button' t-att-data-cid='line.cid' aria-label="Delete" title="Delete"> <i class='fa fa-times-circle' /> </td>
+							</tr>
+						</t>
+					</t>
+					<t t-if='extradue'>
+						<tr class='paymentline extra' t-att-data-cid='0'>
+							<td class='col-due'> <t t-esc='widget.format_currency_no_symbol(extradue)' /> </td>
+						</tr>
+					</t>
+				</tbody>
+			</table>
+		</t>
+
+		</t>
+	</t>
+
+
+
+
+
+</templates>

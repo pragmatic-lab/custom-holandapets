@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+		<record id="action_sale_order_limit_credit" model="ir.actions.act_window">
+			<field name="name">Límite de Crédito en Ventas</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">sale.order</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field>
+			<field name="search_view_id" ref="sale.sale_order_view_search_inherit_sale"/>
+			<field name="context">{}</field>
+			<field name="domain">[('limit_credit', '=', True)]</field>
+			<field name="help" type="html">
+				<p class="o_view_nocontent_smiling_face">
+					Ordenes con límite de crédito
+				</p>
+			</field>
+		</record>
+
+
+
+		<record id="action_limit_credit" model="ir.actions.act_window">
+			<field name="name">Detalle Límite de Crédito</field>
+			<field name="res_model">limit.credit</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="limit_credit_tree"/>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">
+					DetalleS Límite de Crédito.
+				</p>
+			</field>
+		</record>
+
+
+		<menuitem id="menu_sale_order_limit_credit"
+			name="Límite de Crédito en Ventas"
+			parent="sale.sale_order_menu"
+			groups="group_conf_limit_credit"
+			action="action_sale_order_limit_credit"
+			sequence="2"/>
+
+
+		<menuitem id="menu_limit_credit"
+			name="Detalles Límite de Crédito"
+			action="action_limit_credit"
+			groups="group_conf_limit_credit"
+			parent="account.menu_finance_receivables"
+			sequence="99"/>
+		
+</odoo>

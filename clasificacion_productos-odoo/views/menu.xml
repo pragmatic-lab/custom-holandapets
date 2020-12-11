@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+
+		<record id="action_product_clasification_view" model="ir.actions.act_window">
+			<field name="name">Clasificación Producto</field>
+			<field name="res_model">product.template_clasification_relation</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="product_template_clasification_relation_tree_view"/>
+		</record>
+
+		<record id="action_product_template_clasification_view" model="ir.actions.act_window">
+			<field name="name">Criterio Clasificación</field>
+			<field name="res_model">product.template_clasification</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="product_template_clasification_view_tree"/>
+		</record>
+
+
+		<record id="action_product_template_clasification_line_view" model="ir.actions.act_window">
+			<field name="name">Atributos de  Clasificacón</field>
+			<field name="res_model">product.template_clasification_line</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="product_template_clasification_line_view_tree"/>
+		</record>
+
+		<menuitem id="menu_product_clasification_main" name="Clasificación del Producto" parent="sale.prod_config_main"/>		
+
+		<menuitem id="menu_product_clasification" name="Clasificación Producto" parent="menu_product_clasification_main" action="action_product_clasification_view"/>
+
+		<menuitem id="menu_product_template_clasification" name="Criterio Clasificación" parent="menu_product_clasification_main" action="action_product_template_clasification_view"/>
+
+		<menuitem id="menu_product_template_clasification_line" name="Atributos de Clasificación" parent="menu_product_clasification_main" action="action_product_template_clasification_line_view"/>	
+
+</odoo>

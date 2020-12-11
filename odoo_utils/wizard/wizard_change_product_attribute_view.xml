@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record id="wizard_change_product_attribute_form_view"
+		model="ir.ui.view">
+		<field name="name">wizard.change.product.attribute.form</field>
+		<field name="model">wizard.change.product.attribute</field>
+		<field name="arch" type="xml">
+			<form>
+				<group>
+					<group>
+						<field name="attribute_ids" invisible="1" />
+						<field name="product_id" invisible="1" />
+						<field name="attribute_id" required="1"
+							domain="[('id', 'in', attribute_ids)]"
+							options="{'no_create': True}" />
+					</group>
+					<group>
+						<field name="new_attribute_id" required="1"
+							options="{'no_create': True}"
+							domain="[('id', '!=', attribute_id), ('id', 'not in', attribute_ids)]" />
+					</group>
+				</group>
+				<field name="line_ids">
+					<tree editable="bottom" create="0" delete="0">
+						<field name="attribute_value_id" required="1"
+							options="{'no_create': True}"
+							domain="[('attribute_id', '=', parent.attribute_id)]" />
+						<field name="new_attribute_value_id" required="1"
+							context="{'default_attribute_id': parent.new_attribute_id}"
+							domain="[('attribute_id', '=', parent.new_attribute_id)]" />
+					</tree>
+				</field>
+				<footer>
+					<div class="oe_left">
+						<button string="Procesar" name="action_process"
+							type="object" class="oe_highlight" />
+						<button string="Cerrar" special="cancel" type="object"
+							class="oe_link" />
+					</div>
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_wizard_change_product_attribute_form_view"
+		model="ir.actions.act_window">
+		<field name="name">Cambiar Atributos</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">wizard.change.product.attribute</field>
+		<field name="binding_model_id"
+			ref="product.model_product_template" />
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="target">new</field>
+		<field name="view_id"
+			ref="wizard_change_product_attribute_form_view" />
+		<field name="groups_id"
+			eval="[(4, ref('product.group_product_variant'))]" />
+	</record>
+</odoo>

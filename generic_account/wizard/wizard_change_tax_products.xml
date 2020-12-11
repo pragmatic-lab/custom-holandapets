@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<record id="wizard_change_tax_products_form_view" model="ir.ui.view">
+		<field name="name">wizard.change.tax.products.form</field>
+		<field name="model">wizard.change.tax.products</field>
+		<field name="arch" type="xml">
+			<form string="Asistente para cambiar Impuestos x Defecto">
+				<group colspan="4">
+					<field name="change_tax_all_products" colspan="4" />
+					<div class="oe_grey" colspan="4">
+						<h6>*Marque la opcion si desea cambiar los impuestos a productos
+							existentes caso contrario los nuevos impuestos seran para nuevos productos
+						</h6>
+					</div>
+				</group>
+				<notebook colspan="2">
+					<page string="Impuestos de Ventas">
+						<!-- pasar clave por contexto para mostrar solo impuestos vigentes 
+							a la fecha actual -->
+						<field name="sale_tax_ids" context="{'tax_date': False}"
+							options="{'no_create': True}" domain="[('type_tax_use','=','sale')]" />
+					</page>
+					<page string="Impuestos de Compras">
+						<field name="purchase_tax_ids" context="{'tax_date': False}"
+							options="{'no_create': True}" domain="[('type_tax_use','=','purchase')]" />
+					</page>
+				</notebook>
+				<footer>
+					<div class="oe_left">
+						<button string='Confirmar' name="action_set_default_tax"
+							confirm="Esta seguro de cambiar los impuestos por defecto?" type="object"
+							class="oe_highlight" />
+						<button string="Cerar" special="cancel" type="object"
+							class="oe_link" />
+					</div>
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_wizard_change_tax_products_view" model="ir.actions.act_window">
+		<field name="name">Cambiar Impuestos x Defecto Productos</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">wizard.change.tax.products</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="target">new</field>
+		<field name="view_id" ref="wizard_change_tax_products_form_view" />
+	</record>
+
+	<menuitem id="wizard_change_tax_products_menu" name="Cambiar Impuestos x Defecto Productos"
+		parent="account.account_account_menu" action="action_wizard_change_tax_products_view"
+		groups="account.group_account_manager" sequence="40" />
+</odoo>

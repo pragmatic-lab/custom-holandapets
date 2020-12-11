@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<record id="stock_warehouse_search_view" model="ir.ui.view">
+		<field name="name">stock.warehouse.search</field>
+		<field name="model">stock.warehouse</field>
+		<field name="inherit_id" ref="stock.stock_warehouse_view_search" />
+		<field name="arch" type="xml">
+			<filter name="inactive" position="before">
+				<field name="name"
+					filter_domain="['|',('name','ilike',self), ('code','ilike',self)]" />
+			</filter>
+		</field>
+	</record>
+
+	<record id="stock_warehouse_form_view" model="ir.ui.view">
+		<field name="name">stock.warehouse.form</field>
+		<field name="model">stock.warehouse</field>
+		<field name="inherit_id" ref="stock.view_warehouse" />
+		<field name="arch" type="xml">
+			<button name="toggle_active" position="attributes">
+				<attribute name="groups">stock.group_stock_manager</attribute>
+			</button>
+			<xpath expr="//notebook" position="attributes">
+				<attribute name="groups">stock.group_adv_location,generic_stock.group_stock_config</attribute>
+			</xpath>
+		</field>
+	</record>
+</odoo>

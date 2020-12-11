@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+
+	<template id="ticket_sale_order_document">
+
+			<!-- Info orden de venta -->
+			<div class="pos-center-align">
+				<span name="date_order"> Fecha: <span t-esc="o.date_order"/> </span><br/>
+				<span name="name_order"> Orden de Venta # </span> <strong><span t-esc="o.name"/></strong><br/>
+				<span name="name_order"> Vendedor:</span> <strong><span t-esc="o.user_id.name"/></strong><br/>
+			</div>
+		
+
+			<!-- Informacion del partner -->
+			<t>
+
+				<span><strong>Cliente</strong></span> <br/>
+				<strong><span t-field="o.partner_id.name"/></strong><br/>
+				<span t-if="o.partner_id.formatedNit">NIT / DI:<span t-field="o.partner_id.formatedNit"/></span>
+				<span t-if="o.partner_id.doctype == 1">Sin Identificación</span>
+				<span t-if="o.partner_id.doctype == 11">Birth Certificate:<span t-field="o.partner_id.xidentification"/></span>
+				<span t-if="o.partner_id.doctype == 12">T.I:<span t-field="o.partner_id.xidentification"/></span>
+				<span t-if="o.partner_id.doctype == 13">C.C:<span t-field="o.partner_id.xidentification"/></span>
+				<span t-if="o.partner_id.doctype == 21">Alien Registration Card:<span t-field="o.partner_id.xidentification"/></span>
+				<span t-if="o.partner_id.doctype == 22">Foreigner ID:<span t-field="o.partner_id.xidentification"/></span>
+				<span t-if="o.partner_id.doctype == 41">Pasaporte:<span t-field="o.partner_id.xidentification"/></span>
+				<span t-if="o.partner_id.doctype == 42">Foreign Identification Document:<span t-field="o.partner_id.xidentification"/></span>
+				<span t-if="o.partner_id.doctype == 43">No Foreign Identification</span>
+				<span t-if="o.partner_id.vat">TIN: <span t-field="o.partner_id.vat"/></span>
+				<span t-if="o.partner_id.street"><br/>Dirección: <span t-field="o.partner_id.street"/></span>
+				<span t-if="o.partner_id.street2"><br/>Otra Dirección: <span t-field="o.partner_id.street2"/></span>
+				<span t-if="o.partner_id.phone or o.partner_id.mobile"><br/>
+					<span>Teléfono: <span t-esc="o.validate_number_phone(o.partner_id)"/></span>
+				</span>  
+				<span t-if="o.partner_id.country_id.id or o.partner_id.state_id.id or o.partner_id.xcity.id"><br/>
+					<span t-esc="o.validate_state_city(o.partner_id)"/> 
+				</span>
+				<span t-if="o.partner_id.neighborhood"><br/><span>Barrio: <span t-field="o.partner_id.neighborhood"/></span></span>
+				        
+			</t>
+
+		
+			<div class="page">
+				<div class="oe_structure"/>
+
+				<!-- Is there a discount on at least one line? -->
+				<t t-set="display_discount" t-value="any([l.discount for l in o.order_line])"/>
+
+
+				<t t-if="o.order_line">
+
+					<table class='receipt-orderlines' style="width: 100%; border: 2px; border: 1px solid #000;">
+						<thead sclass='receipt-orderlines' tyle="width: 100%; border: 2px; border: 1px solid #000;">
+							<tr style="width: 100%; border: 2px; border: 1px solid #000;">
+								<th class="text-left">Descripción</th>
+								<th class="text-right">Ctdad</th>
+								<th class="text-right">Valor</th>
+							</tr>
+						</thead>
+						<tbody class='receipt-orderlines' style="width: 100%; border: 2px; border: 1px solid #000;">
+
+							<t t-set="current_subtotal" t-value="0"/>
+
+							<t t-foreach="o.order_line" t-as="line">
+
+								<t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+								<t t-set="current_subtotal" t-value="current_subtotal + line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+
+								<tr t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''" style="font-size: 15px; ">
+									<t t-if="not line.display_type">
+
+										<!-- Nombre del producto y descuento -->
+										<td class="text-left" >
+											<span t-field="line.name"/> <br/>
+											<t t-if="display_discount">
+												<i><span name="product_discount" style="font-size: 12px; "> Con un <span t-field="line.discount" t-options="{'widget': 'float', 'precision': 0}"/> % descuento </span></i>
+											</t>
+										</td>
+
+										<!-- Cantidad pedida -->
+										<td class="text-center">
+											|<span t-field="line.product_uom_qty" t-options="{'widget': 'float', 'precision': 0}"/>|
+										</td>
+
+										<!-- Precio unitario del producto -->
+										<td class="text-right" style="text-align:right">
+											<t t-set="value_product" t-value="line.price_subtotal + line.price_tax"/>
+											<span t-esc="value_product" t-options="{'widget': 'float', 'precision': 0}"/>
+										</td>
+
+									</t>
+
+									<t t-if="line.display_type == 'line_section'">
+										<td colspan="90">
+											<span t-field="line.name"/>
+										</td>
+									</t>
+									<t t-if="line.display_type == 'line_note'">
+										<td colspan="90">
+											<span t-field="line.name"/>
+										</td>
+									</t>
+								</tr>
+
+							</t>
+						</tbody>
+					</table>
+
+				</t>
+
+				<br/>
+		
+				<t>
+
+				<table style="border:0px;" width="100%"> 
+					<tr class="border-black o_subtotal">
+						<td><strong>Subtotal</strong></td>
+						<td class="text-right">
+							$<span t-field="o.amount_untaxed" t-options="{'widget': 'float', 'precision': 0}"/>
+						</td>
+					</tr>
+					
+					<t t-foreach="o.return_data_taxes_order_line(o).values()" t-as="tax">
+						<tr>
+							<td class="text-left"><span t-esc="tax['name']"/></td>
+							<td class="text-right">
+								$<span t-esc="tax['amount']" t-options="{'widget': 'float', 'precision': 0}"/>
+							</td>
+						</tr>
+					</t>
+					<!--
+					<t t-foreach="o.amount_by_group" t-as="amount_by_group">
+						<tr>
+							<t t-if="amount_by_group[3] == 1 and o.amount_untaxed == amount_by_group[2]">
+								<td>
+									<span t-esc="amount_by_group[0]"/>
+									<span>&amp;nbsp;<span>on</span>&amp;nbsp;<t t-esc="amount_by_group[2]" t-options="{'widget': 'float', 'precision': 0}"/></span>
+								</td>
+								<td class="text-right o_price_total">
+									<span t-esc="amount_by_group[1]"
+										t-options="{'widget': 'float', 'precision': 0}"/>
+								</td>
+							</t>
+							<t t-else ="">
+								<td>
+									<span t-esc="amount_by_group[0]"/>
+								</td>
+								<td class="text-right o_price_total">
+									<span t-esc="amount_by_group[1]"
+										t-options="{'widget': 'float', 'precision': 0}"/>
+								</td>
+							</t>
+						</tr>
+					</t>
+					-->
+					<tr class="border-black o_total">
+						<td ><strong><span style="font-size: 18px; ">Total</span></strong></td>
+						<td class="text-right" >
+							<span style="font-size: 20px; font-weight: bold;">$</span><span style="font-size: 20px; font-weight: bold;" t-field="o.amount_total" t-options="{'widget': 'float', 'precision': 0}"/>
+						</td>
+					</tr>
+				</table>
+				</t>
+
+		</div>
+
+	</template>
+
+
+	<!-- Template para el encabezado del reporte -->
+	<template id="ticket_header_print">
+		<t t-raw="o.sale_order_conf_text_id.header_text"/>
+	</template>
+
+	<!-- Template para el pie de página del reporte -->
+	<template id="ticket_footer_print">
+		<t t-raw="o.sale_order_conf_text_id.footer_text"/>
+	</template>
+
+
+	<!-- Template ticket orden -->
+	<template id="report_ticket_sale_order">
+		
+		<t t-call="web.basic_layout">
+			<t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)" />
+			<t t-call="sale_order_inherit.ticket_header_print"/>
+			<t t-call="sale_order_inherit.ticket_sale_order_document"/>
+			<t t-call="sale_order_inherit.ticket_footer_print"/>
+		</t>
+	</template>
+
+
+	<!-- Template para el reporte completo  -->
+	<template id="report_ticket_sale_order_document">
+		<t t-call="web.html_container">
+			<t t-foreach="docs" t-as="o">
+
+				<t t-call="sale_order_inherit.report_ticket_sale_order"/>
+
+			</t>
+		</t>
+	</template>
+
+
+	<report
+		id="action_report_sale_order_ticket"
+		model="sale.order"
+		string="Ticket Orden"
+		report_type="qweb-pdf"
+		name="sale_order_inherit.report_ticket_sale_order_document"
+		file="sale_order_inherit.report_ticket_sale_order_document"
+	/>
+
+
+	<record id="action_report_sale_order_ticket" model="ir.actions.report">
+		<field name="paperformat_id" ref="sale_order_inherit.paperformat_ticket_order_print"/>
+	</record>
+
+
+
+
+
+
+</odoo>
+

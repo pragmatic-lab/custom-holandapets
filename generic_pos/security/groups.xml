@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data noupdate="1">
+		<!-- grupo para configuraciones y ver informes relativas al propio modulo -->
+		<record id="group_pos_report" model="res.groups" forcecreate="True">
+			<field name="name">Informes</field>
+			<field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]" />
+			<field name="implied_ids" eval="[(4, ref('point_of_sale.group_pos_user'))]" />
+			<field name="category_id" ref="generic_pos.module_category_point_of_sale" />
+		</record>
+
+		<record id="group_pos_config" model="res.groups" forcecreate="True">
+			<field name="name">Configuraciones</field>
+			<field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]" />
+			<field name="implied_ids" eval="[(4, ref('point_of_sale.group_pos_manager'))]" />
+			<field name="category_id" ref="generic_pos.module_category_point_of_sale" />
+		</record>
+		
+		<record id="group_pos_delete_session" model="res.groups" forcecreate="True">
+			<field name="name">Permitir eliminar sessiones</field>
+			<field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]" />
+			<field name="implied_ids" eval="[(4, ref('point_of_sale.group_pos_user'))]" />
+			<field name="category_id" ref="generic_pos.module_category_point_of_sale" />
+		</record>
+		
+		<record id="pos_payment_multi_company_rule" model="ir.rule">
+			<field name="name">Pagos del POS Multi Company</field>
+			<field name="model_id" ref="model_report_pos_payment" />
+			<field name="global" eval="True" />
+			<field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+		</record>
+		
+	</data>
+	<data>
+		<!-- al grupo director de TPV, quitarle que dependa del grupo de inventarios -->
+		<record id="point_of_sale.group_pos_manager" model="res.groups">
+			<field name="implied_ids" eval="[(3, ref('stock.group_stock_user'))]" />
+		</record>
+	</data>
+	
+</odoo>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+		<record model="ir.ui.view" id="stock_inventory_inherit_form_view">
+				<field name="name">stock.inventory.inherit.form</field>
+				<field name="model">stock.inventory</field>
+				<field name="inherit_id" ref="stock.view_inventory_form" />
+				<field name="arch" type="xml">
+
+					<xpath expr="//header//button[4]" position="after">
+						<button name="generate_excel" string="Generar Excel" type="object" class="btn-primary" />
+						<field name="document" readonly="1" filename='filename'/>
+						<field name="filename" readonly="1" invisible="1"/>
+					</xpath>
+
+
+					<xpath expr="//page[1]/field[@name='line_ids']/tree//field[@name='product_qty']" position="after">
+						<field name="diference"/>
+						<field name="standard_price"/>
+						<field name="standard_price_total"/>
+					</xpath>
+
+				</field>
+		</record>
+
+		<!--
+
+		<record model="ir.ui.view" id="generic_stock_inventory_inherit_form_view">
+				<field name="name">generic.stock.inventory.inherit.form</field>
+				<field name="model">stock.inventory</field>
+				<field name="inherit_id" ref="generic_stock.stock_inventory_form_view" />
+				<field name="arch" type="xml">
+
+					<xpath expr="//page[1]/field[@name='line_ids']/tree//field[@name='price_unit']" position="replace"/>
+
+				</field>
+		</record>
+	-->
+
+
+</odoo>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	
+	<data noupdate="1">
+		<!-- creando configuracion para el reporte pdf de ventas y factura -->
+		<record id="sale_order_conf_data" model="sale.order_conf_text">
+			<field name="name">Encabezado y Pie de Pagina</field>
+			<field name="code">12345</field>
+		</record>
+
+		<!-- Creando contacto para ventas de contado, se utiliza cuando no seleccionan un partner en la venta -->
+		<record id="partner_sales_debit" model="res.partner">
+			<field name="name">Ventas de Contado</field>
+			<field name="personType">1</field>
+			<field name="doctype">1</field>
+			<field name="x_name1">Ventas</field>
+			<field name="x_name2">de</field>
+			<field name="x_lastname1">Contado</field>
+		</record>
+
+		<!-- Creando plantilla para hacer un formato de impresion de los tiquetes en ventas y facturacion -->
+		<record id="paperformat_ticket_order_print" model="report.paperformat">
+			<field name="name">Ticket Pos</field>
+			<field name="default" eval="True" />
+			<field name="format">custom</field>
+			<field name="page_height">280</field>
+			<field name="page_width">90</field>
+			<field name="orientation">Portrait</field>
+			<field name="margin_top">2</field>
+			<field name="margin_bottom">1</field>
+			<field name="margin_left">0.01</field>
+			<field name="margin_right">0.01</field>
+			<field name="header_line" eval="False" />
+			<field name="header_spacing">20</field>
+			<field name="dpi">90</field>
+		</record>
+
+		<!--Creando secuencia para el item del producto -->
+		<record id="product_template_item_seq" model="ir.sequence">
+			<field name="name">N° Product Item</field>
+			<field name="code">product.template_item</field>
+			<field name="prefix"></field>
+			<field name="padding">5</field>
+			<field name="active">TRUE</field>
+			<field eval="1" name="number_next"/>
+			<field eval="1" name="number_increment"/>
+			<field name="implementation">standard</field>
+		</record>
+
+
+
+
+    	
+        <record id="automatic_task_update_item_product" model="ir.cron">
+            <field name="name">Update Item Product</field>
+            <field name="model_id" ref="model_product_template"/>
+            <field name="state">code</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="code">model.update_field_item_product()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+
+
+	</data>
+
+
+
+    <data noupdate="1">
+    	
+        <record id="automatic_task_cancel_sale_order" model="ir.cron">
+            <field name="name">Cancel Sale Order</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="state">code</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="code">model.cancel_all_sale_order()</field>
+            <field name="interval_number">7</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+
+    </data>
+
+
+</odoo>

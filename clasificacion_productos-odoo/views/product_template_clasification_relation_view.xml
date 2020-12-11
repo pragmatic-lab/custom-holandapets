@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+
+	<record id="product_template_clasification_relation_form" model="ir.ui.view">
+		<field name="name">product.template_clasification_relation.form</field>
+		<field name="model">product.template_clasification_relation</field>
+		<field name="arch" type="xml">
+			<form>
+
+				<group>
+					<field name="product_template_clasification_id" string="Clasificación Producto"/>
+					
+				</group>
+
+
+				<group>
+					<field name="product_template_clasification_line_ids" string="Atributos Productos"/>
+				</group>
+
+			</form>
+		</field>
+	</record>
+
+
+	<record id="product_template_clasification_relation_tree" model="ir.ui.view">
+		<field name="name">product.template_clasification_relation.tree</field>
+		<field name="model">product.template_clasification_relation</field>
+		<field name="arch" type="xml">
+			<tree editable="bottom">
+				
+				<field name="product_template_clasification_id" string="Clasificación Producto"/>
+				<field name="product_template_clasification_line_ids" string="Atributos Productos" invisible="1"/>
+				<field name="line_clasification_text" string="Atributos Productos"/>
+			</tree>
+		</field>
+	</record>
+
+
+	<record id="product_template_clasification_relation_tree_view" model="ir.ui.view">
+		<field name="name">product.template_clasification_relation.tree_view</field>
+		<field name="model">product.template_clasification_relation</field>
+		<field name="arch" type="xml">
+			<tree>
+
+				<field name="product_template_clasification_id" string="Clasificación Producto"/>
+				<field name="product_template_clasification_line_ids" string="Atributos Productos" invisible="1"/>
+				<field name="line_clasification_text" string="Atributos Productos"/>
+			</tree>
+		</field>
+	</record>
+
+
+</odoo>

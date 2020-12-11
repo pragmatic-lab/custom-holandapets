@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+	<template id="report_puc_hierarchy">
+		<t t-call="web.html_container">
+			<t t-call="web.external_layout">
+
+				<div class="page">
+					
+					<t t-set="date_from" t-value="form['used_context']['date_from']"/>
+					<t t-set="date_to" t-value="form['used_context']['date_to']"/>
+					<t t-set="partner_id" t-value="form['used_context']['partner_id']"/>
+					<t t-set="account_level" t-value="form['used_context']['account_level']"/>
+					<t t-set="generation" t-value="form['used_context']['generation']"/>
+
+					<t t-set="data" t-value="request.env['hierarchy.report_print'].return_data_level(date_from, date_to, partner_id, account_level)"/>
+					<t t-set="data" t-value="request.env['hierarchy.report_print'].options_generation(data, generation)"/>
+
+					<t t-if="data">
+
+						<!-- Informacion basica -->
+						<div id="informations" class="row mt32 mb32">
+							<div class="col-auto mw-100 mb-2" t-if="partner_id">
+								<strong>Tercero:</strong>
+								<p class="m-0" t-esc="request.env['hierarchy.report_print'].search([(id, '=', partner_id)], limit=1).name"/>
+							</div>
+							<div class="col-auto mw-100 mb-2" t-if="date_from">
+								<strong>Fecha Inicial:</strong>
+								<p class="m-0" t-esc="date_from" t-options="{'widget': 'datetime'}"/>
+							</div>
+							<div class="col-auto mw-100 mb-2" t-if="date_to">
+								<strong>Fecha Final:</strong>
+								<p class="m-0" t-esc="date_to" t-options="{'widget': 'datetime'}"/>
+							</div>
+						</div>
+						<!-- Informacion basica -->
+
+						<h3>Plan de Cuentas</h3>
+
+						<!-- Pagos realizados -->
+						<t t-set="total_initial_balance" t-value="0"/>
+						<t t-set="total_credit" t-value="0"/>
+						<t t-set="total_debit" t-value="0"/>
+						<t t-set="total_balance" t-value="0"/>
+						<t t-set="total_final_balance" t-value="0"/>
+
+						<table class='receipt-orderlines' style="width: 80%; border: 2px; border: 1px solid #000;" name="invoice_line_table">
+							
+						<!-- 								
+							<colgroup>
+								<col width='13%' />
+								<col width='10%' />
+								<col width='15%' />
+								<col width='12%' />
+								<col width='20%' />
+								<col width='10%' />
+								<col width='15%' />
+							</colgroup> 
+						-->
+
+							<thead class='receipt-orderlines' style="width: 100%; border: 2px; border: 1px solid #000;">
+								<tr>
+									<th class="text-left"><span style="margin-left:5px; margin-right:5px;">CÓDIGO</span></th>
+									<th class="text-left"><span style="margin-left:5px; margin-right:5px;">CUENTA</span></th>
+									<th class="text-right"><span style="margin-left:5px; margin-right:5px;">SALDO INICIAL</span></th>
+									<th class="text-right"><span style="margin-left:5px; margin-right:5px;">DEBITOS</span></th>
+									<th class="text-right"><span style="margin-left:5px; margin-right:5px;">CREDITOS</span></th>
+									<th class="text-right"><span style="margin-left:5px; margin-right:5px;">SALDO PERIODO</span></th>
+									<th class="text-right"><span style="margin-left:5px; margin-right:5px;">SALDO FINAL</span></th>
+								</tr>
+							</thead>
+							<tbody class='receipt-orderlines' style="width: 100%; border: 2px; border: 1px solid #000;">
+								
+								<tr t-foreach="data" t-as="item">
+
+									<td class="text-left">
+										<span style="margin-left:5px; margin-right:5px;" t-esc="item['code']"/>
+									</td>
+
+									<td class="text-left">
+										<span style="margin-left:5px; margin-right:5px;" t-esc="item['account_name']"/>
+									</td>
+									
+									<td class="text-right">
+										<span style="margin-left:5px; margin-right:5px;" t-esc="float(item['initial_balance'])" t-options="{'widget': 'float', 'precision': 0}"/>
+									</td>
+									<td class="text-right">
+										<span style="margin-left:5px; margin-right:5px;" t-esc="float(item['debit'])" t-options="{'widget': 'float', 'precision': 0}"/>
+									</td>
+
+									<td class="text-right">
+										<span style="margin-left:5px; margin-right:5px;" t-esc="float(item['credit'])" t-options="{'widget': 'float', 'precision': 0}"/>
+									</td>
+
+									<td class="text-right">
+										<span style="margin-left:5px; margin-right:5px;" t-esc="float(item['balance'])" t-options="{'widget': 'float', 'precision': 0}"/>
+									</td>
+					
+									<td class="text-right">
+										<span style="margin-left:5px; margin-right:5px;" t-esc="item['final_balance']" t-options="{'widget': 'float', 'precision': 0}"/>
+									</td>
+									
+									<t t-set="total_initial_balance" t-value="total_initial_balance + item['initial_balance']"/>
+									<t t-set="total_debit" t-value="total_debit + item['debit']"/>
+									<t t-set="total_credit" t-value="total_credit + item['credit']"/>
+									<t t-set="total_balance" t-value="total_balance + item['balance']"/>
+									<t t-set="total_final_balance" t-value="total_final_balance + item['final_balance']"/>
+								</tr>
+								<tr>
+									<td class="text-left">
+										
+									</td>
+									<td class="text-left">
+										<h6><strong><span style="margin-left:5px; margin-right:5px;">Total</span></strong></h6>
+									</td>
+									
+									<td class="text-left">
+										<h6><strong><span style="margin-left:5px; margin-right:5px;" t-esc="total_initial_balance" t-options="{'widget': 'float', 'precision': 0}"/></strong></h6>
+									</td>
+									<td class="text-left">
+										<h6><strong><span style="margin-left:5px; margin-right:5px;" t-esc="total_debit" t-options="{'widget': 'float', 'precision': 0}"/></strong></h6>
+									</td>
+
+									<td class="text-right">
+										<h6><strong><span style="margin-left:5px; margin-right:5px;" t-esc="total_credit" t-options="{'widget': 'float', 'precision': 0}"/></strong></h6>
+									</td>
+
+									<td class="text-right">
+										<h6><strong><span style="margin-left:5px; margin-right:5px;" t-esc="total_balance" t-options="{'widget': 'float', 'precision': 0}"/></strong></h6>
+									</td>
+					
+									<td class="text-left">
+										<h6><strong><span style="margin-left:5px; margin-right:5px;" t-esc="total_final_balance" t-options="{'widget': 'float', 'precision': 0}"/></strong></h6>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+					</t>
+				</div>
+
+			</t>
+		</t>
+	</template>
+
+
+	<report
+		id="action_report_hierarchy_report_print"
+		model="hierarchy.report_print"
+		string="Reporte de Plan de Cuentas"
+		report_type="qweb-pdf"
+		name="l10n_co_account_hierarchy_report.report_puc_hierarchy"
+		file="l10n_co_account_hierarchy_report.report_puc_hierarchy"
+		menu="False"
+	/>
+
+
+	<record id="action_report_hierarchy_report_print" model="ir.actions.report">
+		<field name="paperformat_id" ref="base.paperformat_euro"/>
+	</record>
+
+</odoo>

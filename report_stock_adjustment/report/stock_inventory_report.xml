@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<template id="stock_inventory_new_report">
+			<t t-call="web.external_layout">
+				<t t-set="o" t-value="o.with_context(lang=lang)" />
+				<div class="page">
+					<div class="oe_structure"/>
+
+
+					<br/>
+					<br/>
+						<div class="row mt8">
+
+							<div class="col-4" style="font-weight:bold; font-size: 12px; color: #000000;">
+								<strong><span > FECHA: </span> </strong>
+								<span t-esc="o.date"/> 
+								<br/>
+								<strong><span> BODEGA PRINCIPAL: </span> </strong>
+								<span t-esc="o.location_id.location_id.name" class="text-uppercase"/> / <span t-esc="o.location_id.name" class="text-uppercase"/>
+								<br/>
+								<t t-value="request.env.user.partner_id.name" t-set="user_name"/>
+								<strong> <span> USUARIO: </span> </strong> <span t-esc="user_name.upper()"/> 
+								<br/>
+								<strong> <span> INVENTARIO: </span> </strong> <span t-esc="o.name" class="text-uppercase"/>
+								<br/>
+								<strong> <span> INVENTARIO DE: </span> </strong> <span t-esc="o.return_filter_value(o.filter)"/> 
+								<br/>
+
+							</div>
+							<div class="col-6" style="font-weight:bold; font-size: 15px; color: #000000;">
+								<center>
+									<strong>
+										<span t-esc="request.env.user.company_id.name"/>
+										<br/>
+										<span>ANALISIS DE DIFERENCIAS EN FISICO</span>
+										<br/>
+										<span>** POR ITEM **</span>
+									</strong>
+									<br/>
+								</center>					
+							</div>
+							<div class="col-2" style="font-weight:bold; font-size: 12px; color: #000000;">
+								<strong> FECHA: <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/></strong>
+								<br/>
+								<strong> HORA: <span t-esc="time.strftime('%H:%M:%S')"/> </strong>
+								<br/>
+
+							</div>
+						</div>
+
+					<br/>
+					<br/>
+
+					<table style="width: 100%;  border: 2px solid #000000;">
+						<thead style="width: 100%; font-weight:bold; font-size: 13px; border: 2px solid #000000; color: #000000;">
+							<tr>
+								<th class="text-center"><span> REFERENCIA </span></th>
+								<th class="text-center"><span> PRODUCTO </span></th>
+								<th class="text-center"><span> FISICO </span></th>
+								<th class="text-center"><span> EXISTENCIA </span></th>
+								<th class="text-center"><span> DIFERENCIA </span></th>
+								<th class="text-center"><span> COSTO UNI </span></th>
+								<th class="text-center"><span> COSTO TOTAL </span></th>
+							</tr>
+						</thead>
+						<tbody style="font-size: 12px; color: #000000;">
+		
+
+							<t t-set="total_fisico" t-value="0"/>
+							<t t-set="total_existencia" t-value="0"/>
+							<t t-set="total_diferencia" t-value="0"/>
+							<t t-set="total_cost" t-value="0"/>
+
+							<t t-foreach="o.line_ids" t-as="line">
+
+								<t t-set="standard_price" t-value="line.product_id.standard_price"/>
+								<t t-set="default_code" t-value="line.product_id.default_code"/>
+								<t t-set="cost_total" t-value="0"/>
+
+								<tr>
+
+									<td class="text-left">
+										<t t-if="default_code != 'False'">
+											<span t-esc="default_code"/>
+										</t>
+										<t t-else="">
+											<span></span>
+										</t>
+									</td>
+
+									<td class="text-left">
+										<span t-esc="line.product_id.name"/> - <span t-esc="line.product_uom_id.name"/>
+									</td>
+
+									<td class="text-right">
+										<span t-esc="line.theoretical_qty" t-options="{'widget': 'float', 'precision': 0}"/>
+									</td>
+
+									<td class="text-right">
+										<span t-esc="line.product_qty" t-options="{'widget': 'float', 'precision': 0}"/>
+									</td>
+
+									<td class="text-right">
+										<span t-esc="line.diference" t-options="{'widget': 'float', 'precision': 0}"/>
+									</td>
+
+									<td class="text-right">
+										<span t-esc="line.standard_price" t-options="{'widget': 'float', 'precision': 0}"/>
+									</td>
+
+									<td class="text-right">
+										<t t-set="cost_total" t-value="line.diference * standard_price"/>
+										<span t-esc="cost_total" t-options="{'widget': 'float', 'precision': 0}"/>
+									</td>
+								</tr>
+							
+
+
+								<t t-set="total_fisico" t-value="total_fisico + line.theoretical_qty"/>
+								<t t-set="total_existencia" t-value="total_existencia + line.product_qty"/>
+								<t t-set="total_diferencia" t-value="total_diferencia + line.diference"/>
+								<t t-set="total_cost" t-value="total_cost + cost_total"/>
+								
+
+							</t>
+
+
+							<tr>
+								<td class="text-center">
+									<strong><span>Total</span></strong>
+								</td>
+
+								<td class="text-left">
+									
+								</td>
+
+								<td class="text-right">
+									<strong><span t-esc="total_fisico" t-options="{'widget': 'float', 'precision': 0}"/></strong>
+								</td>
+
+								<td class="text-right">
+									<strong><span t-esc="total_existencia" t-options="{'widget': 'float', 'precision': 0}"/></strong>
+								</td>
+
+								<td class="text-right">
+									<strong><span t-esc="total_diferencia" t-options="{'widget': 'float', 'precision': 0}"/></strong>
+								</td>
+
+								<td class="text-right">
+									
+								</td>
+
+								<td class="text-right">
+									<strong><span t-esc="total_cost" t-options="{'widget': 'float', 'precision': 0}"/></strong>
+								</td>
+							</tr>
+		
+
+						</tbody>
+					</table> 
+
+
+
+
+				</div>
+			</t>
+		</template>
+
+
+
+		<template id="report_stock_inventory_new">
+			<t t-call="web.html_container">
+				<t t-foreach="docs" t-as="o">
+					<t t-set="lang" />
+					<t t-call="report_stock_adjustment.stock_inventory_new_report" t-lang="lang"/>
+				</t>
+			</t>
+		</template>
+
+
+		<report
+				id="print_report_stock_inventory_new"
+				model="stock.inventory"
+				string="Analisis de Diferencias en Fisico"
+				report_type="qweb-pdf"
+				name="report_stock_adjustment.report_stock_inventory_new"
+				file="report_stock_adjustment.report_stock_inventory_new"
+				menu="True"
+		/>
+
+
+	</data>
+</odoo>

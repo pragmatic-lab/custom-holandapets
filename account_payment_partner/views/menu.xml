@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="menu_accounting_entries_payment_partner" name="Concilliar Facturas" parent="account.menu_finance_entries_accounting_entries" action="action_account_entries_payment_partner"/>
+
+    </data>
+</odoo>
+

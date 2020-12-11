@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<odoo>
+
+	<record id="ftp_config_form_view" model="ir.ui.view">
+		<field name="name">Configuracion SFTP</field>
+		<field name="model">ftp.config</field>
+		<field name="arch" type="xml">
+			<form>
+				<header>
+					<button name="test_sftp_connection" type="object"
+						string="Probar Conexión SFTP" icon="fa-plug" class="oe_highlight" />
+				</header>
+				<sheet>
+					<group string="Configuración remota">
+						<field name="protocol_use" required="1" />
+						<field name="sftp_ip" required="1" />
+						<field name="sftp_username" required="1" />
+						<field name="sftp_password" required="1" password="True" />
+						<field name="sftp_port" required="1" />
+						<field name="sftp_path" required="1" />
+						<field name="sftp_autoremove" />
+						<field name="sftp_days_unlink"
+							attrs="{'invisible':[('sftp_autoremove', '=', False)],'required':[('sftp_autoremove', '=', True)]}" />
+						<field name="send_mail_sftp_fail" />
+						<field name="email_to_notify"
+							attrs="{'invisible':[('send_mail_sftp_fail', '=', False)],'required':[('send_mail_sftp_fail', '=', True)]}" />
+					</group>
+					<group string="Configuración Local" colspan="2">
+						<field name="files_path" required="1" />
+						<field name="local_autoremove" />
+						<field name="local_days_unlink"
+							attrs="{'invisible': [('local_autoremove','=',False)], 'required':[('local_autoremove', '=', True)]}" />
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="ftp_config_tree_view" model="ir.ui.view">
+		<field name="name">Configuracion SFTP</field>
+		<field name="model">ftp.config</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name='sftp_ip' />
+				<field name='sftp_username' />
+				<field name='email_to_notify' />
+				<field name='files_path' />
+				<field name="sftp_path" />
+			</tree>
+		</field>
+	</record>
+
+	<record id="ftp_config_search_view" model="ir.ui.view">
+		<field name="name">Configuracion SFTP</field>
+		<field name="model">ftp.config</field>
+		<field name="arch" type="xml">
+			<search>
+				<field name='sftp_ip' />
+				<field name='sftp_username' />
+				<field name='files_path' />
+				<field name='sftp_path' />
+			</search>
+		</field>
+	</record>
+
+	<record id="action_ftp_config_form" model="ir.actions.act_window">
+		<field name="name">Configuracion SFTP</field>
+		<field name="res_model">ftp.config</field>
+		<field name="view_type">form</field>
+		<field name='view_mode'>tree,form</field>
+		<field name='view_id' ref='ftp_config_tree_view' />
+		<field name='search_view_id' ref='ftp_config_search_view' />
+	</record>
+
+	<menuitem id="backup_conf_menu" parent="base.menu_email"
+		action="action_ftp_config_form" sequence="17" />
+
+</odoo>

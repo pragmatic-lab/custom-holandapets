@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="report_account_move_document">
+		<t t-call="web.internal_layout">
+			<div class="page">
+				<div class="div-bordered col-12" style="display: table;">
+					<div class="text-center" id="title">
+						<h3>
+							Asiento contable
+							<t t-if="o.state == 'draft'">
+								en borrador
+							</t>
+							<t t-if="o.state != 'draft'">
+								<span t-field="o.name" />
+							</t>
+						</h3>
+					</div>
+					<div class="row">
+						<div class="col-6">
+							<div class="col">
+								<strong>Nombre: </strong>
+								<span t-field="o.partner_id" />
+							</div>
+							<div class="col">
+								<strong t-esc="res_company.country_id.vat_label or 'Ced./R.U.C.'"></strong>
+								<span t-field="o.partner_id.ref" />
+							</div>
+						</div>
+						<div class="col-5 offset-1">
+							<div class="col">
+								<strong>Fecha: </strong>
+								<span t-field="o.date" />
+							</div>
+							<div class="col">
+								<strong>Diario: </strong>
+								<span t-field="o.journal_id" />
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="col">
+								<strong>Referencia</strong>
+								<span t-field="o.ref" />
+							</div>
+						</div>
+					</div>
+					<t t-call="generic_account.report_account_move_detail" />
+				</div>
+			</div>
+		</t>
+	</template>
+
+	<template id="report_account_move_detail">
+		<table class="table table-sm">
+			<thead>
+				<tr>
+					<th
+						style="border: 1px solid black; border-bottom: 1px solid black !important;">Cuenta Contable</th>
+					<th t-if="not print_grouped"
+						style="border: 1px solid black; border-bottom: 1px solid black !important;">Descripcion</th>
+					<th
+						style="border: 1px solid black; border-bottom: 1px solid black !important;">Debe</th>
+					<th
+						style="border: 1px solid black; border-bottom: 1px solid black !important;">Haber</th>
+				</tr>
+			</thead>
+			<tbody>
+				<t t-foreach="get_lines(o)" t-as="line">
+					<tr style="font-size: 12px;">
+						<td style="border-top: 1px solid black;">
+							<span t-esc="line['account_display_name']" />
+						</td>
+						<td style="border-top: 1px solid black;" t-if="not print_grouped">
+							<span t-esc="line['name']" />
+						</td>
+						<td class="text-right" style="border-top: 1px solid black;">
+							<span t-esc="line['debit']"
+								t-options='{"widget": "monetary", "display_currency": res_company.currency_id}' />
+						</td>
+						<td class="text-right" style="border-top: 1px solid black;">
+							<span t-esc="line['credit']"
+								t-options='{"widget": "monetary", "display_currency": res_company.currency_id}' />
+						</td>
+					</tr>
+				</t>
+				<tr class="border-black">
+					<td>
+					</td>
+					<td t-if="not print_grouped">
+					</td>
+					<td class="text-right">
+						<strong t-esc="get_total_debit(o)"
+							t-options='{"widget": "monetary", "display_currency": res_company.currency_id}' />
+					</td>
+					<td class="text-right">
+						<strong t-esc="get_total_credit(o)"
+							t-options='{"widget": "monetary", "display_currency": res_company.currency_id}' />
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</template>
+
+	<template id="report_account_move_sign">
+		<div class="col-xs-12">
+			<div class="col-xs-3">
+				<strong>________________</strong>
+				<br />
+				<strong>Elaborado por: </strong>
+			</div>
+			<div class="col-xs-3">
+				<strong>________________</strong>
+				<br />
+				<strong>Revisado por: </strong>
+
+			</div>
+			<div class="col-xs-3">
+				<strong>________________</strong>
+				<br />
+				<strong>Aprobado por: </strong>
+			</div>
+			<div class="col-xs-3">
+				<strong>________________</strong>
+				<br />
+				<strong>Recibi Conforme: </strong>
+				<br />
+				<strong>Nombre: </strong>
+				<br />
+				<strong>C.I.: </strong>
+				<br />
+			</div>
+		</div>
+	</template>
+
+	<template id="report_account_move">
+		<t t-call="web.html_container">
+			<t t-foreach="docs" t-as="o">
+				<t t-call="generic_account.report_account_move_document" />
+			</t>
+		</t>
+	</template>
+
+	<template id="report_account_move_grouped">
+		<t t-call="web.html_container">
+			<t t-foreach="docs" t-as="o">
+				<t t-call="generic_account.report_account_move_document" />
+			</t>
+		</t>
+	</template>
+
+	<report 
+		id="action_report_account_move" 
+		model="account.move"
+		string="Asiento Contable" 
+		report_type="qweb-pdf"
+		name="generic_account.report_account_move" 
+		file="generic_account.report_account_move"
+		paperformat="paperformat_account_move" 
+		menu="True" />
+
+	<report 
+		id="action_report_account_move_grouped" 
+		model="account.move"
+		string="Asiento Contable Agrupado" 
+		report_type="qweb-pdf"
+		name="generic_account.report_account_move_grouped"
+		file="generic_account.report_account_move_grouped"
+		paperformat="paperformat_account_move"
+		menu="True" />
+
+</odoo>

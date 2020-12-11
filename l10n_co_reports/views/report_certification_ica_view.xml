@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="report_certification_ica_view_form" model="ir.ui.view">
+		<field name="name">report.certification_ica.form</field>
+		<field name="model">report.certification_ica</field>
+		<field name="arch" type="xml">
+			<form>
+				<h3 class="panel-title">Certificado de Retención en ICA</h3>
+
+				<group col="4">
+					<field name="date_begin"/>
+					<field name="date_end"/>
+				</group>
+
+				<group string="Terceros">
+					<field name="partner_ids" string="Terceros" widget="many2many_tags"/>
+				</group>
+
+				<footer>
+					<button name="generate_pdf" string="Generar Pdf" type="object" class="btn-primary" />
+					<button name="generate_excel" string="Generar Excel" type="object" class="btn-primary" />
+
+					<field name="document" readonly="1" filename='filename'/>
+					<field name="filename" readonly="1" invisible="1"/>
+				</footer>
+
+			</form>
+		</field>
+	</record>
+		
+		
+	<record id="menu_action_account_report_certification_ica" model="ir.actions.act_window">
+		<field name="name">Certificado de Retención en ICA</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">report.certification_ica</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+	</record>
+
+</odoo>

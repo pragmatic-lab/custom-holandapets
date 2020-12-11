@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<record model="ir.ui.view" id="stock_config_settings_form_view">
+		<field name="name">stock.config.settings.form</field>
+		<field name="model">res.config.settings</field>
+		<field name="priority" eval="50" />
+		<field name="inherit_id" ref="stock.res_config_settings_view_form" />
+		<field name="arch" type="xml">
+			<xpath expr="//label[@for='group_stock_tracking_owner']/../.."
+				position="after">
+				<div class="col-12 col-md-6 o_setting_box">
+					<div class="o_setting_left_pane">
+						<field name="group_set_date_movement_picking" />
+					</div>
+					<div class="o_setting_right_pane">
+						<label for="group_set_date_movement_picking" />
+						<div class="text-muted">
+							Permitir especificar la fecha de movimiento del
+							stock
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-md-6 o_setting_box" groups="stock.group_stock_multi_locations">
+					<div class="o_setting_left_pane">
+					</div>
+					<div class="o_setting_right_pane">
+						<label for="location_showed_ids" />
+						<div class="text-muted">
+							Bodegas a mostrar stock en productos
+						</div>
+						<field name="location_showed_ids" widget="many2many_tags"
+							options="{'no_create': True}" domain="[('usage','=','internal')]" />
+					</div>
+				</div>
+				<div class="col-12 col-md-6 o_setting_box">
+					<div class="o_setting_left_pane">
+					</div>
+					<div class="o_setting_right_pane">
+						<label for="stock_policy" />
+						<div class="text-muted">
+							Control de Stock en Negativos
+						</div>
+						<div class="content-group">
+							<div class="mt16">
+								<field name="stock_policy" class="o_light_label" widget="radio" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</xpath>
+		</field>
+	</record>
+
+</odoo>

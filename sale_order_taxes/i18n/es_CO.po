@@ -1,0 +1,93 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* sale_order_taxes
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-02-25 18:26+0000\n"
+"PO-Revision-Date: 2020-02-25 18:26+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sale_order_taxes
+#: model:ir.model.fields,field_description:sale_order_taxes.field_sale_order_tax__amount
+msgid "Amount"
+msgstr "Importe"
+
+#. module: sale_order_taxes
+#: model:ir.model.fields,field_description:sale_order_taxes.field_sale_order_tax__base
+msgid "Base"
+msgstr ""
+
+#. module: sale_order_taxes
+#: model:ir.model.fields,field_description:sale_order_taxes.field_sale_order_tax__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: sale_order_taxes
+#: model:ir.model.fields,field_description:sale_order_taxes.field_sale_order_tax__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: sale_order_taxes
+#: model:ir.model.fields,field_description:sale_order_taxes.field_sale_order_tax__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: sale_order_taxes
+#: model:ir.model.fields,help:sale_order_taxes.field_sale_order_tax__sequence
+msgid "Gives the sequence order when displaying a list of order tax."
+msgstr ""
+
+#. module: sale_order_taxes
+#: model:ir.model.fields,field_description:sale_order_taxes.field_sale_order_tax__id
+msgid "ID"
+msgstr ""
+
+#. module: sale_order_taxes
+#: model:ir.model.fields,field_description:sale_order_taxes.field_sale_order__taxes_ids
+#: model_terms:ir.ui.view,arch_db:sale_order_taxes.sale-order_form_view
+msgid "Impuestos"
+msgstr ""
+
+#. module: sale_order_taxes
+#: model:ir.model.fields,field_description:sale_order_taxes.field_sale_order_tax____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: sale_order_taxes
+#: model:ir.model.fields,field_description:sale_order_taxes.field_sale_order_tax__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: sale_order_taxes
+#: model:ir.model.fields,field_description:sale_order_taxes.field_sale_order_tax__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: sale_order_taxes
+#: model:ir.model.fields,field_description:sale_order_taxes.field_sale_order_tax__order_id
+msgid "Sale Order"
+msgstr "Pedido de venta"
+
+#. module: sale_order_taxes
+#: model:ir.model.fields,field_description:sale_order_taxes.field_sale_order_tax__sequence
+msgid "Sequence"
+msgstr "Secuencia"
+
+#. module: sale_order_taxes
+#: model:ir.model.fields,field_description:sale_order_taxes.field_sale_order_tax__name
+msgid "Tax Description"
+msgstr "Descripción de impuesto"
+
+#. module: sale_order_taxes
+#: model:ir.model,name:sale_order_taxes.model_sale_order_tax
+msgid "sale.order.tax"
+msgstr ""
+

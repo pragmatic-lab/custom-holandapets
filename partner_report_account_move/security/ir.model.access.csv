@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_partner_report_move,account.partner_report_move,model_account_partner_report_move,,1,1,1,1
+access_account_partner_report_move_view,account.partner_report_move_view,model_account_partner_report_move_view,,1,1,1,1
+access_account_save_report,account.save_report,model_account_save_report,,1,1,1,1

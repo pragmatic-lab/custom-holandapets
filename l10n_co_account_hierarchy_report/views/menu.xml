@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<!-- Agregando menu en Facturas, en el menu de Informes -->
+	<menuitem  
+	id="menu_l10n_co_hierarchy_report_print" 
+	action="hierarchy_report_print_action"
+	sequence="205" 
+	parent="account.menu_finance_reports" />
+	
+</odoo>

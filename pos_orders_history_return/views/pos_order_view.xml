@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record id="pos_order_form_view" model="ir.ui.view">
+		<field name="name">pos.order.form</field>
+		<field name="model">pos.order</field>
+		<field name="inherit_id" ref="point_of_sale.view_pos_pos_form" />
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='pos_reference']" position="after">
+				<field name="origin_order_id" />
+			</xpath>
+			<xpath expr="//notebook" position="inside">
+				<page name="devolutions" string="Devoluciones"
+					attrs="{'invisible': [('devolution_ids', '=', [])]}">
+					<field name="devolution_ids" />
+				</page>
+			</xpath>
+		</field>
+	</record>
+</odoo>

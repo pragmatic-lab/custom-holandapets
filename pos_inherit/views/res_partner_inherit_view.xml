@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+				<!-- Extending Partner Form View -->
+				<record id="view_partner_form" model="ir.ui.view">
+					 <field name="inherit_id" ref="base.view_partner_form" />
+						<field name="model">res.partner</field>
+						<field name="arch" type="xml">
+
+							<field name="website" position="before">
+								<field name="neighborhood"/>
+							</field>
+
+						</field>
+				</record>
+</odoo>

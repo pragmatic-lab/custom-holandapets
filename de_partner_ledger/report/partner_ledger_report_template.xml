@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="de_partner_ledger_pdf_report">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <div class="text-left">
+                    <h3 class="text-center">Partner Statement </h3>
+                    <!--<span t-esc="data['product_id']"/>-->
+                    <t t-foreach="request.env['res.partner'].search([('id', '=', data['partner_id'])])" t-as="prd">
+                        <h4><span t-field="prd.name"/></h4>
+                    </t>
+                        <p>From Date: <span t-esc="data['start_date']" t-options="{'widget': 'date'}" />  To Date: <span t-esc="data['end_date']" t-options="{'widget': 'date'}" /></p>
+                    </div>
+                </div>
+                <table class="table table-condensed" name="account_lines_table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Doc No.</th>
+                            <th>Account</th>
+                            <th>Description</th>
+                            <th>Debit</th>
+                            <th>Credit</th>
+                            <th>Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                         <t t-set="rb" t-value="0"/>
+                        <tr t-foreach="openbal" t-as="o" style="border-bottom:1px solid #000;">
+                                <td colspan="6" class="text-left" >Opening Balance</td>
+                                <td><span t-esc="o['opening_bal']"/></td>
+                            
+                            <t t-if="o['opening_bal']">
+                            <t t-set="rb" t-value="rb + o['opening_bal']"/>
+                            </t>
+                        </tr>
+                       <tr t-foreach="dat" t-as="d" style="border-bottom:1px solid #000;">
+                            <t t-set="rb" t-value="rb + d['debit'] - d['credit'] "/>
+                           <td><span t-esc="d['date']" t-options="{'widget': 'date'}" /></td>
+                                <td><span t-esc="d['doc_no']"/></td>                                
+                                <td><span t-esc="d['gl_account']"/></td>
+                                <td><span t-esc="d['line_desc']"/></td>
+                               <td><t t-esc="'{0:,.2f}'.format(int(d['debit']))" /></td>
+                                <td><t t-esc="'{0:,.2f}'.format(int(d['credit']))" /></td>
+                           <td><t t-esc="'{0:,.2f}'.format(int(rb))" /></td>
+
+                        </tr>
+                        <tr style="border-top:1px solid #000;">
+                                <td colspan="6" class="text-left">Closing Balance</td>
+                                <td><t t-esc="'{0:,.2f}'.format(int(rb))" /></td>
+
+
+                        </tr>
+                    </tbody>
+                  </table>
+            </t>
+        </t>
+    </template>
+</odoo>

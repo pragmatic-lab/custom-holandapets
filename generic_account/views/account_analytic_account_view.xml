@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record id="account_analytic_account_tree_view" model="ir.ui.view">
+		<field name="name">account.analytic.account.tree</field>
+		<field name="model">account.analytic.account</field>
+		<field name="inherit_id" ref="analytic.view_account_analytic_account_list" />
+		<field name="arch" type="xml">
+			<field name="debit" position="replace" />
+			<field name="credit" position="replace" />
+			<field name="balance" position="replace" />
+		</field>
+	</record>
+</odoo>

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_payment_partner_register,account.payment_partner_register,model_account_payment_partner_register,,1,1,1,1
+access_account_entries_payment_partner,account.entries_payment_partner,model_account_entries_payment_partner,,1,1,1,1
+access_account_payment_partner_amount,account.payment_partner_amount,model_account_payment_partner_amount,,1,1,1,1
+

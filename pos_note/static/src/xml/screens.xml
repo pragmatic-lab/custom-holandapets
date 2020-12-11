@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-extend="OrderWidget">
+        <t t-jquery=".summary" t-operation="after">
+            <div class="col-md-12">
+                <ul style="height: 120px">
+                    <li>
+                    	<t t-if="widget.pos.config.enable_order_note">
+							<div class="order-note">
+								<span class="order-note-title">Order Note</span>
+								<span class="order-note-content" />
+							</div>
+						</t>
+                    </li>
+                </ul>
+            </div>
+        </t>
+    </t>
+    
+    <t t-name="OrderLineNote">
+    	<t t-if="line.get_note()">
+            <li class="info orderline-note">
+                <i class="fa fa-tag" /><t t-esc="line.get_note()" />
+            </li>
+        </t>
+    </t>
+    
+    <t t-extend="Orderline">
+    	<t t-jquery=".info-list" t-operation="append">
+    		<t t-call="OrderLineNote" />
+    	</t>
+    </t>
+    
+    <t t-extend="PaymentScreenWidget">
+    	<t t-jquery="div[class*='js_set_customer']" t-operation="after">
+            <t t-if="widget.pos.config.enable_order_note and widget.pos.get_order()">
+                <div class='button js_add_note'>
+                	<i class="fa fa-tag" /> Add Order Note
+                    <div class="order-note-content">
+                    	<span><t t-esc="widget.pos.get_order().get_note() || ''" /></span>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </t>
+
+</templates>

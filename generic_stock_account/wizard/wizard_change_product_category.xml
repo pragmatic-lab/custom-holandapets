@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record id="wizard_change_product_category_form_view" model="ir.ui.view">
+		<field name="name">wizard.change.product.category.form</field>
+		<field name="model">wizard.change.product.category</field>
+		<field name="arch" type="xml">
+			<form string="Asistente para Cambiar Categorias de Productos">
+				<group colspan="2">
+					<field name="product_categ_id" required="1" options="{'no_create': True}" />
+				</group>
+				<notebook colspan="2">
+					<page string="Productos a cambiar de categoria">
+						<field name="product_ids"
+							domain="[('type','!=','service'), ('categ_id','!=',product_categ_id)]"
+							options="{'no_create': True}" />
+					</page>
+				</notebook>
+				<footer>
+					<div class="oe_left">
+						<button string='Cambiar de Categorias' name="action_change_product_categ"
+							type="object" class="oe_highlight"
+							confirm="Esta seguro de cambiar la categoria a todos los productos seleccionados?" />
+						<button string="Cerar" special="cancel" type="object"
+							class="oe_link" />
+					</div>
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="wizard_change_product_category_result_form_view"
+		model="ir.ui.view">
+		<field name="name">wizard.change.product.category.form</field>
+		<field name="model">wizard.change.product.category</field>
+		<field name="arch" type="xml">
+			<form string="Asistente para Cambiar Categorias de Productos">
+				<h3>Proceso terminado con exito</h3>
+				<h4 attrs="{'invisible': [('acc_move_id','=',False)]}">Se creo el siguiente asiento contable para traspasar
+					la contabilidad a la cuenta contable de la nueva categoria
+				</h4>
+				<group colspan="2" attrs="{'invisible': [('acc_move_id','=',False)]}">
+					<field name="acc_move_id" readonly="1" />
+				</group>
+				<footer>
+					<div class="oe_left">
+						<button string="Cerar" special="cancel" class="oe_link" />
+					</div>
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<record model="ir.actions.act_window" id="action_wizard_change_product_category_view">
+		<field name="name">Cambiar Categorias de Productos</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">wizard.change.product.category</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="target">new</field>
+		<field name="view_id" ref="wizard_change_product_category_form_view" />
+	</record>
+
+	<menuitem id="wizard_change_product_category_menu" name="Cambiar Categorias de Productos"
+		parent="stock.menu_product_in_config_stock" action="action_wizard_change_product_category_view"
+		sequence="3" />
+</odoo>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="account_save_report_view_form" model="ir.ui.view">
+		<field name="name">account_save_report_form</field>
+		<field name="model">account.save_report</field>
+		<field name="arch" type="xml">
+			<form>
+
+				<h3 class="panel-title">Configuración de la Plantilla</h3>
+				<group>
+					<field name="name"/>
+				</group>
+				<group string="Cuentas">
+					<field name="account_ids" nolabel="1" widget="many2many_tags"/>
+				</group>
+
+			</form>
+		</field>
+	</record>
+
+</odoo>

@@ -1,0 +1,1 @@
+Allow users to add narration of payment ref from the POS

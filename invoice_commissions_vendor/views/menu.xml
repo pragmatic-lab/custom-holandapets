@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+		<!-- Agregando menu en Facturas, en el menu de Informes -->
+       <menuitem  
+       	id="menu_account_invoice_report_commission_user" 
+       	action="invoice_commissions_vendor.commission_vendor_action"
+       	sequence="205" 
+       	parent="account.menu_finance_reports" />
+        
+</odoo>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<record id="account_cashbox_line_search_view" model="ir.ui.view">
+		<field name="name">account.cashbox.line.search</field>
+		<field name="model">account.cashbox.line</field>
+		<field name="arch" type="xml">
+			<search>
+				<field name="default_pos_id" string="Punto de Venta" />
+			</search>
+		</field>
+	</record>
+
+	<record id="account_cashbox_line_tree_view" model="ir.ui.view">
+		<field name="name">account.cashbox.line.tree</field>
+		<field name="model">account.cashbox.line</field>
+		<field name="inherit_id" ref="point_of_sale.account_cashbox_line_view_tree" />
+		<field name="arch" type="xml">
+			<tree position="attributes">
+				<attribute name="editable">bottom</attribute>
+			</tree>
+		</field>
+	</record>
+
+	<record id="point_of_sale.account_cashbox_line_action" model="ir.actions.act_window">
+		<field name="context">{'search_default_default_pos_id': active_id}</field>
+	</record>
+	
+	<!-- el conteo de efectivo el usuario no podra agregar, eliminar o cambiar la denominacion de moneda
+		esto se debe hacer en el TPV -->
+	<record id="account_bank_statement_cashbox_tree_view" model="ir.ui.view">
+		<field name="name">account.bank.statement.cashbox.tree</field>
+		<field name="model">account.bank.statement.cashbox</field>
+		<field name="inherit_id" ref="account.view_account_bnk_stmt_cashbox" />
+		<field name="groups_id" eval="[(6, 0, [ref('point_of_sale.group_pos_user')])]"></field>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='cashbox_lines_ids']/tree" position="attributes">
+				<attribute name="create">0</attribute>
+				<attribute name="delete">0</attribute>
+			</xpath>
+			<xpath expr="//field[@name='cashbox_lines_ids']/tree//field[@name='coin_value']" position="attributes">
+				<attribute name="readonly">1</attribute>
+				<attribute name="force_save">1</attribute>
+			</xpath>
+		</field>
+	</record>
+	
+</odoo>

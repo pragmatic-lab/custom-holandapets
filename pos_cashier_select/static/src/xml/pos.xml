@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="CashierSelectionPopupWidget">
+        <div class="modal-dialog cashier">
+            <div class="popup popup-selection cashier">
+                <p class="title"><t t-esc=" widget.options.title || 'Select' " /></p>
+                <div class='selection scrollable-y touch-scrollable cashier'>
+                    <div class="selection cashier">
+                        <t t-foreach="widget.list || []" t-as="item">
+                            <span class='selection-item product' t-att-data-item-index='item_index'>
+                            	<div class="product-img">
+                                	<img t-att-src="'/web/image?model=res.users&amp;field=image&amp;id=' + item.item.id" />
+                                </div>
+                                <div class="product-name">
+                                	<t t-esc='item.label'/>
+                                </div>
+                            </span>
+                        </t>
+                    </div>
+                </div>
+                <div class="footer cashier">
+                    <div class="button cancel">
+                        Cancel 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

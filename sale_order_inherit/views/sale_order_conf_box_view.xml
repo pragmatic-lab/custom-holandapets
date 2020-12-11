@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="sale_order_conf_box_view_form" model="ir.ui.view">
+		<field name="name">sale.order_conf_box.form</field>
+		<field name="model">sale.order_conf_box</field>
+		<field name="arch" type="xml">
+			<form>
+
+				<group string="Datos Principales">
+					<group col='2'>
+						<field name="serial"/>
+			
+					</group>
+					<group col='2'>
+					
+						<field name="name"/>
+					</group>
+				</group>
+				<group string="Descripción">
+					<field name="description" nolabel="1"/>
+				</group>
+		
+			</form>
+		</field>
+	</record>
+		
+		
+	<record id="sale_order_conf_box_view_tree" model="ir.ui.view">
+		<field name="name">sale.order_conf_box.tree</field>
+		<field name="model">sale.order_conf_box</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="serial"/>
+				<field name="name"/>
+			</tree>
+		</field>
+	</record>
+
+
+<!-- 	<record id="sale_order_conf_box_action" model="ir.actions.act_window">
+		<field name="name">Configuración Impresión</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">sale.order_conf_box</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html">
+		  <p class="o_view_nocontent_smiling_face">
+			Crear una nueva configuración
+		  </p>
+		</field>
+	</record> -->
+
+
+
+</odoo>

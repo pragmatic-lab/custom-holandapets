@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record model="ir.ui.view" id="wizard_product_no_tock_form_view">
+		<field name="name">wizard.product.no.stock.form</field>
+		<field name="model">wizard.product.no.stock</field>
+		<field name="arch" type="xml">
+			<form string="Productos sin Stock">
+				<sheet>
+					<h3>Los siguientes productos no tienen stock suficiente, por favor
+						verifique antes de continuar.
+					</h3>
+					<field name="line_ids" readonly="1">
+						<tree>
+							<field name="product_id" />
+							<field name="product_qty" />
+							<field name="qty_available" />
+							<field name="uom_id" />
+							<field name="location_id" />
+							<field name="lot_id" />
+						</tree>
+						<form>
+							<group>
+								<group>
+									<field name="product_id" />
+									<field name="qty_available" />
+									<field name="location_id" />
+								</group>
+								<group>
+									<field name="product_qty" />
+									<field name="uom_id" />
+									<field name="lot_id" />
+								</group>
+							</group>
+						</form>
+					</field>
+				</sheet>
+				<footer>
+					<div class="oe_left">
+						<button string="Cerrar" special="cancel" type="object"
+							class="oe_link" />
+					</div>
+				</footer>
+			</form>
+		</field>
+	</record>
+</odoo>

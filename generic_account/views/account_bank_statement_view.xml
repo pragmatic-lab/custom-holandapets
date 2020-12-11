@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<record id="account_bank_statement_search_view" model="ir.ui.view">
+		<field name="name">account.bank.statement.search</field>
+		<field name="model">account.bank.statement</field>
+		<field name="inherit_id" ref="account.view_bank_statement_search" />
+		<field name="arch" type="xml">
+			<field name="date" position="after">
+				<filter name="this_month" string="Fecha" date="date" />
+				<separator />
+			</field>
+		</field>
+	</record>
+
+	<record id="account_bank_statement_form_view" model="ir.ui.view">
+		<field name="name">account.bank.statement.form</field>
+		<field name="model">account.bank.statement</field>
+		<field name="inherit_id" ref="account.view_bank_statement_form" />
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='line_ids']/tree" position="after">
+				<form>
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+								<field name="partner_id" />
+								<field name="amount" />
+							</group>
+							<group>
+								<field name="date" />
+								<field name="ref" />
+								<field name="sequence" />
+								<field name="journal_currency_id" invisible="1" />
+							</group>
+							<group colspan="2" string="Notas">
+								<field name="note" nolabel="1" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="account_bank_statement_kanban_view" model="ir.ui.view">
+		<field name="name">account.bank.statement.kanban</field>
+		<field name="model">account.bank.statement</field>
+		<field name="arch" type="xml">
+			<kanban class="o_kanban_mobile">
+				<field name="name" />
+				<field name="date" />
+				<field name="journal_id" />
+				<field name="balance_start" />
+				<field name="balance_end_real" />
+				<field name="balance_end" />
+				<field name="currency_id" />
+				<field name="state" />
+				<field name="is_difference_zero" />
+				<templates>
+					<t t-name="kanban-box">
+						<div t-attf-class="oe_kanban_card oe_kanban_global_click">
+							<div class="o_kanban_record_top">
+								<div class="o_kanban_record_headings">
+									<strong class="o_kanban_record_title">
+										<strong t-esc="record.journal_id.value" />
+									</strong>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-6">
+									<strong>Inicial:</strong>
+									<span class="float-right">
+										<field name="balance_start" widget="monetary" />
+									</span>
+								</div>
+								<div class="col-6">
+									<span class="float-right">
+										<i class="fa fa-clock-o" aria-label="Fecha" role="img" title="Fecha" />
+										<t t-esc="record.date.value" />
+									</span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-6">
+									<strong>Final:</strong>
+									<span class="float-right">
+										<field name="balance_end_real" widget="monetary" />
+									</span>
+								</div>
+								<div class="col-6">
+									<div class="float-right">
+										<field name="state" widget="label_selection"
+											options="{'classes': {'open': 'info', 'confirm': 'success'}}" />
+									</div>
+								</div>
+							</div>
+							<div class="o_kanban_record_top">
+								<div class="o_kanban_record_headings">
+									<strong class="o_kanban_record_title">
+										<strong>Referencia:</strong>
+										<span t-esc="record.name.value" />
+									</strong>
+								</div>
+							</div>
+						</div>
+					</t>
+				</templates>
+			</kanban>
+		</field>
+	</record>
+
+	<record id="account.action_view_bank_statement_tree" model="ir.actions.act_window">
+		<field name="view_mode">tree,form,kanban,pivot,graph</field>
+		<field name="context">{'journal_type':'cash', 'search_default_this_month':1}</field>
+	</record>
+
+	<record id="account.action_bank_statement_tree" model="ir.actions.act_window">
+		<field name="view_mode">tree,form,kanban,pivot,graph</field>
+		<field name="context">{'journal_type':'bank', 'search_default_this_month':1}</field>
+	</record>
+
+</odoo>

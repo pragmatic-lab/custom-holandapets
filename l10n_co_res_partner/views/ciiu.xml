@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+
+      <!--
+    <record id="view_res_co_ciiu_search" model="ir.ui.view">
+        <field name="name">res.ciiu.search</field>
+        <field name="model">res.ciiu</field>
+        <field name="arch" type="xml">
+            <search string="CIIU">
+              <field name="code" filter_domain="['|', ('code','ilike',self), ('name','ilike',self)]" string="Código / Actividad"/>
+              <group expand="0" string="Group By...">
+                <filter string="Secciones" icon="terp-folder-orange" domain="[('parent_id','=',False)]"/>
+              </group>
+            </search>
+        </field>
+    </record>
+  -->
+
+
+    <record model="ir.ui.view" id="view_res_co_ciiu_lines_form">
+        <field name="name">res.ciiu.form</field>
+        <field name="model">res.ciiu</field>
+        <field name="field_parent">child_id</field>
+        <field name="arch" type="xml">
+            <form string="CIIU">
+              <sheet>
+              <group name="ciiu">
+                <group string="Datos CIIU">
+                  <field name="code" />
+                  <field name="name" />
+                </group>
+                <group string="Propiedades">
+                  <field name="parent_id" />
+                  <field name="type" />
+                </group>
+              </group>
+              <notebook>
+                <page string="Impuesos y Retenciones del CIUU">
+                </page>
+              </notebook>
+              <field name="note" class="oe_inline" placeholder="Notas del código..."/>
+              </sheet>
+            </form>
+        </field>
+    </record>
+
+
+
+    <record id="view_res_co_ciiu_tree" model="ir.ui.view">
+      <field name="name">res.ciiu.tree</field>
+      <field name="model">res.ciiu</field>
+      <field name="field_parent">child_id</field>
+      <field name="arch" type="xml">
+
+
+        <tree decoration-it="type == 'view'" decoration-bf="type == 'other'" string="CIIU ID code." toolbar="1">
+          <field name="code" />
+                    <field name="name" />
+          <field name="parent_id" invisible="1"/>
+                    <field name="type" invisible="1"/>
+        </tree>
+      </field>
+    </record>
+
+
+
+    <record id="action_res_co_ciiu_form" model="ir.actions.act_window">
+      <field name="name">CIIU, ICA y CREE</field>
+      <field name="res_model">res.ciiu</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <!--
+      <field name="search_view_id" ref="view_res_co_ciiu_search"/>
+    -->
+    </record>
+
+
+
+    <menuitem id="base_ciiu_menu"
+              parent="account.account_account_menu"
+              action="action_res_co_ciiu_form"
+              sequence="0"/>
+
+  </data>
+</odoo>

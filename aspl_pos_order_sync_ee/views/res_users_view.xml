@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="aspl_sale_note_res_users_form_view_ace" model="ir.ui.view">
+        <field name="name">res.users.form.view</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="point_of_sale.res_users_view_form"/>
+        <field name="arch" type="xml">
+            <field name="barcode" position="before">
+                <field name="based_on" required="1"/>
+            </field>
+
+		<field name="pos_security_pin" position="after">
+		        <separator string="Operation Restriction"/>
+		           	<field name="can_change_price"/>
+		            <field name="can_give_discount"/>
+		            <field name="discount_limit" attrs="{'invisible' : [('can_give_discount' ,'!=', True)]}" />
+        	    <separator string="Order Sync"/>
+	                <field name="pos_user_type"/>
+	                <field name="sales_persons" widget="many2many_tags"
+	                attrs="{'invisible' : [('pos_user_type' ,'!=', 'cashier')]}"
+	                context="{'from_sales_person': True}"/>
+	        </field>
+        </field>
+        </record>
+
+    </data>
+</openerp>

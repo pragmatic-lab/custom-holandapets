@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2018 Artem Losev
+     Copyright 2018 Dinar Gabbasov <https://it-projects.info/team/GabbasovDinar>
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html). -->
+<templates id="template" xml:space="preserve">
+
+    <t t-extend="OrderHistory">
+        <t t-jquery=".actions.oe_hidden" t-operation="append">
+            <span class="button reprint oe_hidden"><i class="fa fa-print "></i> Reprint</span>
+        </t>
+    </t>
+
+    <t t-name="ReprintReceiptScreenWidget">
+        <div class='receipt-screen screen'>
+            <div class='screen-content'>
+                <div class='top-content'>
+                    <span class='button back'>
+                        <i class='fa fa-angle-double-left'></i>
+                        Back
+                    </span>
+                </div>
+                <div class="centered-content touch-scrollable">
+                    <div class="button print">
+                        <i class='fa fa-print'></i> Print Receipt
+                    </div>
+                    <div class="pos-receipt-container">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+
+</templates>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record model="ir.ui.view" id="pos_order_form_view">
+		<field name="name">pos.order.form</field>
+		<field name="model">pos.order</field>
+		<field name="inherit_id" ref="point_of_sale.view_pos_pos_form" />
+		<field name="priority" eval="5" />
+		<field name="arch" type="xml">
+			<field name="amount_tax" position="after">
+				<field name="rounding" attrs="{'invisible': [('rounding','=',0.0)]}" />
+			</field>
+		</field>
+	</record>
+
+</odoo>

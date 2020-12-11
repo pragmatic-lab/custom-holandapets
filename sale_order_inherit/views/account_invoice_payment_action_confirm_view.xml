@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="account_invoice_payment_action_confirm_view_form" model="ir.ui.view">
+		<field name="name">account.invoice_payment_action_confirm.form</field>
+		<field name="model">account.invoice_payment_action_confirm</field>
+		<field name="arch" type="xml">
+			<form>
+				<h3 class="panel-title">Pagos</h3>
+				
+				<field name="invoice_id" invisible="1"/>
+				<group col="1">
+					<field name="payment_action_ids" context="{'invoice_id': invoice_id}" nolabel="1"/>
+				</group>
+
+
+				<footer>
+					<button name="button_payment_invoice_complete" string="Validar" type="object" class="btn-primary" />
+				</footer>
+			</form>
+		</field>
+	</record>
+		
+
+</odoo>

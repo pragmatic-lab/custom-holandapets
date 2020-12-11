@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_sale_order_limit_credit,access_sale_order_limit_credit,model_sale_order,limit_credit_partner.group_conf_limit_credit,1,1,1,1
+access_limit_credit_partner,access_limit_credit_partner,model_limit_credit_partner,,1,1,1,1
+access_limit_credit,access_limit_credit,model_limit_credit,,1,1,1,1

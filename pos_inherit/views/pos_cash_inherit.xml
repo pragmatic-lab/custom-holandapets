@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	
+	<record model="ir.ui.view" id="cash_box_out_form_inherit">
+		<field name="name">cash_box_out</field>
+		<field name="model">cash.box.out</field>
+		<field name="inherit_id" ref="account.cash_box_out_form" />
+		<field name="arch" type="xml">
+
+			<field name="name" position="after">
+				<field name="pos_session_id" invisible="1"/>
+				<field name="partner_id" class="oe_inline"/>
+				<field name="account_id" class="oe_inline"/>
+			</field>
+
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="cash_box_in_form_inherit">
+		<field name="name">cash_box_in</field>
+		<field name="model">cash.box.in</field>
+		<field name="inherit_id" ref="account.cash_box_in_form" />
+		<field name="arch" type="xml">
+
+			<field name="name" position="after">
+				<field name="pos_session_id" invisible="1"/>
+				<field name="partner_id" class="oe_inline"/>
+				<field name="account_id" class="oe_inline"/>
+			</field>
+
+		</field>
+	</record>
+
+	
+</odoo>

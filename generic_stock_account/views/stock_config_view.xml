@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record id="stock_config_settings_form_view" model="ir.ui.view">
+		<field name="name">stock.config.settings.form</field>
+		<field name="model">res.config.settings</field>
+		<field name="groups_id" eval="[(4, ref('account.group_account_user'))]"></field>
+		<field name="inherit_id" ref="stock.res_config_settings_view_form" />
+		<field name="arch" type="xml">
+			<xpath expr="//h2[@id='schedule_info']" position="before">
+				<h2>Contabilidad</h2>
+				<div class="row mt16 o_settings_container">
+					<div class="col-12 col-md-6 o_setting_box">
+						<div class="o_setting_left_pane">
+						</div>
+						<div class="o_setting_right_pane">
+							<label for="property_valuation" />
+							<div class="text-muted">
+								Crear asientos contables para valoracion de
+								inventario automatica o manualmente
+							</div>
+							<div class="content-group">
+								<div class="mt16">
+									<field name="property_valuation" class="o_light_label"
+										widget="radio" />
+									<button name="action_set_valuation_products" string="Cambiar a todos los productos"
+										confirm="Está seguro de cambiar el método de valoracion de inventario a todos los productos?. Ésta opcion no puede revertirse."
+										type="object" class="oe_link oe_inline fa fa-arrow-right" />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-md-6 o_setting_box">
+						<div class="o_setting_left_pane">
+						</div>
+						<div class="o_setting_right_pane">
+							<label for="property_cost_method" />
+							<div class="text-muted">
+								Precio por defecto en productos, esto afecta la
+								valoracion de inventario
+							</div>
+							<div class="content-group">
+								<div class="mt16">
+									<field name="property_cost_method" class="o_light_label"
+										widget="radio" />
+									<button name="action_set_cost_method_products" string="Cambiar a todos los productos"
+										confirm="Está seguro de cambiar el método de coste a todos los productos?. Ésta opcion no puede revertirse."
+										type="object" class="oe_link oe_inline fa fa-arrow-right" />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-md-6 o_setting_box">
+						<div class="o_setting_left_pane">
+						</div>
+						<div class="o_setting_right_pane">
+							<span class="o_form_label">Cuentas de Inventario</span>
+							<div class="text-muted">
+								Cuentas por defecto en productos, esto afecta la
+								valoracion de inventario
+							</div>
+							<div class="content-group">
+								<div class="row mt16">
+									<label for="stock_account_input_id" string="Entrada de Stock" class="col-3" />
+									<field name="stock_account_input_id" options="{'no_quick_create': True}"
+										class="o_light_label" />
+									<button name="action_set_account_input" string="Cambiar a todos los productos"
+										confirm="Está seguro de cambiar la cuenta de Entrada de inventario a todos los productos?. Ésta opcion no puede revertirse."
+										type="object" class="oe_link oe_inline fa fa-arrow-right" />
+								</div>
+								<div class="row mt16">
+									<label for="stock_account_output_id" string="Salida de Stock" class="col-3" />
+									<field name="stock_account_output_id" options="{'no_quick_create': True}"
+										class="o_light_label" />
+									<button name="action_set_account_output" string="Cambiar a todos los productos"
+										confirm="Está seguro de cambiar la cuenta de Salida de inventario a todos los productos?. Ésta opcion no puede revertirse."
+										type="object" class="oe_link oe_inline fa fa-arrow-right" />
+								</div>
+								<div class="row mt16">
+									<label for="stock_account_valuation_id" string="Valoracion de Stock" class="col-3" />
+									<field name="stock_account_valuation_id" options="{'no_quick_create': True}"
+										class="o_light_label" />
+									<button name="action_set_account_valuation" string="Cambiar a todos los productos"
+										confirm="Está seguro de cambiar la cuenta de Valoracion de inventario a todos los productos?. Ésta opcion no puede revertirse."
+										type="object" class="oe_link oe_inline fa fa-arrow-right" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</xpath>
+		</field>
+	</record>
+</odoo>

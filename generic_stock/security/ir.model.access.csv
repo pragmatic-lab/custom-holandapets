@@ -1,0 +1,13 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_model_res_company_group_stock_config","access_model_res_company_group_stock_config","base.model_res_company","group_stock_config",1,1,0,0
+"access_model_ir_rule_group_stock_config","access_model_ir_rule_group_stock_config","base.model_ir_rule","group_stock_config",1,0,0,0
+"access_model_ir_config_parameter_group_stock_config","access_model_ir_config_parameter_group_stock_config","base.model_ir_config_parameter","group_stock_config",1,0,0,0
+"access_model_ir_module_module_group_stock_config","access_model_ir_module_module_group_stock_config","base.model_ir_module_module","group_stock_config",1,0,0,0
+"access_model_account_bank_statement_group_stock_config","access_model_account_bank_statement_group_stock_config","account.model_account_bank_statement","group_stock_config",1,0,0,0
+"access_model_stock_warehouse_orderpoint_group_user","access_model_stock_warehouse_orderpoint_group_user","stock.model_stock_warehouse_orderpoint","base.group_user",1,0,0,0
+"access_model_report_stock_forecast_group_user","access_model_report_stock_forecast_group_user","stock.model_report_stock_forecast","base.group_user",1,0,0,0
+"access_model_stock_production_lot_group_user","access_model_stock_production_lot_group_user","stock.model_stock_production_lot","base.group_user",1,0,0,0
+"stock.access_stock_move_user","stock.move user","stock.model_stock_move","stock.group_stock_user",1,1,1,1
+"stock.access_stock_inventory_line_user","stock.inventory.line user","stock.model_stock_inventory_line","stock.group_stock_user",1,1,1,1
+"access_model_account_move_group_stock_user","access_model_account_move_group_stock_user","account.model_account_move","stock.group_stock_user",1,0,0,0
+"access_model_account_move_line_group_stock_user","access_model_account_move_line_group_stock_user","account.model_account_move_line","stock.group_stock_user",1,0,0,0

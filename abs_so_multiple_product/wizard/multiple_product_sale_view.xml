@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- add fields and button in MultipleProductSale view-->
+    <record id="view_multiple_product_sale" model="ir.ui.view">
+        <field name="name">Products</field>
+        <field name="model">multiple.product.sale</field>
+        <field name="arch" type="xml">
+            <form string="Products">
+                <group>  
+                    <field name="product_ids" widget='many2many_tags' /> 
+                </group>
+                <footer>
+                    <button string='Add Products' name="add_multiple_product_sale" type='object' class='btn-primary'/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Wizard view Action-->
+    <record id="open_view_multiple_product_sale_action" model="ir.actions.act_window">
+        <field name="name">Products</field>
+        <field name="res_model">multiple.product.sale</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="view_multiple_product_sale"/>	
+    </record>
+
+</odoo>
+

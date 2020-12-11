@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<data noupdate="1">
+
+		<!-- Grupo que permite realizar una factura rapida -->
+		<record id="group_create_invoice_quick_configuration" model="res.groups">
+			<field name="name">Crear Factura Rápida</field>
+		</record>
+
+
+	</data>
+
+</odoo>

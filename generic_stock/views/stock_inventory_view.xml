@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record id="stock_inventory_form_view" model="ir.ui.view">
+		<field name="name">stock.inventory.form</field>
+		<field name="model">stock.inventory</field>
+		<field name="inherit_id" ref="stock.view_inventory_form" />
+		<field name="arch" type="xml">
+			<xpath expr="//button[@name='action_start']" position="attributes">
+				<attribute name="confirm">Está seguro de iniciar el inventario con los filtros seleccionados?</attribute>
+			</xpath>
+			<xpath expr="//button[@name='action_validate']" position="attributes">
+				<attribute name="confirm">Está seguro de Validar y hacer el ajuste de inventario con las cantidades indicadas?</attribute>
+			</xpath>
+			<xpath expr="//button[@name='action_cancel_draft'][@states='confirm']"
+				position="attributes">
+				<attribute name="groups">stock.group_stock_user</attribute>
+				<attribute name="confirm">Está seguro de cancelar este registro?</attribute>
+			</xpath>
+			<xpath expr="//button[@name='action_cancel_draft'][@states='cancel']"
+				position="attributes">
+				<attribute name="groups">stock.group_stock_user</attribute>
+			</xpath>
+			<xpath expr="//button[@name='action_cancel_draft'][@states='cancel']"
+				position="before">
+				<button name="action_cancel_draft" states="done" string="Anular Inventario"
+					type="object" confirm="Está seguro de cancelar este registro?"
+					groups="generic_stock.group_cancel_picking_done" />
+			</xpath>
+			<xpath expr="//field[@name='location_id']" position="attributes">
+				<attribute name="options">{'no_create': True}</attribute>
+				<attribute name="domain">[('usage','not in', ['supplier','production', 'view'])]</attribute>
+			</xpath>
+			<xpath expr="//field[@name='product_id']" position="attributes">
+				<attribute name="options">{'no_quick_create': True}</attribute>
+			</xpath>
+			<xpath expr="//field[@name='lot_id']" position="attributes">
+				<attribute name="options">{'no_quick_create': True}</attribute>
+			</xpath>
+			<xpath expr="//field[@name='partner_id']" position="attributes">
+				<attribute name="options">{'no_create': True}</attribute>
+			</xpath>
+			<xpath expr="//field[@name='package_id']" position="attributes">
+				<attribute name="options">{'no_create': True}</attribute>
+			</xpath>
+			<xpath expr="//field[@name='line_ids']/tree//field[@name='state']"
+				position="before">
+				<field name="price_unit" />
+			</xpath>
+			<xpath expr="//field[@name='line_ids']/tree//field[@name='product_id']"
+				position="attributes">
+				<attribute name="options">{'no_quick_create': True}</attribute>
+			</xpath>
+			<xpath
+				expr="//field[@name='line_ids']/tree//field[@name='product_uom_id']"
+				position="attributes">
+				<attribute name="options">{'no_create': True}</attribute>
+			</xpath>
+			<xpath expr="//field[@name='line_ids']/tree//field[@name='location_id']"
+				position="attributes">
+				<attribute name="options">{'no_create': True}</attribute>
+			</xpath>
+			<xpath expr="//field[@name='line_ids']/tree//field[@name='prod_lot_id']"
+				position="attributes">
+				<attribute name="options">{'no_quick_create': True}</attribute>
+			</xpath>
+			<xpath expr="//field[@name='line_ids']/tree//field[@name='package_id']"
+				position="attributes">
+				<attribute name="options">{'no_create': True}</attribute>
+			</xpath>
+			<xpath expr="//field[@name='line_ids']/tree//field[@name='partner_id']"
+				position="attributes">
+				<attribute name="options">{'no_create': True}</attribute>
+			</xpath>
+			<xpath expr="/form/sheet" position="after">
+				<div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+			</xpath>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="stock_inventory_search_view">
+		<field name="name">stock.inventory.search</field>
+		<field name="model">stock.inventory</field>
+		<field name="inherit_id" ref="stock.view_inventory_filter" />
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='date']" position="attributes">
+				<attribute name="widget">date</attribute>
+			</xpath>
+			<filter name="draft" position="before">
+				<filter name="this_month" string="Fecha" date="date" />
+				<separator />
+			</filter>
+		</field>
+	</record>
+
+</odoo>

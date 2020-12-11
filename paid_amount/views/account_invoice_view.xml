@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="view_invoice_paid_amount_tree">
+            <field name="name">view.invoice.paid.amount.tree.inherit</field>
+            <field name="inherit_id" ref="account.invoice_tree"/>
+            <field name="model">account.invoice</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='residual_signed']" position="after">
+                    <field name="paid_amount" sum="Paid Amount"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_invoice_paid_amount_filter">
+            <field name="name">view.invoice.paid.amount.filter.inherit</field>
+            <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+            <field name="model">account.invoice</field>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='status']" position="after">
+                    <filter name="residual" string="Residual" context="{'group_by':'residual'}"/>
+                    <filter name="paid" string="Paid" context="{'group_by':'paid_amount'}"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
+

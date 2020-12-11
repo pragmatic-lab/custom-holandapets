@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sale_order_conf_text,sale.order_conf_text,model_sale_order_conf_text,,1,1,0,0
+access_account_invoice_payment_action,account.invoice_payment_action,model_account_invoice_payment_action,,1,1,1,1
+access_account_invoice_payment_action_confirm,account.invoice_payment_action_confirm,model_account_invoice_payment_action_confirm,,1,1,1,1
+access_sale_order_conf_box,sale.order_conf_box,model_sale_order_conf_box,,1,1,1,1

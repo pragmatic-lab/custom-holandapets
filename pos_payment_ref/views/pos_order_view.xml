@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="pos_paymentref_pos_order_view_form" model="ir.ui.view">
+        <field name="name">pos.payment.pos.order.form</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='statement_ids']/tree" position="inside">
+                <field name="pos_payment_ref" invisible="1"/>
+                <field name="payment_ref" string="Autorización Pago" attrs="{'required':[('pos_payment_ref','=',True)]}" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

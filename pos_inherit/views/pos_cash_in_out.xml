@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+		<template id="report_pos_cash_in_out">
+		<t t-call="web.html_container">
+			<t t-foreach="docs" t-as="doc">
+				<t t-call="web.external_layout">
+					<div class="page">
+						<div class="oe_structure"/>
+
+						<br/>
+
+						<h2>
+							<span>Punto de Venta:</span><span t-field="doc.config_id.name"/>
+						</h2>
+
+						<div class="row mt32 mb32">
+							<div class="col-auto mw-100 mb-2">
+								<strong>Sesión:</strong>
+								<p t-field="doc.name"/>
+							</div>
+							<div class="col-auto mw-100 mb-2">
+								<strong>Cajero:</strong>
+								<t t-if="doc.user_id.partner_id.xidentification">
+									<span><strong>CC. Cajero:</strong> <t t-esc="doc.user_id.partner_id.xidentification" /> </span>
+								</t>
+								<br/>
+								<p t-field="doc.user_id"/>
+							</div>
+							<div class="col-auto mw-100 mb-2">
+								<strong>Fecha de Apertura:</strong>
+								<p t-field="doc.start_at"/>
+							</div>
+							<div class="col-auto mw-100 mb-2">
+								<strong>Fecha de Cierre:</strong>
+								<p t-field="doc.stop_at"/>
+							</div>
+						</div>
+
+						<h2>
+							<span>Ingresos</span>
+						</h2>
+
+						<table class="table table-condensed table-striped">
+							<thead>
+								<tr>
+									<th class="text-left">Ref.</th>
+									<th class="text-left">Motivo</th>
+									<th class="text-left">Tercero</th>
+									<th class="text-left">Cuenta</th>
+									<th class="text-right">Importe</th>
+								</tr>
+							</thead>
+							<tbody>
+								<t t-foreach="request.env['cash.box.in'].search([('pos_session_id', '=', doc.id)])" t-as="record">
+									<tr>
+										<td class="text-left">
+											<span t-field="record.code"/>
+										</td>
+										<td class="text-left">
+											<span t-field="record.name"/>
+										</td>
+										<td class="text-left">
+											<span t-field="record.partner_id.name"/>
+										</td>
+										<td class="text-left">
+											<t t-if="record.account_id">
+												[<span t-field="record.account_id.code"/>] <span t-field="record.account_id.name"/>
+											</t>
+										</td>
+										<td class="text-right">
+											<span t-field="record.amount"/>
+										</td>
+									</tr>
+								</t>
+							</tbody>
+						</table>
+
+
+
+						<h2>
+							<span>Egresos</span>
+						</h2>
+
+						<table class="table table-condensed table-striped">
+							<thead>
+								<tr>
+									<th class="text-left">Motivo</th>
+									<th class="text-left">Tercero</th>
+									<th class="text-left">Cuenta</th>
+									<th class="text-right">Importe</th>
+								</tr>
+							</thead>
+							<tbody>
+								<t t-foreach="request.env['cash.box.out'].search([('pos_session_id', '=', doc.id)])" t-as="record">
+									<tr>
+										<td class="text-left">
+											<span t-field="record.name"/>
+										</td>
+										<td class="text-left">
+											<span t-field="record.partner_id.name"/>
+										</td>
+										<td class="text-left">
+											<t t-if="record.account_id">
+												[<span t-field="record.account_id.code"/>] <span t-field="record.account_id.name"/>
+											</t>
+										</td>
+										<td class="text-right">
+											<span t-field="record.amount"/>
+										</td>
+									</tr>
+								</t>
+							</tbody>
+						</table>
+
+					</div>
+				</t>
+			</t>
+			</t>
+		</template>
+
+
+	<data>
+		<report
+			id="action_report_pos_cash_in_out"
+			model="pos.session"
+			string="Ingresos/Egresos"
+			report_type="qweb-pdf"
+			name="pos_inherit.report_pos_cash_in_out"
+			file="pos_inherit.report_pos_cash_in_out"
+		/>
+	</data>
+
+
+
+
+</odoo>
+

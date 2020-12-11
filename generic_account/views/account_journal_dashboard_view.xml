@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record id="account_journal_dashboard_kanban_view" model="ir.ui.view">
+		<field name="name">account.journal.dashboard.kanban</field>
+		<field name="model">account.journal</field>
+		<field name="inherit_id" ref="account.account_journal_dashboard_kanban_view" />
+		<field name="arch" type="xml">
+			<xpath expr="//div[hasclass('o_kanban_manage_reports')]"
+				position="attributes">
+				<attribute name="groups">generic_account.group_account_report</attribute>
+			</xpath>
+			<xpath expr="//a[@name='%(account.action_account_invoice_report_all)d']"
+				position="attributes">
+				<attribute name="groups">generic_account.group_account_report</attribute>
+			</xpath>
+			<xpath expr="//a[@name='%(account.action_account_invoice_report_all_supp)d']"
+				position="attributes">
+				<attribute name="groups">generic_account.group_account_report</attribute>
+			</xpath>
+		</field>
+	</record>
+</odoo>
