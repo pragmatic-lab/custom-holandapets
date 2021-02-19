@@ -45,12 +45,12 @@
 								<br/>
 								<br/>
 		
-								<span style="font-size:19px;">Cerificamos que <strong><span t-esc="line['name']"/></strong> efectuó <span/> durante el periodo de <strong><span t-esc="begin_month.title()"/></strong> hasta <strong><span t-esc="end_month.title()"/></strong></span><br/>
+								<span style="font-size:19px;">Certificamos que <strong><span t-esc="line['name']"/></strong> efectuó <span/> durante el periodo de <strong><span t-esc="begin_month.title()"/></strong> hasta <strong><span t-esc="end_month.title()"/></strong></span><br/>
 
 								<br/>
 
 								<p>
-									<span style="font-size:16px;"> <strong>Nombre / Razón Solical:</strong> <span t-esc="line['name']"/></span><br/>
+									<span style="font-size:16px;"> <strong>Nombre / Razón Social:</strong> <span t-esc="line['name']"/></span><br/>
 								
 									<span style="font-size:16px;"><strong>Identificación / Nit:</strong> <span t-esc="line['partner_vat']"/></span><br/>
 								
@@ -100,7 +100,8 @@
 								<br/>
 								<br/>
 
-								<span style="font-size:19px;">Domicilio del retenedor: <span t-esc="line['partner_street']"/></span>
+								<!-- <span style="font-size:19px;">Domicilio del retenedor: <span t-esc="line['partner_street']"/></span> -->
+								<span style="font-size:19px;">Domicilio del retenedor: <span t-esc="request.env.user.company_id.partner_id.street"/></span>
 								<br/>
 								<br/>
 

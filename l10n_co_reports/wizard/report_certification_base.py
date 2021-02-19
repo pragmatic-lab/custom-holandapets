@@ -172,8 +172,6 @@ class ReportCertificationsBase(models.TransientModel):
 		domain = []
 
 		domain += self._get_domain()
-		print('el dominio es:')
-		print(domain)
 
 		if line_id:
 			partner_id = re.search('partner_(.+)', line_id).group(1)
