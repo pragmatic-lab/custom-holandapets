@@ -960,8 +960,8 @@ class AccountInvoiceSummaryReport(models.TransientModel):
 
 		date_from_ = date_fixed['date_from']
 		date_to_ = date_fixed['date_to']
-		date_from = self.date_from
-		date_to = self.date_to
+		date_from = self.return_date_utc(self.date_from)
+		date_to = self.return_date_utc(self.date_to)
 
 		worksheet.set_column('A1:A1',35)
 		worksheet.set_column('B1:B1',35)
@@ -1016,9 +1016,9 @@ class AccountInvoiceSummaryReport(models.TransientModel):
 			worksheet.write('A9', "Cajero", header_format)
 			worksheet.write('A10', user, bold)
 			worksheet.write('B9', "Fecha Inical", header_format)
-			worksheet.write('B10', str(date_from_), bold)
+			worksheet.write('B10', str(date_from), bold)
 			worksheet.write('C9', "Fecha Final", header_format)
-			worksheet.write('C10', str(date_to_), bold)
+			worksheet.write('C10', str(date_to), bold)
 			worksheet.write('D9', "Autorizacion DIAN", header_format)
 			worksheet.write('D10', data_dian.resolution_number, bold)
 			worksheet.write('E9', "Fecha Autorizacion", header_format)
@@ -1036,11 +1036,15 @@ class AccountInvoiceSummaryReport(models.TransientModel):
 			date_today=str(datetime.strftime(now, format))
 			date_create= str("Fecha Creacion")
 			worksheet.write('G1', date_create, header_format)
-			worksheet.write('G2', date_today, bold)
+			worksheet.write('G2', self.return_date_utc(date_today), bold)
 			worksheet.write('G4', 'Consecutivo Inicial', header_format)
 			worksheet.write('G5', value_info_invoice['initial'], bold)
 			worksheet.write('G6', 'Consecutivo Final', header_format)
 			worksheet.write('G7', value_info_invoice['final'], bold)
+
+	def return_date_utc(self, date_begin):
+		date_fix = date_begin - timedelta(hours=5)
+		return date_fix
 
 	def generate_body_excel(self, worksheet, user_id, model_spai, header_format, letter_black, bold_total, letter_black_name, bold_total_color, bold_total_gray, format_diag, header_format_subtitle, footer_format, header_center, value_box):
 		"""
@@ -1084,7 +1088,8 @@ class AccountInvoiceSummaryReport(models.TransientModel):
 			self.return_data_outbound(x, user_id, data_refund)
 
 			if x.type_payment != 'outbound':
-				worksheet.write(row,col , str(x.date_move) or '', letter_black_name)
+				date_fix = self.return_date_utc(x.date_move)
+				worksheet.write(row,col , str(date_fix) or '', letter_black_name)
 				worksheet.write(row,col+1 , x.invoice_id.number or '', letter_black_name)
 				worksheet.write(row,col+2 , x.payment_ref or '', letter_black_name)
 				worksheet.write(row,col+3 , x.number_authorization or '', letter_black_name)
@@ -1123,7 +1128,8 @@ class AccountInvoiceSummaryReport(models.TransientModel):
 			sum_total_residual = 0
 
 			for x in data_cartera:
-				worksheet.write(row,col , str(x['date_move']) or '', letter_black_name)
+				date_fix = self.return_date_utc(x['date_move'])
+				worksheet.write(row,col , str(date_fix) or '', letter_black_name)
 				worksheet.write(row,col+1 , x['invoice_number'] or '', letter_black_name)
 				worksheet.write(row,col+2 , x['account_move'] or '', letter_black_name)
 				worksheet.write(row,col+3 , '', letter_black_name)
@@ -1161,8 +1167,9 @@ class AccountInvoiceSummaryReport(models.TransientModel):
 
 			sum_total_refund = 0
 			#consultar account_invoice_payment_rel
-			for x in data_refund:			
-				worksheet.write(row,col , str(x['date_move']) or '', letter_black_name)
+			for x in data_refund:	
+				date_fix = self.return_date_utc(x['date_move'])		
+				worksheet.write(row,col , str(date_fix) or '', letter_black_name)
 				worksheet.write(row,col+1 , x['invoice_number'] or '', letter_black_name)
 				worksheet.write(row,col+2 , x['payment_name'] or '', letter_black_name)
 				worksheet.write(row,col+3 , x['journal_name'], letter_black_name)
@@ -1205,7 +1212,8 @@ class AccountInvoiceSummaryReport(models.TransientModel):
 			for x in model_spai.search([('user_id', '=', user_id)], order='invoice_number asc'):
 				
 				if x.invoice_id.type == 'in_invoice':
-					worksheet.write(row,col , str(x.date_move) or '', letter_black_name)
+					date_fix = self.return_date_utc(x.date_move)
+					worksheet.write(row,col , str(date_fix) or '', letter_black_name)
 					worksheet.write(row,col+1 , x.invoice_id.number or '', letter_black_name)
 					worksheet.write(row,col+2 , x.payment_name or '', letter_black_name)
 					worksheet.write(row,col+3 , x.journal_id.name or '', letter_black_name)
@@ -1218,7 +1226,8 @@ class AccountInvoiceSummaryReport(models.TransientModel):
 					row +=1
 
 				if not x.invoice_id and x.type_payment == 'outbound':
-					worksheet.write(row,col , str(x.date_move) or '', letter_black_name)
+					date_fix = self.return_date_utc(x.date_move)
+					worksheet.write(row,col , str(date_fix) or '', letter_black_name)
 					worksheet.write(row,col+1 , x.invoice_id.number or '', letter_black_name)
 					worksheet.write(row,col+2 , x.payment_name or '', letter_black_name)
 					worksheet.write(row,col+3 , x.journal_id.name or '', letter_black_name)
@@ -1528,7 +1537,7 @@ class AccountInvoiceSummaryReport(models.TransientModel):
 
 		date_from_ = self.date_from
 		date_to_ = self.date_to
-		self.write({'document':base64.encodestring(file_data.read()), 'filename':Header_Text + '  ' + str(date_from_) + ' - ' + str(date_to_) +'.xlsx'})
+		self.write({'document':base64.encodestring(file_data.read()), 'filename':Header_Text + '  ' + str(self.return_date_utc(date_from_)) + ' - ' + str(self.return_date_utc(date_to_)) +'.xlsx'})
 
 
 		return self.return_excel()
