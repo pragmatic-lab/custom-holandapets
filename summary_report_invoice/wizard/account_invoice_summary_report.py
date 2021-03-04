@@ -65,6 +65,10 @@ class AccountInvoiceSummaryReport(models.TransientModel):
 
 			return {'date_from': str(date_from), 'date_to': str(date_to)}
 
+	def return_date_utc(self, date_begin):
+		date_fix = date_begin - timedelta(hours=5)
+		return date_fix
+
 	def return_data_domain(self):
 		"""
 			Funcion que retorna el domain de los campos que fueron seleccionados en el wizard
@@ -252,8 +256,8 @@ class AccountInvoiceSummaryReport(models.TransientModel):
 		"""
 		if self.print_account_ids:
 			
-			date_from = self.date_from
-			date_to = self.date_to
+			date_from = self.return_date_utc(self.date_from)
+			date_to = self.return_date_utc(self.date_to)
 			data_user = [x.id for x in self.user_ids if self.user_ids]
 			data_journal = [x.id for x in self.journal_ids if self.journal_ids]
 
@@ -337,8 +341,8 @@ class AccountInvoiceSummaryReport(models.TransientModel):
 						LEFT JOIN account_payment as payment
 							ON (aml.payment_id = payment.id)
 				"""
-			sql = sql + " WHERE ((CASE WHEN extract(hour from (aml.create_date)) BETWEEN 0 AND 5 THEN (( a_move.date + '1 day'::interval) + aml.create_date::timestamp::time) ELSE (a_move.date + aml.create_date::timestamp::time)END)) BETWEEN '" + str(date_from) + "' AND '" + str(date_to) +"' AND a_move.date BETWEEN '" + str(date_from) + "'::DATE AND '" + str(date_from) +"'::DATE  "
-			
+			#sql = sql + " WHERE ((CASE WHEN extract(hour from (aml.create_date)) BETWEEN 0 AND 5 THEN (( a_move.date + '1 day'::interval) + aml.create_date::timestamp::time) ELSE (a_move.date + aml.create_date::timestamp::time)END)) BETWEEN '" + str(date_from) + "' AND '" + str(date_to) +"' AND a_move.date BETWEEN '" + str(date_from) + "'::DATE AND '" + str(date_from) +"'::DATE  "
+			sql += "WHERE a_move.date BETWEEN '%s'::DATE AND '%s'::DATE"%(str(date_from), str(date_to))
 			data_account_ids = ''
 
 			for x in self.print_account_ids:
@@ -473,20 +477,20 @@ class AccountInvoiceSummaryReport(models.TransientModel):
 		"""
 		sql = """
 			SELECT 
-				ai.create_date as date_move,
+				--ai.create_date as date_move,
+				am.date as date_move,
 				rp.name AS partner_name,
 				ai.number AS invoice_number,
 				ai.amount_total AS amount_total,
 				ai.residual AS amount_residual,
 				am.name AS account_move
-				
 			FROM account_invoice ai, res_partner rp, account_move am
-
 			WHERE 	ai.type = 'out_invoice'
 					AND ai.state in ('open') 
 					AND rp.id = ai.partner_id
 					AND am.id = ai.move_id
-					AND ai.create_date  BETWEEN '%s' AND '%s' 
+					--AND ai.create_date  BETWEEN 's' AND 's' 
+					AND am.date  BETWEEN '%s' AND '%s' 
 			"""
 			
 		if user_id:
@@ -595,7 +599,8 @@ class AccountInvoiceSummaryReport(models.TransientModel):
 					partner.name AS partner_name,
 					account.code || ' ' || account.name  AS account,
 					(aml.balance) AS balance,
-					aml.create_date AS date_move,
+					--aml.create_date AS date_move,
+					aml.date AS date_move,
 					journal.name AS journal_name,
 					invoice.number AS invoice_number
 				FROM account_move_line aml
@@ -628,7 +633,8 @@ class AccountInvoiceSummaryReport(models.TransientModel):
 
 			"""
 
-		sql = sql + " WHERE aml.create_date BETWEEN '" + date_from + "' AND '" + date_to +"' "
+		#sql = sql + " WHERE aml.create_date BETWEEN '" + date_from + "' AND '" + date_to +"' "
+		sql += " WHERE aml.date BETWEEN '" + date_from + "'::DATE AND '" + date_to +"'::DATE "
 		sql = sql + " AND aml.account_id in (SELECT id FROM account_account WHERE code LIKE " + data + ")"
 
 		if '5' in data:
@@ -674,12 +680,12 @@ class AccountInvoiceSummaryReport(models.TransientModel):
 						ON (product.product_tmpl_id = product_template.id)
 					LEFT JOIN product_category AS category
 						ON (product_template.categ_id = category.id)
-				WHERE ai.date_invoice_complete BETWEEN '%s' AND '%s'
+				--WHERE ai.date_invoice_complete BETWEEN 's' AND 's'
+				WHERE ai.date BETWEEN '%s'::DATE AND '%s'::DATE
 					AND ai.company_id = %s
 					AND ai.type in ('%s')
 					AND ai.state = 'paid'
 				"""
-
 
 		if validate == 'out_refund':
 			sql = """
@@ -706,7 +712,8 @@ class AccountInvoiceSummaryReport(models.TransientModel):
 						ON (product.product_tmpl_id = product_template.id)
 					LEFT JOIN product_category AS category
 						ON (product_template.categ_id = category.id)
-				WHERE ai.date_invoice_complete BETWEEN '%s' AND '%s'
+				--WHERE ai.date_invoice_complete BETWEEN 's' AND 's'
+				WHERE ai.date BETWEEN '%s'::DATE AND '%s'::DATE
 					AND ai.company_id = %s
 					AND ai.type in ('%s')
 					AND ai.state = 'paid'
@@ -1033,18 +1040,16 @@ class AccountInvoiceSummaryReport(models.TransientModel):
 
 			format="%Y-%m-%d %H:%M:00"
 			now=fields.Datetime.context_timestamp(self, fields.Datetime.from_string(fields.Datetime.now()))
-			date_today=str(datetime.strftime(now, format))
+			date_today=(datetime.strftime(now, format))
 			date_create= str("Fecha Creacion")
 			worksheet.write('G1', date_create, header_format)
-			worksheet.write('G2', self.return_date_utc(date_today), bold)
+			worksheet.write('G2', str(self.return_date_utc(now)), bold)
 			worksheet.write('G4', 'Consecutivo Inicial', header_format)
 			worksheet.write('G5', value_info_invoice['initial'], bold)
 			worksheet.write('G6', 'Consecutivo Final', header_format)
 			worksheet.write('G7', value_info_invoice['final'], bold)
 
-	def return_date_utc(self, date_begin):
-		date_fix = date_begin - timedelta(hours=5)
-		return date_fix
+
 
 	def generate_body_excel(self, worksheet, user_id, model_spai, header_format, letter_black, bold_total, letter_black_name, bold_total_color, bold_total_gray, format_diag, header_format_subtitle, footer_format, header_center, value_box):
 		"""
