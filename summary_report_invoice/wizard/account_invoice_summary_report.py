@@ -66,7 +66,9 @@ class AccountInvoiceSummaryReport(models.TransientModel):
 			return {'date_from': str(date_from), 'date_to': str(date_to)}
 
 	def return_date_utc(self, date_begin):
-		date_fix = date_begin - timedelta(hours=5)
+		format="%Y-%m-%d %H:%M:%S"
+		date_begin_fix = datetime.strptime(str(date_begin), format)
+		date_fix = date_begin_fix - timedelta(hours=5)
 		return date_fix
 
 	def return_data_domain(self):
@@ -634,7 +636,7 @@ class AccountInvoiceSummaryReport(models.TransientModel):
 			"""
 
 		#sql = sql + " WHERE aml.create_date BETWEEN '" + date_from + "' AND '" + date_to +"' "
-		sql += " WHERE aml.date BETWEEN '" + date_from + "'::DATE AND '" + date_to +"'::DATE "
+		sql += " WHERE a_move.date BETWEEN '" + date_from + "'::DATE AND '" + date_to +"'::DATE "
 		sql = sql + " AND aml.account_id in (SELECT id FROM account_account WHERE code LIKE " + data + ")"
 
 		if '5' in data:
